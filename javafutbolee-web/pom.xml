@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>javafutbolee</artifactId>
-    <groupId>io.dacopancm</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+        <artifactId>javafutbolee</artifactId>
+        <groupId>io.dacopancm</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>io.dacopancm</groupId>
     <artifactId>javafutbolee-web</artifactId>
@@ -21,11 +21,108 @@
     
     <dependencies>
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.0.4.Final</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.0.4.Final</version>
+            <type>jar</type>
+        </dependency>    
+           
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.3.0.Final</version>
+        </dependency>  
+        
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        
+        
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>4.0.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>4.0.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.0.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.2.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>4.2.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>4.2.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>4.2.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        
+        
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-faces</artifactId>
+            <version>2.4.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>4.0.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        
+        
+        
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -77,5 +174,11 @@
             </plugin>
         </plugins>
     </build>
-
+    <repositories>
+        <repository>
+            <id>unknown-jars-temp-repo</id>
+            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
+            <url>file:${project.basedir}/lib</url>
+        </repository>
+    </repositories>
 </project>
