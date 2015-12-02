@@ -1,0 +1,35 @@
+{
+  "name": "javafutbolee",
+  "version": "1.0.0",
+  "description": "Java Enterprise Application to manage a football club's partners and ticket reservations for games",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dacopan/javafutbolee.git"
+  },
+  "keywords": [
+    "java",
+    "jee",
+    "less",
+    "spring",
+    "mvc",
+    "team",
+    "football"
+  ],
+  "author": "dacopanCM",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dacopan/javafutbolee/issues"
+  },
+  "homepage": "https://github.com/dacopan/javafutbolee#readme",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "*",
+    "gulp-less": "*",
+    "gulp-minify-css": "*",
+    "gulp-uglify": "*"
+  }
+}
