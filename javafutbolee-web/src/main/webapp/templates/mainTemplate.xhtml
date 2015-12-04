@@ -9,7 +9,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />                    
         <h:outputStylesheet library="dt1c" name="css/preloader.css"/>
-        <h:outputStylesheet library="dt1c" name="css/vendor.css"/>       
+        <h:outputStylesheet library="dt1c" name="css/vendor.css"/>              
         <title><ui:insert name="title" /></title>
     </h:head>
     <h:body class="dt1c">
@@ -21,91 +21,84 @@
 
         </p:ajaxStatus>
         <div id="layout">
-            <div id="preloader" class="preloader"><div class="spinner status"><div></div><div></div><div></div></div></div>
-            <!--HEADER custom by project-->
-            <header id="header" class="header wow fadeIn">
-                <ul id="parallax_move">
-                    <li class="layer layer1" data-depth="0.10" style="background-image: url(http://demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/background1.png);">
-                    </li>
-                    <li class="layer layer2" data-depth="0.20" style="background-image: url(http://demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/background2.png);">
-                    </li>
-                </ul>  
+            <div id="preloader" class="preloader">
+                <div class="spinner status">
+                    <div><span class="fa fa-futbol-o fa-2x fg-yellow"></span></div>
+                    <div><span class="fa fa-futbol-o fa-2x fg-yellow"></span></div>
+                    <div><span class="fa fa-futbol-o fa-2x fg-yellow"></span></div>
+                </div>
+            </div>
 
-                <div class="overlay-layer-wrap">
-                    <div class="container overlay-layer" id="parallax_header" style="padding-top: 154px;">
+            <!--HEADER custom by project-->            
+            <ui:include src="header.xhtml"/>
+            <!--end header-->
 
-                        <!-- ONLY LOGO ON HEADER -->
-                        <div class="only-logo">
-                            <div id="only-logo-inner" class="navbar">
-                                <div id="parallax_only_logo" class="navbar-header">
-                                    <img src="http://demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/logo-2.png" alt=""/>
+            <!--main content-->
+            <main style="margin-bottom: 400px;">
+                <p:outputPanel layout="block" id="content" class="page-content" style="opacity: 0">                                
+                    <p:growl id="messages2" sticky="true"/>
+                    <ui:insert name="content">
+                        <span>Página en construcción</span>
+                    </ui:insert>
+                </p:outputPanel>
+                <!--end main content-->               
+            </main>
+            <footer class="contact-info">
+                <div class="pre_footer">
+                    <div class="pre_footer_image"><a href="http://www.facebook.com/BarcelonaSCweb" target="_blank"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/social_media/fb_icon.png"/></a></div>
+                    <div class="pre_footer_image"><a href="http://www.twitter.com/BarcelonaSCweb" target="_blank"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/social_media/tw_icon.png"/></a></div>
+                    <div class="pre_footer_image"><a href="http://www.instagram.com/barcelonasc" target="_blank"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/social_media/in_icon.png"/></a></div>
+                    <div class="pre_footer_image"><a href="http://www.youtube.com/BarcelonaSCweb" target="_blank"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/social_media/yo_icon.png"/></a></div>
+                    <div class="pre_footer_image"><a href="http://www.vine.co/u/941399379477164032" target="_blank"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/social_media/vi_icon.png"/></a></div>
+                    <div class="pre_footer_image"><a href="http://plus.google.com/app/basic/111277749520914219520" target="_blank"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/social_media/go_icon.png"/></a></div>
+                </div>
+
+                <div class="pre_footer_brands">
+                    <div class="pre_footer_brands_pos"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/auspiciantes/auspiciante1.png"/></div>
+                    <div class="pre_footer_brands_pos"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/auspiciantes/auspiciante2.png"/></div>
+                    <div class="pre_footer_brands_pos"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/auspiciantes/auspiciante3.png"/></div>
+                    <div class="pre_footer_brands_pos"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/auspiciantes/auspiciante4.png"/></div>
+                    <div class="pre_footer_brands_pos"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/auspiciantes/auspiciante5.png"/></div>
+                    <div class="pre_footer_brands_pos"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/auspiciantes/auspiciante6.png"/></div>
+                    <div class="pre_footer_brands_pos"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/auspiciantes/auspiciante7.png"/></div>
+                    <div class="pre_footer_brands_pos"><img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/auspiciantes/auspiciante8.png"/></div>
+                </div>
+
+                <div class="section-overlay-layer">
+                    <div class="container">
+                        <div class="grid">
+                            <div class="row cells3">
+                                <div class="cell">
+                                    <div class="contact-link-box">
+                                        <div class="icon-container">
+                                            <span class="fa fa-envelope fg-lightGray"></span>
+                                        </div>
+                                        <a href="#" class="strong fg-lightGray">soc10s@javafutbolee.tk</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>			<!-- /END ONLY LOGO ON HEADER -->
 
-                        <div class="row">
-                            <div class="col-md-12 intro-section-text-wrap">
-
-                                <!-- HEADING AND BUTTONS -->
-                                <div id="intro-section" class="intro-section">
-
-                                    <!-- WELCOM MESSAGE -->
-                                    <h1 class="intro fg-white">JavaFutbolEE</h1>
-
-                                    <h5 class="fg-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
-
-
+                                <div class="cell">
+                                    <div class="contact-link-box">
+                                        <div class="icon-container">
+                                            <span class="fa fa-map-marker fg-lightGray"></span>                                           
+                                        </div>
+                                        <a href="#" class="strong fg-lightGray">Estadio Monumental Lado Oeste<br/>Av. Barcelona, Guayaquil-Ecuador</a>
+                                    </div>
                                 </div>
-                                <!-- /END HEADNING AND BUTTONS -->
+
+                                <div class="cell">
+                                    <div class="contact-link-box">
+                                        <div class="icon-container">
+                                            <span class="fa fa-mobile fg-lightGray"></span>
+                                        </div>
+                                        <a href="#" class="strong fg-lightGray">(593) 04-2200550</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <script>
-                    /* Header section */
-                    jQuery(window).load(parallax_effect);
-                    jQuery(window).resize(parallax_effect);
-
-                    function parallax_effect() {
-
-                        if (jQuery('#parallax_move').length > 0) {
-                            var scene = document.getElementById('parallax_move');
-                            var window_width = jQuery(window).outerWidth();
-                            jQuery('#parallax_move').css({
-                                'width': window_width + 120,
-                                'margin-left': -60,
-                                'margin-top': -60,
-                                'position': 'absolute',
-                            });
-                            var h = jQuery('.overlay-layer-wrap').outerHeight();
-                            jQuery('#parallax_move').children().each(function () {
-                                jQuery(this).css({
-                                    'height': h + 100,
-                                });
-                            });
-
-                            $(scene).parallax();
-                        }
-
-                    }
-                </script>
-            </header>
-            <!--end header-->
-
-            <!--main content-->
-            <p:outputPanel layout="block" id="content" class="page-content" style="opacity: 0">                                
-                <p:growl id="messages2" sticky="true"/>
-                <ui:insert name="content">
-                    <span>Página en construcción</span>
-                </ui:insert>
-            </p:outputPanel>
-            <!--end main content-->
-
-            <!--footer-->
-            <div id="footer">
-                <p><a href="#">©</a></p>
-            </div>
+            </footer>
             <!--end footer-->
         </div>
 

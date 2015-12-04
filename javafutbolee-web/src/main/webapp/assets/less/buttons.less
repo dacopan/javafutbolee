@@ -194,13 +194,16 @@ a.ui-button, a.round-button, a.square-button {
 
 .ui-button {
     &.primary {
-        background: @linkColor;
+        background: @yellow;
         color: @white;
-        border-color: @linkColor;
+        border-color: @yellow;
 
         &:active {
             background: @darkCyan;
             color: @white;
+        }
+        &:hover{
+            background: @darkYellow;
         }
     }
     &.success {

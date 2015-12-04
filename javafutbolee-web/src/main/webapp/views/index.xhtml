@@ -20,46 +20,66 @@
 
                             <!-- SECTION HEADER -->
                             <div class="section-header">
-                                <h2 class="dark-text">Our Services</h2>
+                                <h2 class="dark-text">Beneficios Socios</h2>
                                 <div class="colored-line"></div>
                                 <div class="sub-heading">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    El ser SOCIO de Barcelona, en cualquier parte del Ecuador y del mundo, es un PRIVILEGIO, porque formamos parte de la institución más gloriosa del Ecuador, apoyamos al Club y tenemos una serie de beneficios que nos hace diferentes. Nos hace más que un hincha, un SOCIO, porque el amor crece
                                 </div>					
                             </div>
 
 
-                            <div class="services-wrap parallax_one_grid parallax_one_grid_CFp1qPJEOR">
-                                <div class="parallax_one_grid_col_3 parallax_one_grid_column_1 parallax_one_grid_first ">
+                            <div class="services-wrap parallax_one_grid">
+                                <div class="parallax_one_grid_col_3 parallax_one_grid_first wow fadeInLeft" data-wow-delay="0.25s">
                                     <div class="service-box" parallax_onegrid-attr="this-0">
                                         <div class="single-service border-bottom-hover">
                                             <div class="service-icon colored-text">
-                                                <span class="fa fa-paw"></span>
+                                                <span class="fa fa-street-view"></span>
                                             </div>
-                                            <h3 class="colored-text">Lorem Ipsum</h3>
+                                            <h3 class="colored-text">A la Cancha</h3>
                                             <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, consequat nibh. Etiam non elit dui. Nullam vel eros sit amet arcu vestibulum accumsan in in leo.
+                                                Disfruta salir con tus ídolos a la cancha al comienzo del partido como un momento inolvidable.
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="parallax_one_grid_col_3 parallax_one_grid_column_2">
-                                
+                                <div class="parallax_one_grid_col_3 parallax_one_grid_column_2 wow fadeInLeft" data-wow-delay="0.5s">
+                                    <div class="service-box" parallax_onegrid-attr="this-0">
+                                        <div class="single-service border-bottom-hover">
+                                            <div class="service-icon colored-text">
+                                                <span class="fa fa-futbol-o"></span>
+                                            </div>
+                                            <h3 class="colored-text">Tour Monumental</h3>
+                                            <p>
+                                                Con tu afiliación y vía sorteo, puedes disfrutar de El Tour Estadio Monumental para sentirte como un campeón.
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="parallax_one_grid_col_3 parallax_one_grid_column_3 parallax_one_grid_last ">
-
+                                <div class="parallax_one_grid_col_3 parallax_one_grid_last wow fadeInLeft" data-wow-delay="0.75s">
+                                    <div class="service-box" parallax_onegrid-attr="this-0">
+                                        <div class="single-service border-bottom-hover">
+                                            <div class="service-icon colored-text">
+                                                <span class="fa fa-ticket"></span>
+                                            </div>
+                                            <h3 class="colored-text">Reserva Entradas</h3>
+                                            <p>
+                                                No te quedes fuera de los partidos, sin filas y sin reventa puedes obtener entradas para disfrutar con tu familia.
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>	
                     </div>
                 </section>
-                
-                <section class="call-to-action" style="background-image:url(//demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/background-images/parallax-img/parallax-img1.jpg);">
+
+                <section class="call-to-action" style="background-image:url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/bg1.jpg);">
                     <div class="section-overlay-layer">
                         <div class="container">
                             <div class="text-center">
 
-                                <h2 class="fg-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-                                <p:commandButton value="Iniciar Sesión" class="primary big-button "/>
+                                <h2 class="fg-white">Forma parte de la familia y apoya a tu equipo</h2>
+                                <p:commandButton value="Afiliarse" class="primary big-button wow fadeIn"/>
 
                             </div>
                         </div>
@@ -71,14 +91,15 @@
                         <div class="container">
 
                             <div class="section-header">
-                                <h2 class="text-light">Happy Customers</h2>
-                                <div class="colored-line"></div>
-                                <div class="sub-heading">Cloud computing subscription model out of the box proactive solution.</div>					</div>
+                                <h2 class="text-light">Socio Feliz</h2>
+                                <div class="colored-line wow fadeInLeft"></div>
+                                <div class="sub-heading">Tu mejor decisión, ya eres de la familia</div>					
+                            </div>
 
 
                             <div class="text-center padding20">
 
-                                <p:commandButton value="Registrarse" class="primary big-button "/>
+                                <p:commandButton value="Iniciar Sesión" class="primary big-button wow fadeInDown "/>
                                 <br/>
                                 <br/>
                                 <br/>
@@ -88,23 +109,6 @@
                     </div>
                 </section>
 
-                <h1>Dt1c Theme</h1>
-
-
-                Hello from Facelets
-
-                <sec:authorize access="hasAnyRole('ROLE_ADMIN')">         
-                    <h:outputText value="seguro role admin"/>         
-                </sec:authorize>           
-
-
-                <sec:authorize ifNotGranted="ROLE_ADMIN">         
-                    <br/> <br/> <h:outputText value="no seguro ifNotGranted"/>         
-                </sec:authorize> 
-
-                <sec:authorize areNotGranted="ROLE_ADMIN">         
-                    <br/> <br/> <h:outputText value="areNotGranted"/>         
-                </sec:authorize> 
 
 
             </h:form>
