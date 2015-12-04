@@ -1,0 +1,107 @@
+@import (once) "variables";
+/* paginator */
+.ui-paginator {
+    margin: 0px;
+    padding: 0px !important;
+
+    .ui-paginator-pages {
+        padding: 0px 6px;
+    }
+    .ui-paginator-current {
+        font-size: 14px;
+        padding: 15px;
+        color: #9ad6f8;
+        //font-family: 'roboto_condensedlight';
+    }
+
+    .ui-paginator-page.ui-state-focus,
+    .ui-paginator-first.ui-state-focus,
+    .ui-paginator-prev.ui-state-focus,
+    .ui-paginator-next.ui-state-focus,
+    .ui-paginator-last.ui-state-focus {
+        background-color: #0288d1;
+        color: #ffffff;
+    }
+
+
+    .ui-paginator-first,
+    .ui-paginator-prev,
+    .ui-paginator-pages .ui-paginator-page,
+    .ui-paginator-next,
+    .ui-paginator-last,
+    .ui-paginator-rpp-options {
+        font-size: 20px;
+        padding: 10px 3px !important;
+        font-weight: bold;
+        border: solid 3px transparent;
+        color: #a6defd;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        border-radius: 0px !important;
+        font-weight: normal;
+        //font-family: 'roboto_condensedlight';
+    }
+}
+
+
+.ui-paginator-top {
+    background-color: #0277bd;
+    border-radius: 1px;
+}
+.ui-paginator-bottom {
+    background-color: #0277bd;
+    border-radius: 1px;
+}
+
+.ui-paginator {
+    .ui-paginator-rpp-options {
+        outline: none;
+    }
+    .ui-paginator-first{
+        .ui-icon {
+            display: none;
+        }
+        &:before{content: @paginatorFirs;}
+    }
+    .ui-paginator-last{
+        .ui-icon {
+            display: none;
+        }
+        &:before{content: @paginatorLast;}
+    }
+    .ui-paginator-prev{
+        .ui-icon {
+            display: none;
+        }
+        &:before{content: @paginatorPrev;}
+    }
+    .ui-paginator-next{
+        .ui-icon {
+            display: none;
+        }
+        &:before{content: @paginatorNext;}
+    }
+    .ui-state-active,
+    .ui-state-hover,
+    .ui-paginator-pages .ui-state-active,
+    .ui-paginator-pages .ui-state-hover {
+        color: #ffffff !important;
+        background-repeat: no-repeat;
+        border-bottom: solid 3px #ffffff;
+        font-size: 20px;
+        border-radius: 0px !important;
+    }
+    .ui-paginator-rpp-options {
+        outline: none;
+        color: #ffffff !important;        
+        font-size: 18px !important;
+        background-color: #0277bd;
+        border: solid 1px transparent;
+    }
+    .ui-paginator-rpp-options.ui-state-focus {
+        background-color: #0288d1 !important;
+    }
+}

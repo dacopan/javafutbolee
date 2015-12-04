@@ -1,0 +1,147 @@
+@import (once) "variables" ;
+//@import (once) "utils";
+
+
+/*Style For Ribbon And TabView --------------------------------------------------------------------------------------*/
+.ui-tabs .ui-tabs-panel {
+    padding: 10px !important;
+}
+.ui-tabs-top {
+    border: solid 0px #e0e0e0;
+    background-color: transparent;    
+    padding: 0px !important;
+
+    .ui-tabs-nav {
+        //background-color:@lightBlue;
+        border-bottom: solid 2px @blue;
+        padding:0!important;
+    }
+
+    .ui-tabs-navscroller {
+
+        .ui-tabs-nav {
+            border-radius: 0px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+        }
+
+        .ui-tabs-navscroller-btn {
+            top:1px;
+            height: 58px;
+            padding: 0px 4px;
+            background-color: @darkBlue;
+            &:hover {
+                background-color: #2a5bc5;
+            }
+        }
+        .ui-tabs-navscroller-btn-left,.ui-tabs-navscroller-btn-right {
+            border-radius: 0;                        
+            .ui-icon {
+                color:#fff;
+                font-size:25px;
+                padding:3px;
+                margin-top: 14px;                
+            }
+        }
+
+        .ui-tabs-navscroller-btn-left {
+            left: 0;
+            border-right: solid 1px #fff;
+            .ui-icon:before{
+                content: @paginatorPrev;
+            }
+        }
+        .ui-tabs-navscroller-btn-right {
+
+            right: 0px;
+            border-left: solid 1px #fff;
+            .ui-icon:before{
+                content: @paginatorNext;
+            }
+
+        }
+
+        .ui-state-disabled {
+            opacity: 1;
+            filter: alpha(opacity=100);
+            .ui-icon {
+                opacity: 0.4;
+                filter: alpha(opacity=40);
+            }
+        }
+
+    }
+
+    .ui-tabs-nav li {    
+        background-color: @lightBlue;
+        top: 1px !important;
+        font-size: 14px;
+        margin: 0 .15em 1px 0 !important;
+        outline: none;
+        border-top: solid 5px transparent!important;
+        .transition(.3s);
+        .ui-icon-close {
+            color: #bbdefb !important;
+            &:before{
+                content:@iconClose;
+            }
+        }
+
+
+        &.ui-state-hover .ui-icon-close,
+        &.ui-state-active .ui-icon-close {
+            color: #fff !important;
+        }
+        a {
+            color: #bbdefb !important;
+            font-size: 17px;
+            height: 52px;
+            //padding: 14px 1em !important;   
+             /*
+            width: 100%;
+            max-width: 90%;
+            word-break: break-word;
+            word-wrap: break-word;
+            white-space: normal;
+            max-height: 80px;
+            overflow: hidden;
+            line-height: 17px;
+            height: 52px;
+            //*/
+        }
+        &.ui-tabs-selected,
+        &.ui-tabs-active,
+        &.ui-state-hover {
+            background-color: @blue;
+            //border: solid 1px transparent !important;
+            border-radius: 0px;
+            border-top: solid 5px @darkBlue !important;
+
+            a {
+                color: #ffffff !important;
+            }
+        }
+        &.ui-tabs-selected{
+            border-top: solid 5px @darkBlue !important;
+        }
+    }
+
+
+    .ui-tabs-panels {
+        background-color: transparent;
+        margin: -1px 0px 3px 0px;
+        border: solid 1px @blue;
+        background-image: none !important;
+        font-size: 15px;
+
+        .ui-ribbon-groups {
+            background-color: transparent;
+            background: none;
+            filter: none !important;
+        }
+        .ui-tabs-panel {
+            background-image: none !important;
+            color: #546e7a;
+        }
+    }
+}

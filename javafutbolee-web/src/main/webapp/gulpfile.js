@@ -7,18 +7,30 @@ var rimraf = require('rimraf');
 var paths = {
     dist: {
         css: './resources/primefaces-dtic_theme/',
-        js: './resources/dt1c/js'
+        js: './resources/dt1c/js',
+        fonts: './resources/fonts'
     },
     less: ['./assets/less/dtictheme.less'],
     js: ['./assets/js/*.js', './assets/js/**/*.js'],
     vendor: {
-        css: [],
-        //['./bower_components/twitter/bootstrap/dist/css/bootstrap.min.css'],
-        js: ['./bower_components/parallax/deploy/jquery.parallax.min.js',
-                    //'./bower_components/scrollmagic/scrollmagic/ScrollMagic.min.js',
-                    //'./bower_components/scrollmagic/scrollmagic/ScrollMagic.min.js',
-                    //'./bower_components/smooth-scroll/dist/js/smooth-scroll.js'
+        css: [
+            './bower_components/animate.css/animate.css',
+            './bower_components/font-awesome/css/font-awesome.css'
+        ],
+        js: [
+            './bower_components/smooth-scroll/dist/js/smooth-scroll.js',
+            './bower_components/scrollmagic/scrollmagic/ScrollMagic.min.js',
+            './bower_components/wow/dist/wow.js',
+            './bower_components/smoothscroll/SmoothScroll.js',
+            './bower_components/parallax/deploy/jquery.parallax.min.js'
+        ],
+        fonts: [
+            './bower_components/font-awesome/fonts/fontawesome-webfont.*'
         ]
+
+    },
+    preloader: {
+        css: ['./assets/less/preloader.less']
     }
 };
 
@@ -49,6 +61,13 @@ gulp.task('js', function () {
             .pipe(gulp.dest(paths.dist.js));
 });
 
+gulp.task('fonts', function () {
+    gulp.src(paths.vendor.fonts)
+            .pipe(gulp.dest(paths.dist.fonts));
+
+});
+
+
 /**
  * copies vendor specific files to the public folder.
  */
@@ -56,12 +75,20 @@ gulp.task('vendor', function () {
     gulp.src(paths.vendor.css)
             .pipe(plugins.concat('vendor.css'))
             .pipe(plugins.minifyCss())
-            .pipe(gulp.dest(paths.dist.css));
+            .pipe(gulp.dest(paths.dist.js + '/../css'));
+
+    gulp.src(paths.preloader.css)
+            .pipe(plugins.concat('preloader.css'))
+            .pipe(plugins.less())
+            .pipe(plugins.minifyCss())
+            .pipe(gulp.dest(paths.dist.js + '/../css'));
+
 
     gulp.src(paths.vendor.js)
             .pipe(plugins.concat('vendor.js'))
             .pipe(plugins.uglify({mangle: false}))
             .pipe(gulp.dest(paths.dist.js));
+
 });
 
 /**
@@ -75,5 +102,6 @@ gulp.task('dist', function () {
 
 gulp.task('build', ['clean', 'less', 'js', 'dist']);
 gulp.task('nvendor', ['vendor']);
+gulp.task('allx', ['build','nvendor','fonts']);
 
 gulp.task('default', ['build']);

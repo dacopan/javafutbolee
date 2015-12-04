@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />                    
+        <h:outputStylesheet library="dt1c" name="css/preloader.css"/>
+        <h:outputStylesheet library="dt1c" name="css/vendor.css"/>       
+        <title><ui:insert name="title" /></title>
+    </h:head>
+    <h:body class="dt1c">
+        <p:ajaxStatus style="width: 32px;height: 32px;position: fixed;right: 7px;bottom: 7px;">
+
+            <f:facet name="start">
+                <img src="http://www.primefaces.org/rio/javax.faces.resource/images/preloader.gif.xhtml?ln=rio-layout"/>
+            </f:facet>
+
+        </p:ajaxStatus>
+        <div id="layout">
+            <div id="preloader" class="preloader"><div class="spinner status"><div></div><div></div><div></div></div></div>
+            <!--HEADER custom by project-->
+            <header id="header" class="header wow fadeIn">
+                <ul id="parallax_move">
+                    <li class="layer layer1" data-depth="0.10" style="background-image: url(http://demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/background1.png);">
+                    </li>
+                    <li class="layer layer2" data-depth="0.20" style="background-image: url(http://demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/background2.png);">
+                    </li>
+                </ul>  
+
+                <div class="overlay-layer-wrap">
+                    <div class="container overlay-layer" id="parallax_header" style="padding-top: 154px;">
+
+                        <!-- ONLY LOGO ON HEADER -->
+                        <div class="only-logo">
+                            <div id="only-logo-inner" class="navbar">
+                                <div id="parallax_only_logo" class="navbar-header">
+                                    <img src="http://demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/logo-2.png" alt=""/>
+                                </div>
+                            </div>
+                        </div>			<!-- /END ONLY LOGO ON HEADER -->
+
+                        <div class="row">
+                            <div class="col-md-12 intro-section-text-wrap">
+
+                                <!-- HEADING AND BUTTONS -->
+                                <div id="intro-section" class="intro-section">
+
+                                    <!-- WELCOM MESSAGE -->
+                                    <h1 class="intro fg-white">JavaFutbolEE</h1>
+
+                                    <h5 class="fg-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
+
+
+                                </div>
+                                <!-- /END HEADNING AND BUTTONS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    /* Header section */
+                    jQuery(window).load(parallax_effect);
+                    jQuery(window).resize(parallax_effect);
+
+                    function parallax_effect() {
+
+                        if (jQuery('#parallax_move').length > 0) {
+                            var scene = document.getElementById('parallax_move');
+                            var window_width = jQuery(window).outerWidth();
+                            jQuery('#parallax_move').css({
+                                'width': window_width + 120,
+                                'margin-left': -60,
+                                'margin-top': -60,
+                                'position': 'absolute',
+                            });
+                            var h = jQuery('.overlay-layer-wrap').outerHeight();
+                            jQuery('#parallax_move').children().each(function () {
+                                jQuery(this).css({
+                                    'height': h + 100,
+                                });
+                            });
+
+                            $(scene).parallax();
+                        }
+
+                    }
+                </script>
+            </header>
+            <!--end header-->
+
+            <!--main content-->
+            <p:outputPanel layout="block" id="content" class="page-content" style="opacity: 0">                                
+                <p:growl id="messages2" sticky="true"/>
+                <ui:insert name="content">
+                    <span>Página en construcción</span>
+                </ui:insert>
+            </p:outputPanel>
+            <!--end main content-->
+
+            <!--footer-->
+            <div id="footer">
+                <p><a href="#">©</a></p>
+            </div>
+            <!--end footer-->
+        </div>
+
+        <script src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/dt1c/js/vendor.js" type="text/javascript" async="true"></script>
+        <h:outputScript library="dt1c" name="js/dt1ctheme.js"></h:outputScript> 
+    </h:body>
+</html>

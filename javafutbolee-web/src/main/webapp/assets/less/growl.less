@@ -1,0 +1,104 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25/09/2015, 17:07:19
+    Author     : anunaki
+*/
+
+.ui-growl {
+    width: 350px !important;
+    right: 12px !important;
+    top: 70px !important;
+}
+.ui-growl-item-container {
+    opacity: 0.95 !important;
+    filter: alpha(opacity=95) !important;
+}
+.ui-growl-item {
+    padding: 10px!important;
+    background-color: #ffffff;
+    border-radius: 0px;    
+
+}
+.ui-growl-message {
+    width: 250px !important;
+    font-size: 16px !important;
+    line-height: 16px !important;    
+
+    display: block;
+    margin-right: 20px;
+    position: relative;
+    
+    color: #fff;
+}
+.ui-growl-image {
+    width: 32px !important;
+    height: 32px !important;
+    .fa;    
+    font-size: 32px;
+    text-align: center;
+    position: absolute;
+    margin: -16px 10px!important;
+    top: 50%;
+    left: 0;
+    color: #fff;
+}
+.ui-growl-image-error {
+    background-image: none !important;
+    &:before{
+        content: @iconError;
+    }
+}
+.ui-growl-image-warn {
+    background-image: none !important;
+    &:before{
+        content: @iconError;
+    }
+}
+.ui-growl-image-info {
+    background-image: none !important;
+    &:before{
+        content: @iconError;
+    }
+}
+.ui-growl-image-fatal {
+    background-image: none !important;
+    &:before{
+        content: @iconError;
+    }
+}
+.ui-growl-icon-close {    
+    background: none!important;
+    &:before{
+        content: @iconClose;
+    }
+}
+.ui-growl-item {
+    &.info{
+        background-color: #03a9f4 !important;
+    }
+    &.warn{
+        background-color: #f9bf08 !important;
+    }
+    &.error{
+        background-color: #f03369 !important;
+    }
+    &.fatal{
+        background-color: #f55151 !important;
+    }
+}
+.ui-growl-image-info+ .ui-growl-message {
+   // color: #03a9f4 !important;
+}
+.ui-growl-image-warn + .ui-growl-message {
+    //color: #f9bf08 !important;
+}
+.ui-growl-image-error + .ui-growl-message {
+   // color: #f03369 !important;
+}
+.ui-growl-image-fatal + .ui-growl-message {
+    //color: #f55151 !important;
+}

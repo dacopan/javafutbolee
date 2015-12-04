@@ -1,0 +1,81 @@
+@import (once) "variables";
+.color-rgba(@color, @a: 1) {background: rgba(red(@color), green(@color), blue(@color), @a) !important;}
+.fg-color(@color) {color: @color !important;}
+.bg-color(@color) {background: @color !important;}
+.op-color(@color, @opacity: .7){
+    background-color: rgba(red(@color), green(@color), blue(@color), @opacity) !important;
+}
+
+//opt
+.op-default {
+    background-color: rgba(red(@cyan), green(@cyan), blue(@cyan), .7);
+}
+
+.op-black {.op-color(@black)}
+// Colors : background
+.dt1c{
+    .bg-black {.bg-color(@black)}
+    .bg-white {.bg-color(@white)}
+    .bg-dorado {.bg-color(@dorado)}
+    .bg-red {.bg-color(@red)}
+    .bg-yellow {.bg-color(@yellow)}
+    .bg-darkBlue {.bg-color(@darkBlue)}
+    .bg-blue {.bg-color(@blue)}
+    .bg-lightBlue {.bg-color(@lightBlue)}
+    .bg-extraLightBlue {.bg-color(@extraLightBlue)}
+    .bg-gray {.bg-color(@gray)}
+    .bg-lightGray {.bg-color(@lightGray)}
+    .bg-dark {.bg-color(@dark)}
+    .bg-darker {.bg-color(@darker)}    
+    //
+    .bg-steel{.bg-color(@steel)}                  
+    .bg-teal{.bg-color(@teal)}  
+    .bg-lightOrange{.bg-color(@lightOrange)}  
+    .bg-lightRed{.bg-color(@lightRed)}  
+    .bg-lightGreen{.bg-color(@lightGreen)}  
+    .bg-lighterBlue{.bg-color(@lighterBlue)}  
+    .bg-darkOrange{.bg-color(@darkOrange)}  
+    .bg-darkRed{.bg-color(@darkRed)}  
+    .bg-darkGreen{.bg-color(@darkGreen)}  
+    .bg-darkCyan{.bg-color(@darkCyan)}  
+    .bg-grayLight{.bg-color(@grayLight)}  
+    .bg-grayLighter{.bg-color(@grayLighter)}  
+    .bg-cyan{.bg-color(@cyan)}  
+    .bg-green{.bg-color(@green)}  
+    .bg-orange{.bg-color(@orange)}  
+    .bg-lightCyan{.bg-color(@lightCyan)}  
+}
+
+// Colors : foreground
+.dt1c{
+    .fg-black,.fg-hover-black:hover {.fg-color(@black)}
+    .fg-white,.fg-hover-white:hover {.fg-color(@white)}
+    .fg-dorado,.fg-hover-dorado:hover {.fg-color(@dorado)}
+    .fg-red,.fg-hover-red:hover {.fg-color(@red)}
+    .fg-yellow,.fg-hover-yellow:hover {.fg-color(@yellow)}
+    .fg-darkBlue,.fg-hover-darkBlue:hover {.fg-color(@darkBlue)}
+    .fg-blue,.fg-hover-blue:hover {.fg-color(@blue)}
+    .fg-lightBlue,.fg-hover-lightBlue:hover {.fg-color(@lightBlue)}
+    .fg-extraLightBlue,.fg-hover-extraLightBlue:hover {.fg-color(@extraLightBlue)}
+    .fg-gray,.fg-hover-gray:hover {.fg-color(@gray)}
+    .fg-lightGray,.fg-hover-lightGray:hover {.fg-color(@lightGray)}
+    .fg-dark,.fg-hover-dark:hover {.fg-color(@dark)}
+    .fg-darker,.fg-hover-darker:hover {.fg-color(@darker)}
+}
+
+// Colors : border
+.dt1c{
+    .fg-black {.fg-color(@black)}
+    .fg-white {.fg-color(@white)}
+    .fg-dorado {.fg-color(@dorado)}
+    .fg-red {.fg-color(@red)}
+    .fg-yellow {.fg-color(@yellow)}
+    .fg-darkBlue {.fg-color(@darkBlue)}
+    .fg-blue {.fg-color(@blue)}
+    .fg-lightBlue {.fg-color(@lightBlue)}
+    .fg-extraLightBlue {.fg-color(@extraLightBlue)}
+    .fg-gray {.fg-color(@gray)}
+    .fg-lightGray {.fg-color(@lightGray)}
+    .fg-dark {.fg-color(@dark)}
+    .fg-darker {.fg-color(@darker)}
+}

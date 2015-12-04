@@ -1,0 +1,127 @@
+//@import (once) "variables" ;
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25/09/2015, 13:36:41
+    Author     : anunaki
+*/
+
+.ui-messages-error,
+.ui-message-error {
+    color: #f03369 !important;
+    background-color: #ffffff !important;
+    border-color: #f4bacb !important;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 10px !important;    
+}
+.ui-messages-info,
+.ui-message-info {
+    color: #03a9f4 !important;
+    background-color: #ffffff !important;
+    border-color: #03a9f4 !important;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 10px !important;
+
+}
+.ui-messages-info,
+.ui-messages-warn,
+.ui-messages-error,
+.ui-messages-fatal {
+    .ui-icon-close{
+        &:before{
+            content: @iconClose;
+        }
+    }
+}
+.ui-messages-warn,
+.ui-message-warn {
+    color: #f9bf08 !important;
+    background-color: #ffffff !important;
+    border-color: #f7e3a4 !important;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 10px !important;
+
+}
+.ui-messages-fatal,
+.ui-message-fatal {
+    color: #f55151 !important;
+    background-color: #ffffff !important;
+    border-color: #f5b1b1 !important;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 10px !important;
+
+}
+.ui-messages-info-icon,
+.ui-messages-warn-icon,
+.ui-messages-error-icon,
+.ui-message-error-icon,
+.ui-messages-fatal-icon,
+.ui-message-icon-only .ui-messages-warn-icon,
+.ui-message-icon-only .ui-messages-error-icon,
+.ui-message-icon-only .ui-message-error-icon,
+.ui-message-icon-only .ui-messages-fatal-icon{
+    margin: -4px 2px 2px!important;    
+    background: none!important;  
+    .fa;
+    font-size: 32px;
+    display: inline-block!important;
+    float: left!important;    
+}
+
+.ui-message-error-icon,
+.ui-message-icon-only .ui-messages-warn-icon,
+.ui-message-icon-only .ui-messages-error-icon,
+.ui-message-icon-only .ui-message-error-icon,
+.ui-message-icon-only .ui-messages-fatal-icon{
+    font-size: 18px;
+    margin: 0px 2px 2px!important; 
+}
+.ui-message-icon-only 
+{
+    width: 40px!important;
+    height: 40px!important;
+    .ui-messages-error-icon,
+    .ui-message-error-icon,
+    .ui-messages-fatal-icon {    
+        margin: 0px !important;
+        background: none;
+    }
+}
+
+
+.ui-message-error-icon,.ui-messages-error-icon {
+    &:before{
+        content: @iconError;
+    }
+}
+
+.ui-messages-info-icon {
+    &:before{
+        content: @iconInfo;
+    }
+}
+.ui-messages-warn-icon {
+    &:before{
+        content: @iconWarning;
+    }
+}
+.ui-messages-fatal-icon {
+    &:before{
+        content: @iconFatal;
+    }
+
+}
+.ui-messages ul {    
+    margin:0 0 0 20px!important;
+    padding: 0!important;
+    list-style-type: none!important;
+    display: inline-block!important;
+    vertical-align: middle!important;
+}

@@ -152,7 +152,7 @@
                 <version>2.3</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>                
-                    <packagingExcludes>bower_components/**,node_modules/**,assets/**</packagingExcludes>
+                    <packagingExcludes>bower_components/**,node_modules/**,assets/**,bower.json,gulpfile.js,notes.txt,npm-debug.log,</packagingExcludes>
                 </configuration>
             </plugin>
             <plugin>
