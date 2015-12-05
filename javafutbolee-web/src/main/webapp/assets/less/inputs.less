@@ -1,8 +1,9 @@
-@import (once) "variables";
+/*@import (once) "variables";
 @import (once) "transform";
 @import (once) "utils";
 @import (once) "buttons";
 @import (once) "icons";
+*/
 
 .ui-inputfield {
     color: #546e7a;
@@ -555,4 +556,18 @@
 input[type="button"], input[type="reset"], input[type="submit"] {
     .ui-button;
     vertical-align: middle;
+}
+
+
+.input-control.icon{
+    padding: 15px 30px;
+    .ui-inputfield{
+        width: ~"calc(100% - 30px)";
+        margin-left: 10px;
+    }
+    .fa{
+        font-size: 24px;
+        line-height: 24px;
+        vertical-align: middle;
+    }
 }

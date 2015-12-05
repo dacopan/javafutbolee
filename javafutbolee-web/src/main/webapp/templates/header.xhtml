@@ -6,11 +6,14 @@
     <ui:composition>
         <header id="header" class="header wow fadeIn">
             <ul id="parallax_move">
-                <li class="layer layer1" data-depth="0.10" style="background-image: url(http://demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/background1.png);">
+                <li class="layer layer1" data-depth="0.10" style="background-image: url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/11.jpg);">
                 </li>
-                <li class="layer layer2" data-depth="0.20" style="background-image: url(http://demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/background2.png);">
+                <li class="layer layer1" data-depth="0.15" style="background-image: url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/22.png);">
                 </li>
-            </ul>  
+            <li class="layer layer1" data-depth="0.25" style="background-image: url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/33.png);">
+                </li>
+                    
+            </ul>   
 
             <div class="overlay-layer-wrap">
                 <div class="container overlay-layer" id="parallax_header" style="padding-top: 154px;">

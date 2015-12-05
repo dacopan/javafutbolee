@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition template="/templates/emptyTemplate.xhtml">
+        <ui:define name="title">
+            <h:outputText value="JavaFutbolEE | Login" />
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+                <section class="call-to-action full-height" style="background-image:url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/bg3.jpg);">
+                    <div class="container">
+
+
+                        <div style="text-align: center;">
+                            <div style="width: 60px;height: 60px;border-radius: 50%;display: inline-block;margin-bottom: -25px;border: 1px solid #fff;background: #fff">
+                                <span class="fa fa-lock" style="vertical-align: middle;line-height: 25px;font-size: 30px;text-align: center;margin-bottom: -35px;color: #FFEF00;"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="login-wrap">
+                            <div class="section-header">
+                                <h2 class="text-light">Iniciar Sesión</h2>
+                                <div class="colored-line wow fadeInLeft"></div>
+                                <div class="sub-heading">Tu mejor decisión, ya eres de la familia</div>					
+                            </div>
+                            <div class="input-control text icon wow fadeInDown" pt:data-wow-delay="0.75s">
+                                <span class="fa fa-user"></span> <p:inputText placeholder="username"/>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="input-control text icon wow fadeInDown" pt:data-wow-delay="0.5s">
+                                <span class="fa fa-key"></span> <p:inputText placeholder="password" />
+                            </div>
+                            <br/>
+                            <br/>
+
+                            <div class="align-center">
+                            <h:commandLink action="rememberPassword" value="Olvidé mi contraseña" class="align-center fg-white fg-hover-yellow wow fadeIn" 
+                                           pt:data-wow-delay="1s"/>
+                            </div>
+                            
+                           
+                            <p:commandButton action="login" class="big-button wow fadeIn login-button" pt:data-wow-delay="0.35s" 
+                                             value="Login"/>
+
+                        </div>                   
+
+                    </div>
+                </section>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -98,9 +98,9 @@
 
 
                             <div class="text-center padding20">
-
-                                <p:commandButton value="Iniciar Sesión" class="primary big-button wow fadeInDown "/>
-                                <br/>
+                                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+                                <h:commandButton value="Iniciar Sesión"  action="loginx" class="primary big-button wow fadeInDown "/>                               
+                                <br/> 
                                 <br/>
                                 <br/>
                                 <br/>
