@@ -21,7 +21,7 @@
 $(function () {
     $.Metro.initAppBar($('body'));    
     setTimeout(function() {        
-        $("#content").animate({
+        $("#main").animate({
             opacity: 1
         }, {
             queue: false,

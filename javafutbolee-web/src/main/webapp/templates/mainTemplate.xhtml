@@ -34,8 +34,8 @@
             <!--end header-->
 
             <!--main content-->
-            <main style="margin-bottom: 400px;">
-                <p:outputPanel layout="block" id="content" class="page-content" style="opacity: 0">                                
+            <main style="margin-bottom: 400px;opacity: 0;" id="main">
+                <p:outputPanel layout="block" id="content" class="page-content">                               
                     <p:growl id="messages2" sticky="true"/>
                     <ui:insert name="content">
                         <span>Página en construcción</span>
@@ -43,7 +43,7 @@
                 </p:outputPanel>
                 <!--end main content-->               
             </main>
-            
+
             <ui:include src="footer.xhtml"/>
         </div>
 

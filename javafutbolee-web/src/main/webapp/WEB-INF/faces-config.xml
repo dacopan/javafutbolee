@@ -17,19 +17,96 @@
             <from-outcome>loginx</from-outcome>
             <to-view-id>/views/p/login.xhtml</to-view-id> 
             <redirect></redirect>
+        </navigation-case>                
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/p/login.xhtml
+        </from-view-id>
+        <navigation-case>
+            <from-outcome>requestPassword</from-outcome>
+            <to-view-id>/views/p/requestPassword.xhtml</to-view-id>
+            <redirect></redirect>
         </navigation-case>
         <navigation-case>
-            <from-outcome>loginx2</from-outcome>
-            <to-view-id>/views/s/xxx.xhtml</to-view-id>
-            <redirect></redirect> 
-        </navigation-case> 
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
         
         <navigation-case>
-            <from-outcome>loginx3</from-outcome>
-            <to-view-id>/views/xxx.xhtml</to-view-id>
-            <redirect></redirect> 
-        </navigation-case> 
-        
+            <from-outcome>success</from-outcome>
+            <to-view-id>/views/s/home.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+            
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/p/requestPassword.xhtml
+        </from-view-id>        
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/views/p/login.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>                
+            
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/s/changePassword.xhtml
+        </from-view-id>        
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/views/p/login.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>  
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/views/s/home.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>              
+            
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/p/confirmEmail.xhtml
+        </from-view-id>        
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>     
+        <navigation-case>
+            <from-outcome>resend</from-outcome>
+            <to-view-id>/views/p/sendConfirmEmail.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>             
+            
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/p/sendConfirmEmail.xhtml
+        </from-view-id>        
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>     
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/views/p/login.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>             
+            
     </navigation-rule>
     
 </faces-config>
