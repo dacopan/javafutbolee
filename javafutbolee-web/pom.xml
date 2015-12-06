@@ -47,8 +47,13 @@
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
             <version>3.3.0.Final</version>
-        </dependency>  
-        
+        </dependency>
+        <dependency>
+            <groupId>io.dacopancm</groupId>
+            <artifactId>javafutbolee-ejb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>

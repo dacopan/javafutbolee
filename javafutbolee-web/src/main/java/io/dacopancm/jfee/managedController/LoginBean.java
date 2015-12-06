@@ -17,13 +17,16 @@
 package io.dacopancm.jfee.managedController;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 /**
  *
@@ -41,14 +44,25 @@ public class LoginBean {
 
     public String login() {
         try {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contact admin."));
             Authentication request = new UsernamePasswordAuthenticationToken(this.getUserName(), this.getPassword());
             Authentication result = authenticationManager.authenticate(request);
             SecurityContextHolder.getContext().setAuthentication(result);
+
         } catch (AuthenticationException e) {
             e.printStackTrace();
 
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Incorrecto", "Usuario o contraseña incorrecto"));
+
             return "incorrect";
         }
+
+        User userDetails
+                = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", "Hola, " + userDetails.getUsername()));
         return "correct";
     }
 

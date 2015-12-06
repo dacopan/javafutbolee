@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author dacopan
  */
 @Service
-@Transactional(readOnly=true)
+@Transactional(readOnly = true)
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -45,6 +45,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String usr_ci) throws UsernameNotFoundException {
         Usuario domainUser = userService.getUsuario(usr_ci);
 
+        if (domainUser == null) {
+            throw new UsernameNotFoundException(usr_ci);
+        }
         boolean enabled = domainUser.getUsrActive();
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;

@@ -31,8 +31,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public Usuario getUsuario(String usr_ci) {
         List<Usuario> userList = new ArrayList<Usuario>();
-        Query query = openSession().createQuery("from User u where u.usr_ci = :usr_ci");
-        query.setParameter("usr_ci", usr_ci);
+        Query query = openSession().createQuery("from Usuario u where u.usrCi = :usrCi");
+        query.setParameter("usrCi", usr_ci);
         userList = query.list();
         if (userList.size() > 0) {
             return userList.get(0);

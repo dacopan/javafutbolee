@@ -36,9 +36,13 @@
         </navigation-case>
         
         <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/views/s/home.xhtml</to-view-id>
+            <from-outcome>correct</from-outcome>
+            <to-view-id>/views/s/xxx.xhtml</to-view-id>
             <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>incorrect</from-outcome>
+            <to-view-id>/views/p/login.xhtml</to-view-id>            
         </navigation-case>
             
     </navigation-rule>

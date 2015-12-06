@@ -4,8 +4,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:beans="http://www.springframework.org/schema/beans"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
-
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">    
+    
+    
     <!-- Enable method level Spring Security by annotations  -->
     <sec:global-method-security pre-post-annotations="enabled" />  
     <sec:http auto-config="true" use-expressions="true">
@@ -24,7 +25,7 @@
      
   
         <!-- Define login page for Spring Security -->      
-        <sec:form-login login-page="/faces/views/p/login.xhtml"/>
+        <sec:form-login login-page="/faces/views/p/login.xhtml" default-target-url="/faces/views/p/home.xhtml"/>
         
 
         <!-- Define logout properties for Spring Security -->
@@ -34,7 +35,12 @@
     <!-- Set customUserDetailsService class as the authentication Manager for Spring Security-->
     <sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider user-service-ref="customUserDetailsService">
-            <sec:password-encoder hash="plaintext"></sec:password-encoder>
+            <sec:password-encoder hash="bcrypt" />
+        </sec:authentication-provider>
+        
+        <sec:authentication-provider >
+            <sec:user-service properties="/WEB-INF/enlil_users.properties">                
+            </sec:user-service>
         </sec:authentication-provider>
     </sec:authentication-manager>
 
@@ -42,4 +48,6 @@
     <beans:bean id="loginBean" name="loginBean" class="io.dacopancm.jfee.managedController.LoginBean" scope="prototype">
         <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
     </beans:bean>
+    
+    
 </beans:beans>

@@ -11,6 +11,7 @@
         <h:outputStylesheet library="dt1c" name="css/preloader.css"/>
         <h:outputStylesheet library="dt1c" name="css/vendor.css"/>              
         <title><ui:insert name="title" /></title>
+        <ui:insert name="headx"></ui:insert>
     </h:head>
     <h:body class="dt1c">
         <p:ajaxStatus style="width: 32px;height: 32px;position: fixed;right: 7px;bottom: 7px;">
@@ -36,7 +37,7 @@
             <!--main content-->
             <main style="margin-bottom: 400px;opacity: 0;" id="main">
                 <p:outputPanel layout="block" id="content" class="page-content">                               
-                    <p:growl id="messages2" sticky="true"/>
+                    <p:growl id="messages2" sticky="true" showDetail="true"/>
                     <ui:insert name="content">
                         <span>Página en construcción</span>
                     </ui:insert>
