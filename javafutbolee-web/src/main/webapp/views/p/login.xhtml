@@ -9,7 +9,7 @@
     <ui:composition template="/templates/emptyTemplate.xhtml">
         <ui:define name="headx">
             <sec:authorize access="isAuthenticated()">
-                <meta http-equiv="refresh" content="0;url=http://www.google.com" /> 
+                <meta http-equiv="refresh" content="0;url=#{facesContext.externalContext.requestContextPath}/faces/views/s/home.xhtml" /> 
             </sec:authorize>
         </ui:define>
         <ui:define name="title">

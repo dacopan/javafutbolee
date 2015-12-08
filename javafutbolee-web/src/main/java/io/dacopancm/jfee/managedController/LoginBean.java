@@ -24,7 +24,6 @@ import javax.faces.context.FacesContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
@@ -49,14 +48,14 @@ public class LoginBean {
             Authentication result = authenticationManager.authenticate(request);
             SecurityContextHolder.getContext().setAuthentication(result);
 
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            //e.printStackTrace();
 
             FacesContext context = FacesContext.getCurrentInstance();
 
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Incorrecto", "Usuario o contraseña incorrecto"));
 
-            return "incorrect";
+            return null;
         }
 
         User userDetails

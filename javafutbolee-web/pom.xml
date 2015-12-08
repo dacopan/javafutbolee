@@ -133,6 +133,12 @@
             <version>1.2</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>primefaces-extensions</artifactId>
+            <version>4.0.0</version>
+        </dependency>
     </dependencies>
 
     
@@ -157,7 +163,7 @@
                 <version>2.3</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>                
-                    <packagingExcludes>bower_components/**,node_modules/**,assets/**,bower.json,gulpfile.js,notes.txt,npm-debug.log,</packagingExcludes>
+                    <packagingExcludes>bower_components/**,node_modules/**,assets/**,bower.json,gulpfile.js,notes.txt,npm-debug.log,</packagingExcludes>                    
                 </configuration>
             </plugin>
             <plugin>
@@ -200,7 +206,25 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
+            <resource>
+                <directory>src/main/webapp/WEB-INF</directory>
+                <filtering>true</filtering>
+            </resource>
         </resources>
     </build>
-    
+    <profiles>  
+        <profile>            
+            <id>dev</id>            
+            <properties>                
+                <env>dev</env>
+            </properties>
+        </profile>
+        
+        <profile>            
+            <id>openshift</id>            
+            <properties>                
+                <env>prod</env>
+            </properties>
+        </profile>
+    </profiles>  
 </project>

@@ -13,7 +13,7 @@
     
     <bean id="propeanx" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="false" /> 
-        <property name="location" value="/WEB-INF/enki.properties"/> 
+        <property name="location" value="classpath:enki.${env}.properties"/> 
     </bean>
     
     

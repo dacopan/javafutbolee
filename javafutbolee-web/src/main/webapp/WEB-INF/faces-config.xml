@@ -37,7 +37,7 @@
         
         <navigation-case>
             <from-outcome>correct</from-outcome>
-            <to-view-id>/views/s/xxx.xhtml</to-view-id>
+            <to-view-id>/views/s/home.xhtml</to-view-id> 
             <redirect></redirect>
         </navigation-case>
         <navigation-case>

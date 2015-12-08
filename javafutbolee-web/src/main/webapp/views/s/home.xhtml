@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+    <ui:composition template="/templates/mainTemplate.xhtml">
+        <ui:define name="title">
+            JavaFutbolEE|Home
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+
+                <section class="services" id="services" role="region" aria-label="Services">
+                    <div class="section-overlay-layer">
+                        <div class="container">
+
+                            <!-- SECTION HEADER -->
+                            <div class="section-header">
+                                <h2 class="dark-text wow fadeIn" data-wow-delay="0.25s">Mi cuenta</h2>
+                                <div class="colored-line wow fadeInLeftBig"></div>                                					
+                            </div>
+                            <br/>
+                            <div class="grid">
+                                <div class="row cells2">
+
+
+                                    <div class="cell align-center"> 
+                                        <span class="fa fa-envelope colored-text"></span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <h:outputText value="jhon.doe@javafutbolee.tk"/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <h:commandLink class="fg-darkBlue" value="editar"/>
+                                    </div>
+
+
+
+                                    <div class="cell align-center">
+                                        <span class="fa fa-key colored-text"></span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <h:outputText value="******"/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <h:commandLink class="fg-darkBlue" value="cambiar"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="section-header">
+                                <h2 class="dark-text wow fadeIn" data-wow-delay="0.25s">Mis datos</h2>
+                                <div class="colored-line wow fadeInLeftBig"></div>                                					
+                            </div>
+
+                            <div class="grid">
+                                <div class="row cells3">
+                                    <div class="cell">
+                                        <pe:gravatar value="pfcorreap@yahoo.es" size="200" notFound="identicon" style="margin-top: 8px;"/>  
+                                    </div>
+
+                                    <div class="cell">
+                                        <h4 class="no-margin"><small>Nombres</small></h4>
+                                        <h:outputText value="Darwin Alejandro"/>
+                                        <br/>
+                                        <br/>
+
+                                        <h4 class="no-margin"><small>Apellidos</small></h4>
+                                        <h:outputText value="Correa Panchi"/>
+                                        <br/><br/>
+
+                                        <h4 class="no-margin"><small>Nacimiento</small></h4>
+                                        <h:outputText value="20, noviembre 1994"/>
+                                        <br/><br/>
+
+                                        <h4 class="no-margin"><small>Lugar</small></h4>
+                                        <h:outputText value="Quito, Ecuador"/>
+                                        <br/><br/>
+                                    </div>
+
+                                    <div class="cell">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <h:panelGroup layout="block" class="grid">
+                                <div class="row cells align-right">
+                                    <div class="cell">
+                                        <p:commandButton value="editar" class="primary big-button" icon="fa fa-pencil"/>
+                                    </div>
+                                </div>
+                            </h:panelGroup>                                                        
+
+                            <br/><br/>
+
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="call-to-action" style="background-image:url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/bg1.jpg);">
+                    <div class="section-overlay-layer no-padding">
+                        <div class="container no-padding">
+                            <div class="section-header">
+                                <h2 class="fg-white text-light wow fadeIn" data-wow-delay="0.25s">Próximo <strong>Partido</strong></h2>
+                                <div class="colored-line wow fadeInLeftBig"></div>      
+
+                                <br/><br/>
+                                <div class="table_home fg-white">                                                                                                               
+                                    <table class="widget_table calendario_table" style="margin: auto;">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="3" class="wow fadeInDown" data-wow-delay="0.25s">
+                                                    <span class="fa fa-angellist"></span> FECHA 20
+                                                    <br/><br/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="wow fadeInDown" data-wow-delay="0.5s">
+                                                    <span class="fa fa-calendar-check-o"></span> Domingo 06, diciembre 2015 
+                                                    <br/><br/>
+                                                </td>
+                                            </tr>
+                                            <tr class="wow fadeInDown" data-wow-delay="0.5s">
+                                                <td>MRA</td>
+                                                <td style="font-size: 30px;">VS</td>
+                                                <td>BSC</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="wow bounceIn" data-wow-delay="0.75s"><img class="pulse" data-wow-delay="1.3s" data-wow-duration="2.2s" data-wow-iteration="infinite" src="http://www.barcelonasc.com.ec/img/widget/mra.png"/></td>
+                                                <td>|</td>
+                                                <td class="wow bounceIn" data-wow-delay="0.75s"><img class="pulse" data-wow-delay="1.3s" data-wow-duration="2.2s" data-wow-iteration="infinite" src="http://www.barcelonasc.com.ec/img/widget/bsc.png"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="wow fadeInUpBig" data-wow-delay="0.75s">
+                                                    <img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/cancha2.png"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="wow fadeInDown" data-wow-delay="0.75s">
+                                                    ESTADIO - Bellavista
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>                                                                            		
+                                </div>
+
+                                <br/><br/>
+                                <div class="">
+                                    <p:commandButton icon="fa fa-ticket" value="Reservar" class="primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="">
+                    <div class="section-overlay-layer bg-white">
+                        <div class="container">
+
+                            <div class="section-header">
+                                <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administración <strong>Socios</strong></h2>
+                                <div class="colored-line wow fadeInLeftBig"></div>
+                                <div class="sub-heading">Administre a todos los soc10s, cambie estados, datos, y más...</div>					
+                            </div>
+
+                            <div class="grid">
+                                <div class="row cells2">
+
+
+                                    <div class="cell align-center"> 
+                                        <h2 class="text-light wow fadeInLeft" data-wow-delay="0.5s">12000</h2>
+                                        <h4 class="no-margin wow fadeInDown" data-wow-delay="0.75s"><small>Socios</small></h4>
+                                    </div>
+
+
+
+                                    <div class="cell align-center">
+                                        <h2 class="text-light wow fadeInRight" data-wow-delay="0.5s">10000</h2>
+                                        <h4 class="no-margin wow fadeInDown" data-wow-delay="0.75s"><small>Activos</small></h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center padding20">                                
+                                <h:commandButton value="Administración Socios" action="loginx" class="primary big-button wow fadeInDown" pt:data-wow-delay="0.25s"/>                               
+                                <br/> 
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+                <section class="">
+                    <div class="section-overlay-layer bg-white">
+                        <div class="container">
+
+                            <div class="section-header">
+                                <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administración <strong>Funcionarios</strong></h2>
+                                <div class="colored-line wow fadeInLeftBig"></div>
+                                <div class="sub-heading">Administre a todos los funcionarios y sus roles: Administradores de socios, Relacionista Público, etc</div>					
+                            </div>
+
+                            <div class="grid">
+                                <div class="row cells2">
+
+
+                                    <div class="cell align-center"> 
+                                        <h2 class="text-light wow fadeInLeft" data-wow-delay="0.5s">10</h2>
+                                        <h4 class="no-margin wow fadeInDown" data-wow-delay="0.75s"><small>Admin Socios</small></h4>
+                                    </div>
+
+
+
+                                    <div class="cell align-center">
+                                        <h2 class="text-light wow fadeInRight" data-wow-delay="0.5s">3</h2>
+                                        <h4 class="no-margin wow fadeInDown" data-wow-delay="0.75s"><small>RRPP</small></h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center padding20">                                
+                                <h:commandButton value="Administración Socios" action="loginx" class="primary big-button wow fadeInDown" pt:data-wow-delay="0.25s"/>                               
+                                <br/> 
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
