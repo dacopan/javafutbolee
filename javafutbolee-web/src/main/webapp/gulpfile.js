@@ -22,7 +22,9 @@ var paths = {
             './bower_components/scrollmagic/scrollmagic/ScrollMagic.min.js',
             './bower_components/wow/dist/wow.js',
             './bower_components/smoothscroll/SmoothScroll.js',
-            './bower_components/parallax/deploy/jquery.parallax.min.js'
+            './bower_components/parallax/deploy/jquery.parallax.min.js',
+            './bower_components/bootstrap/js/collapse.js',
+            './bower_components/bootstrap/js/transition.js'
         ],
         fonts: [
             './bower_components/font-awesome/fonts/fontawesome-webfont.*'
