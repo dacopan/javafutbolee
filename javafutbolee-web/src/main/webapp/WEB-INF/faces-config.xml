@@ -113,4 +113,16 @@
             
     </navigation-rule>
     
+    
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/s/home.xhtml
+        </from-view-id>        
+        <navigation-case>
+            <from-outcome>loggedout</from-outcome>
+            <to-view-id>/views/p/index.xhtml</to-view-id> 
+            <redirect></redirect>
+        </navigation-case>                
+    </navigation-rule>
 </faces-config>

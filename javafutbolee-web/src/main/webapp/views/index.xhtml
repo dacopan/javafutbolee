@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:sec="http://www.springframework.org/security/tags"
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/templates/mainTemplate.xhtml">
@@ -14,7 +13,7 @@
             <h:form>
                 <!-- contenido de la página-->
 
-                <section class="services" id="services" role="region" aria-label="Services">
+                <section class="services" id="beneficios" role="region" aria-label="Services">
                     <div class="section-overlay-layer">
                         <div class="container">
 
@@ -73,7 +72,7 @@
                     </div>
                 </section>
 
-                <section class="call-to-action" style="background-image:url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/bg1.jpg);">
+                <section id="afiliarse" class="call-to-action" style="background-image:url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/bg1.jpg);">
                     <div class="section-overlay-layer">
                         <div class="container">
                             <div class="text-center">
@@ -86,7 +85,7 @@
                     </div>
                 </section>
 
-                <section class="">
+                <section id="ingresar" class="">
                     <div class="section-overlay-layer bg-white">
                         <div class="container">
 

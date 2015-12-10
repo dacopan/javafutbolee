@@ -22,9 +22,10 @@ var paths = {
             './bower_components/scrollmagic/scrollmagic/ScrollMagic.min.js',
             './bower_components/wow/dist/wow.js',
             './bower_components/smoothscroll/SmoothScroll.js',
-            './bower_components/parallax/deploy/jquery.parallax.min.js',
             './bower_components/bootstrap/js/collapse.js',
-            './bower_components/bootstrap/js/transition.js'
+            './bower_components/bootstrap/js/transition.js',
+            './bower_components/smooth-scroll/dist/js/smooth-scroll.js',
+            './bower_components/parallax/deploy/jquery.parallax.min.js'
         ],
         fonts: [
             './bower_components/font-awesome/fonts/fontawesome-webfont.*'
@@ -104,6 +105,6 @@ gulp.task('dist', function () {
 
 gulp.task('build', ['clean', 'less', 'js', 'dist']);
 gulp.task('nvendor', ['vendor']);
-gulp.task('allx', ['build','nvendor','fonts']);
+gulp.task('allx', ['build', 'nvendor', 'fonts']);
 
 gulp.task('default', ['build']);
