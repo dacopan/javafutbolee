@@ -59,6 +59,10 @@
                                             </li>
                                         </sec:authorize>
                                         <sec:authorize access="isAuthenticated()">
+                                            <ui:insert name="menuitem">
+
+                                            </ui:insert>
+
                                             <li class="menu-item fg-hover-red item-red">
                                                 <h:form>
                                                     <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
@@ -69,7 +73,7 @@
                                                     </h:commandLink>
                                                 </h:form>
                                             </li>
-                                        </sec:authorize>
+                                        </sec:authorize>                                        
                                     </ul>
                                 </div>							
                             </nav>

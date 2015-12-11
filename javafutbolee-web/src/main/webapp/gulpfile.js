@@ -25,6 +25,7 @@ var paths = {
             './bower_components/bootstrap/js/collapse.js',
             './bower_components/bootstrap/js/transition.js',
             './bower_components/smooth-scroll/dist/js/smooth-scroll.js',
+            './bower_components/jQuery-One-Page-Nav/jquery.nav.js',
             './bower_components/parallax/deploy/jquery.parallax.min.js'
         ],
         fonts: [

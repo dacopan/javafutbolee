@@ -10,11 +10,34 @@
         <ui:define name="title">
             JavaFutbolEE|Home
         </ui:define>
+        <ui:define name="menuitem">
+            
+            <li class="menu-item">
+                <a href="#cuenta" data-scroll="true">
+                    Cuenta 
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#nextMatch" data-scroll="true">
+                    Próximo Partido
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#adminSocios" data-scroll="true">
+                    Admin Socios
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#adminFuncionarios" data-scroll="true">
+                    Admin Funcionarios
+                </a>
+            </li>
+        </ui:define>
         <ui:define name="content">
             <h:form>
                 <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
 
-                <section class="services" id="services" role="region" aria-label="Services">
+                <section class="services" id="cuenta" role="region" aria-label="Services">
                     <div class="section-overlay-layer">
                         <div class="container">
 
@@ -101,7 +124,7 @@
                 </section>
 
 
-                <section class="call-to-action" style="background-image:url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/bg1.jpg);">
+                <section id="nextMatch" class="call-to-action" style="background-image:url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/bg1.jpg);">
                     <div class="section-overlay-layer no-padding">
                         <div class="container no-padding">
                             <div class="section-header">
@@ -159,7 +182,7 @@
                 </section>
 
 
-                <section class="">
+                <section id="adminSocios" class="">
                     <div class="section-overlay-layer bg-white">
                         <div class="container">
 
@@ -199,8 +222,7 @@
                 </section>
 
 
-
-                <section class="">
+                <section id="adminFuncionarios" class="">
                     <div class="section-overlay-layer bg-white">
                         <div class="container">
 
