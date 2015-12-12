@@ -6,6 +6,9 @@ import javax.management.relation.Role;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -23,6 +26,7 @@ import javax.validation.constraints.Size;
 public class Usuario implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "usr_id", unique = true, nullable = false)
     private int usrId;
     @Column(name = "usr_ci", length = 45)
@@ -47,7 +51,7 @@ public class Usuario implements java.io.Serializable {
     @Size(max = 45)
     @Column(name = "usr_password_reset_hash")
     private String usrPasswordResetHash;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "ROL_MIEMBRO",
             joinColumns = {
                 @JoinColumn(name = "usr_id", referencedColumnName = "usr_id")},

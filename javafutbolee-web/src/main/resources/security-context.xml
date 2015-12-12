@@ -10,7 +10,13 @@
     <!-- Enable method level Spring Security by annotations  -->
     <sec:global-method-security pre-post-annotations="enabled" />  
     <sec:http auto-config="true" use-expressions="true">        
+        
+        <sec:intercept-url pattern="/faces/views/s/adminFuncionarios/**" access="hasAuthority('ROLE_ADMIN')"/>  
+        
+        <sec:intercept-url pattern="/faces/views/s/adminSocios/registrarSocio.xhtml" access="permitAll"/>        
+        <sec:intercept-url pattern="/faces/views/s/adminSocios/**" access="hasAuthority('ROLE_ADMIN_SOCIO')" />        
 
+        
         <!-- Page level Spring Security : Intercept access to resources in /pages/secure/** -->
         <sec:intercept-url pattern="/faces/views/s/**" access="isAuthenticated()" />
 

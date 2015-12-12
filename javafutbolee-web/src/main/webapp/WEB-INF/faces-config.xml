@@ -121,8 +121,18 @@
         </from-view-id>        
         <navigation-case>
             <from-outcome>loggedout</from-outcome>
-            <to-view-id>/views/p/index.xhtml</to-view-id> 
+            <to-view-id>/views/p/index.xhtml</to-view-id>
             <redirect></redirect>
-        </navigation-case>                
+        </navigation-case>  
+        <navigation-case>
+            <from-outcome>adminSocios</from-outcome>
+            <to-view-id>/views/s/adminSocios/adminSocios.xhtml</to-view-id> 
+            <redirect></redirect>
+        </navigation-case> 
+        <navigation-case>
+            <from-outcome>adminFuncionarios</from-outcome>
+            <to-view-id>/views/s/adminFuncionarios/adminFuncionarios.xhtml</to-view-id> 
+            <redirect></redirect>
+        </navigation-case>              
     </navigation-rule>
 </faces-config>
