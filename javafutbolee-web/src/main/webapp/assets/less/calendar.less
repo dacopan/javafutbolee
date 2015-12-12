@@ -1,0 +1,199 @@
+/*
+Copyright (C) 2015 dacopan
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : 12/12/2015, 5:47:43
+    Author     : dacopan
+*/
+
+/*Style For DatePicker And Calendar--------------------------------------------------------------------------------------*/
+#ui-datepicker-div {
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.8) !important;
+    -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.8) !important;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.8) !important;
+    border:1px solid rgba(0, 0, 0, 0.8);
+}
+
+
+
+.ui-datepicker {
+    .ui-datepicker-title{
+        select{
+            background: transparent;
+            padding: 2px;
+            margin-left: 2px!important;
+            border-color: #546e7a;
+        }
+    }
+    .ui-datepicker-prev,.ui-datepicker-next{
+        font-size: 18px;
+        vertical-align: middle;
+        text-align: center;
+        padding: 2px;
+
+        .ui-icon{
+            background: none;
+            text-indent: -9999px;
+            display:none;            
+        }
+        &:before{
+            content: @paginatorPrev;
+            color: @yellow;
+            font-size: 28px;
+            text-align: center;
+        }
+    }
+    .ui-datepicker-next{
+        &:before{content: @paginatorNext;}
+    }
+}
+
+.ui-datepicker-inline {
+    border: solid 1px #e0e0e0;
+}
+.ui-datepicker {
+    padding: 8px !important;
+    background-color: #ffffff !important;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    z-index: 9999;
+    border-collapse: separate;
+}
+.ui-datepicker:hover,
+.ui-datepicker:focus {
+    z-index: 9999;
+}
+.ui-datepicker-header {
+    font-size: 18px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    color: #546e7a;
+    padding: 10px 0px !important;
+}
+.ui-datepicker-header .ui-datepicker-prev {
+    left: 3px !important;
+    top: 10px !important;
+    cursor: pointer;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+}
+.ui-datepicker-header .ui-datepicker-next {
+    right: 3px !important;
+    top: 10px !important;
+    cursor: pointer;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+}
+.ui-datepicker-header .ui-datepicker-prev-hover {
+    background-color: @gray;
+    left: 3px;
+    top: 3px;
+}
+.ui-datepicker-header .ui-datepicker-next-hover {
+    background-color:@gray;
+    right: 3px;
+    top: 3px;
+}
+
+.ui-datepicker-calendar {
+    margin: 2px 0px 0px 0px !important;
+    border-collapse: inherit !important;
+}
+.ui-datepicker-calendar thead tr th {
+    color: #546e7a;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    cursor: default;
+    padding: 9px 0px;
+}
+.ui-datepicker-calendar tbody tr td {
+    border: solid 1px transparent;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    cursor: default;
+    padding: 6px 0px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.ui-datepicker td span,
+.ui-datepicker td a {
+    text-align: center !important;
+}
+.ui-datepicker-calendar tbody tr td:hover {
+    background-color: #26a69a;
+    border: solid 1px #26a69a;
+}
+.ui-datepicker-calendar tbody tr td:hover a {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    color: #ffffff !important;
+}
+.ui-datepicker-calendar tbody tr td a {
+    color: @dark !important;
+    background-color: transparent !important;
+}
+.ui-datepicker-calendar tbody tr .ui-datepicker-today {
+    background-color: #ffffff;
+    border: solid 1px #26a69a;
+}
+.ui-datepicker-calendar tbody tr .ui-datepicker-today a {
+    color: #26a69a !important;
+}
+.ui-datepicker-calendar tbody tr .ui-datepicker-current-day {
+    background-color: @yellow;
+    border: solid 1px @darkYellow;
+}
+.ui-datepicker-calendar tbody tr .ui-datepicker-current-day a {
+    color: #f6fafc !important;
+}
+.ui-datepicker-trigger {
+    width: auto !important;
+    margin-left: 2px !important;
+}
+.ui-datepicker-trigger .ui-icon {
+    background-image: url("http://www.primefaces.org/rio/javax.faces.resource/images/calendar.svg.xhtml?ln=primefaces-rio");
+    background-position: center !important;
+    background-size: 145% !important;
+}
+.ui-datepicker-group .ui-datepicker-calendar {
+    width: 100% !important;
+}
+.ui-timepicker-div {
+    color: #546e7a;
+}
+.ui-timepicker-div dl {
+    padding: 1px 10px;
+}
+.ui-timepicker-div .ui-widget-header {
+    font-size: 18px;
+    padding: 6px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    color: #546e7a;
+}
