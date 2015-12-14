@@ -27,7 +27,7 @@ import org.springframework.stereotype.Repository;
  * @author dacopan
  */
 @Repository
-public class PersonalDAO implements java.io.Serializable{
+public class PersonalDAO implements java.io.Serializable {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -40,34 +40,28 @@ public class PersonalDAO implements java.io.Serializable{
         this.sessionFactory = sessionFactory;
     }
 
-    
     public void addPersonal(Personal p) {
         getSessionFactory().getCurrentSession().save(p);
     }
 
-    
     public void deletePersonal(Personal p) {
         getSessionFactory().getCurrentSession().delete(p);
     }
 
-    
     public void updatePersonal(Personal p) {
         getSessionFactory().getCurrentSession().update(p);
     }
 
-    
     public Personal getPersonalById(int id) {
-        List list = getSessionFactory().getCurrentSession().createQuery("from Personal where psnId=?").setParameter(0, id).list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from Personal where psnId=:psnId").setParameter("psnId", id).list();
         return list.size() < 1 ? null : (Personal) list.get(0);
     }
 
-    
     public Personal getPersonalByCi(String ci) {
-        List list = getSessionFactory().getCurrentSession().createQuery("from Personal where usuario.usr_ci=?").setParameter(0, ci).list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from Personal where usuario.usrCi=:usrCi").setParameter("usrCi", ci).list();
         return list.size() < 1 ? null : (Personal) list.get(0);
     }
 
-    
     public List<Personal> getPersonals() {
         return getSessionFactory().getCurrentSession().createQuery("from Personal").list();
     }

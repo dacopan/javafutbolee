@@ -73,19 +73,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         List<String> roles = new ArrayList();
 
-        if (role == 1) {
-            roles.add("ROLE_REL_SOCIO");
-            roles.add("ROLE_REL_PUB");
+        if (role == 1) {                    //admin
+            roles.add("ROLE_SOCIO");
+            roles.add("ROLE_RRPP");
             roles.add("ROLE_ADMIN_SOCIO");
             roles.add("ROLE_ADMIN");
-        } else if (role == 2) {
-            roles.add("ROLE_REL_SOCIO");
-            roles.add("ROLE_REL_PUB");
+        } else if (role == 2) {             //admin_soc
+            roles.add("ROLE_SOCIO");
+            roles.add("ROLE_RRPP");
             roles.add("ROLE_ADMIN_SOCIO");
-        } else if (role == 3) {
-            roles.add("ROLE_REL_SOCIO");
-            roles.add("ROLE_REL_PUB");
-            roles.add("ROLE_ADMIN_SOCIO");
+        } else if (role == 3) {             //rrpp
+            roles.add("ROLE_SOCIO");
+            roles.add("ROLE_RRPP");
+        } else if (role == 4) {             //soc10
+            roles.add("ROLE_SOCIO");
         }
         return roles;
     }

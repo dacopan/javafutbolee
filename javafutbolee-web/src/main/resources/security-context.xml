@@ -41,7 +41,7 @@
     <!-- Set customUserDetailsService class as the authentication Manager for Spring Security-->
     <sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider user-service-ref="customUserDetailsService">
-            <sec:password-encoder hash="bcrypt" />
+            <sec:password-encoder ref="encoder"/>
         </sec:authentication-provider>
         
         <sec:authentication-provider >
@@ -49,7 +49,12 @@
             </sec:user-service>
         </sec:authentication-provider>
     </sec:authentication-manager>
+                
+    <!-- For hashing and salting user passwords -->
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
+    
+    
     <!-- Inject authentication Manager to our LoginBean -->
     <beans:bean id="loginBean" name="loginBean" class="io.dacopancm.jfee.managedController.LoginBean" scope="prototype">
         <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>

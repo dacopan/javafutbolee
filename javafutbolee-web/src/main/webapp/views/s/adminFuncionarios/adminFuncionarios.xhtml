@@ -33,37 +33,48 @@
                                          ajax="true" actionListener="#{funcionariosBean.resetAddFuncionario}" 
                                          update="dialogs"
                                          oncomplete="PF('dlgAddFuncionario').show();"/>                        
- 
+
                         <br/><br/>
 
 
                         <p:dataTable var="func" value="#{funcionariosBean.personalList}" rows="10"
                                      paginator="true"  reflow="true" editable="false"
-                                     sortMode="multiple"
+                                     sortMode="multiple" widgetVar="funcionariosTable" filteredValue="#{funcionariosBean.filteredPersonalList}"
                                      selectionMode="single" selection="#{funcionariosBean.selectedPersonal}" rowKey="#{func.psnId}"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                     rowsPerPageTemplate="5,10,15"
+                                     rowsPerPageTemplate="5,10,15" 
                                      >
                             <f:facet name="emptyMessage">
                                 <h2 class="text-light">Ningún Funcionario</h2>
                             </f:facet>
                             <f:facet name="header">
-                                Funcionarios
+
+                                <div class="align-center pos-rel">
+                                    Funcionarios
+                                    <p:inputText id="globalFilter" onkeyup="PF('funcionariosTable').filter()" style="width:150px;position: absolute;right: 50px;" placeholder="Enter keyword"/>
+                                    <span class="fa fa-search" style="position: absolute; right: 5px;"></span>&nbsp;&nbsp;
+                                </div>
+
+
+
                             </f:facet>
-                            <p:column headerText="Id" sortBy="#{func.psnId}">
+                            <p:column headerText="Id" sortBy="#{func.psnId}" filterBy="#{func.psnId}" filterStyleClass="no-display" filterMatchMode="contains">
                                 <h:outputText value="#{func.psnId}" />
                             </p:column>
 
-                            <p:column headerText="CI" sortBy="#{func.usuario.usrCi}">
+                            <p:column headerText="CI" sortBy="#{func.usuario.usrCi}" filterBy="#{func.usuario.usrCi}" filterStyleClass="no-display" filterMatchMode="contains">
                                 <h:outputText value="#{func.usuario.usrCi}" />
                             </p:column>
 
-                            <p:column headerText="Nombres" sortBy="#{func.psnNombre}">
+                            <p:column headerText="Nombres" sortBy="#{func.psnNombre}" filterBy="#{func.psnNombre}" filterStyleClass="no-display" filterMatchMode="contains">
                                 <h:outputText value="#{func.psnNombre}" />
                             </p:column>
 
-                            <p:column headerText="Apellidos" sortBy="#{func.psnApellido}">
+                            <p:column headerText="Apellidos" sortBy="#{func.psnApellido}" filterBy="#{func.psnApellido}" filterStyleClass="no-display" filterMatchMode="contains">
                                 <h:outputText value="#{func.psnApellido}" />
+                            </p:column>
+                            <p:column headerText="Email" sortBy="#{func.usuario.usrEmail}" filterBy="#{func.usuario.usrEmail}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{func.usuario.usrEmail}" />
                             </p:column>
 
                         </p:dataTable>
@@ -77,7 +88,7 @@
         <ui:define name="dialogs">
             <h:form>
                 <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
-                <p:dialog header="Añadir Funcionario" widgetVar="dlgAddFuncionario" modal="true" hideEffect="fade"
+                <p:dialog header="Añadir Funcionario" widgetVar="dlgAddFuncionario" modal="true" hideEffect="fade" showEffect="fade"
                           closeOnEscape="true" 
                           onShow="$('#content').addClass('blurx');" onHide="$('#content').removeClass('blurx');">
 
@@ -86,31 +97,43 @@
 
                             <div class="cell">                                                             
                                 <div class="input-control">
-                                    <p:outputLabel for="psnNombre" value="Nombres"/>
-                                    <p:inputText id="psnNombre" value="#{funcionariosBean.psnNombre}"
+                                    <p:outputLabel for="psnNombre">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombres                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="psnNombre" value="#{funcionariosBean.selectedPersonal.psnNombre}"
                                                  required="true" validatorMessage="Nombres inválidos"/> 
                                 </div>
                                 <br/>
                                 <br/>
-                                
+
                                 <div class="input-control">
-                                    <p:outputLabel for="psnApellido" value="Apellidos"/>
+                                    <p:outputLabel for="psnApellido">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Apellidos                                        
+                                    </p:outputLabel>
                                     <p:inputText id="psnApellido" value="#{funcionariosBean.selectedPersonal.psnApellido}"
                                                  required="true" validatorMessage="Apellidos inválidos"/>
                                 </div>
                                 <br/><br/>
-                                
+
                                 <div class="input-control">
-                                    <p:outputLabel for="psnFechaNac" value="Nacimiento"/>
+                                    <p:outputLabel for="psnFechaNac">
+                                        <span class="fa fg-gray fa-calendar"></span>
+                                        nacimiento                                        
+                                    </p:outputLabel>
                                     <p:calendar id="psnFechaNac" navigator="true" placeholder="Fecha Nacimiento"
                                                 validatorMessage="Fecha Nacimiento Inválida" required="true"
                                                 mask="true" pattern="dd-MM-yyyy"
                                                 value="#{funcionariosBean.selectedPersonal.psnFechaNac}"/>
                                 </div>
                                 <br/><br/>
-                                
+
                                 <div class="input-control">
-                                    <p:outputLabel for="psnGenero" value="Género"/>
+                                    <p:outputLabel for="psnGenero">
+                                        <span class="fa fg-gray fa-venus-mars"></span>
+                                        Género                                        
+                                    </p:outputLabel>
                                     <p:selectOneMenu id="psnGenero" value="#{funcionariosBean.selectedPersonal.psnGenero}" style="width:125px">
                                         <f:selectItem itemLabel="Masculino" itemValue="0" />
                                         <f:selectItem itemLabel="Femenino" itemValue="1" />
@@ -121,55 +144,77 @@
 
                             <div class="cell">                                
                                 <div class="input-control">
-                                    <p:outputLabel for="psnDireccion" value="Dirección"/>
+                                    <p:outputLabel for="psnDireccion">
+                                        <span class="fa fg-gray fa-map-marker"></span>
+                                        Dirección                                        
+                                    </p:outputLabel>
                                     <p:inputText id="psnDireccion" value="#{funcionariosBean.selectedPersonal.psnDireccion}"/>
                                 </div>
                                 <br/>
                                 <br/>
-                                
+
                                 <div class="input-control">
-                                    <p:outputLabel for="psnTelefono" value="Teléfono"/>
+                                    <p:outputLabel for="psnTelefono">
+                                        <span class="fa fg-gray fa-phone"></span>
+                                        Teléfono                                        
+                                    </p:outputLabel>
                                     <p:inputMask id="psnTelefono" required="true" mask="" validatorMessage="Teléfono Inválido" 
                                                  value="#{funcionariosBean.selectedPersonal.psnTelefono}"/>
                                 </div>
                                 <br/><br/>
-                                
+
                                 <div class="input-control">
-                                    <p:outputLabel for="psnCelular" value="Celular"/>
+                                    <p:outputLabel for="psnCelular">
+                                        <span class="fa fg-gray fa-mobile-phone"></span>
+                                        Celular                                        
+                                    </p:outputLabel>
                                     <p:inputMask id="psnCelular" required="true" validatorMessage="Celular inválido" mask="" 
                                                  value="#{funcionariosBean.selectedPersonal.psnCelular}"/>
                                 </div>
                                 <br/><br/>
-                                
+
                                 <div class="input-control">
-                                    <p:outputLabel for="usrCi" value="Cédula"/>
+                                    <p:outputLabel for="usrCi">
+                                        <span class="fa fg-gray fa-credit-card"></span>
+                                        Cédula                                        
+                                    </p:outputLabel>
                                     <p:inputText id="usrCi" value="#{funcionariosBean.selectedPersonal.usuario.usrCi}"
-                                                 required="true" validatorMessage="Cédula inválidos"/>
+                                                 required="true" validatorMessage="Cédula inválidos">
+                                        <f:validator validatorId="custom.cedulaValidator"/>
+                                    </p:inputText>
                                 </div>
                                 <br/><br/>
 
                             </div>
 
                         </div>
-                        
+
                         <div class="row">
                             <div class="cell">
                                 <div class="input-control">
-                                    <p:outputLabel for="usrEmail" value="Email"/>
+                                    <p:outputLabel for="usrEmail">
+                                        <span class="fa fg-gray fa-envelope"></span>
+                                        Email                                        
+                                    </p:outputLabel>
                                     <p:inputText id="usrEmail" value="#{funcionariosBean.selectedPersonal.usuario.usrEmail}"
                                                  required="true" type="email" validatorMessage="Email inválidos">
-                                    <p:clientValidator event="keyup"/>
-                                    <f:validateRegex pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)"/>
+                                        <p:clientValidator event="keyup"/>
+                                        <f:validateRegex pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)"/>
                                     </p:inputText>
                                 </div>
                                 <br/><br/>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="cell align-right">
-                                <p:commandButton class="primary" value="Guardar" icon="fa fa-check" validateClient="true" action="#{funcionariosBean.addFuncionarioAction()}"
-                                                 oncomplete="alert('mayra')"  />
+                                <p:commandButton widgetVar="addFuncionarioButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{funcionariosBean.addFuncionarioAction()}"
+                                                 oncomplete="PF('addFuncionarioButton').prop('disabled', false);"                                                                                                  
+                                                 onstart="PF('addFuncionarioButton').prop('disabled', true);"
+                                                 onerror="PF('addFuncionarioButton').prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
                             </div>
                         </div>
                     </div>
