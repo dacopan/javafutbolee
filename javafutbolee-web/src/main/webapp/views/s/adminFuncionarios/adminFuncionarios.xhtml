@@ -29,7 +29,7 @@
                             <div class="sub-heading">Administre a todos los funcionarios y sus roles: Administradores de socios, Relacionista Público, etc...</div>					
                         </div>
 
-                        <p:commandButton class="success " value="Añadir" icon="fa fa-user-plus"
+                        <p:commandButton class="success call-button" value="Añadir" icon="fa fa-user-plus"
                                          ajax="true" actionListener="#{funcionariosBean.resetAddFuncionario}" 
                                          update="dialogs"
                                          oncomplete="PF('dlgAddFuncionario').show();"/>                        
@@ -77,6 +77,11 @@
                                 <h:outputText value="#{func.usuario.usrEmail}" />
                             </p:column>
 
+                            <p:column headerText="Acciones">
+                                <p:commandButton update="dialogs" oncomplete="PF('dlgEditFuncionario').show()" icon="fa-pencil" title="Editar">
+                                    <f:setPropertyActionListener value="#{car}" target="#{funcionariosBean.selectedPersonal}" />
+                                </p:commandButton>
+                            </p:column>
                         </p:dataTable>
 
                     </div>
@@ -220,6 +225,12 @@
                     </div>
 
                 </p:dialog> 
+                
+                <p:dialog header="Añadir Funcionario" widgetVar="dlgEditFuncionario" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true" 
+                    onShow="$('#content').addClass('blurx');" onHide="$('#content').removeClass('blurx');">
+                              
+                </p:dialog>
             </h:form>
         </ui:define>
     </ui:composition>
