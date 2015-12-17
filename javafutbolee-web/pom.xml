@@ -25,29 +25,14 @@
             <artifactId>primefaces</artifactId>  
             <version>5.3</version>  
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.0.4.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.0.4.Final</version>
-            <type>jar</type>
-        </dependency>    
+          
            
         <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
             <version>3.3.0.Final</version>
         </dependency>
+       
         <dependency>
             <groupId>io.dacopancm</groupId>
             <artifactId>javafutbolee-ejb</artifactId>

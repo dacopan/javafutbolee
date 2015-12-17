@@ -35,8 +35,7 @@ import javax.persistence.TemporalType;
  * @author dacopan
  */
 @Entity
-@Table(name = "personal", catalog = "jfee"
-)
+@Table(name = "personal")
 public class Personal implements java.io.Serializable {
 
     private Integer psnId;
