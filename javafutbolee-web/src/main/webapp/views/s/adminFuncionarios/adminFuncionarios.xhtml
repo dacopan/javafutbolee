@@ -85,9 +85,9 @@
                                                  class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
                                     <f:setPropertyActionListener value="#{func}" target="#{funcionariosBean.selectedPersonal}" />
                                 </p:commandButton>
-                                <p:commandButton update="content,dialogs" oncomplete="PF('dlgEditFuncionario').show()" icon="fa-trash" title="Eliminar"
+                                <p:commandButton update="content,dialogs" oncomplete="PF('dlgDeleteFuncionario').show()" icon="fa-trash" title="Eliminar"
                                                  class="cycle-button bd-gray fg-gray bd-hover-red bg-hover-red fg-hover-white">
-                                    
+
                                     <f:setPropertyActionListener value="#{func}" target="#{funcionariosBean.selectedPersonal}" />
                                 </p:commandButton>
                             </p:column>
@@ -370,7 +370,7 @@
                                 <br/><br/>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="cell">
                                 <div class="input-control">
@@ -393,6 +393,28 @@
                                                  oncomplete="PF('editFuncionarioButton').prop('disabled', false);"                                                                                                  
                                                  onstart="PF('editFuncionarioButton').prop('disabled', true);"
                                                  onerror="PF('editFuncionarioButton').prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog>
+            </h:form>            
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Eliminar Funcionario" widgetVar="dlgDeleteFuncionario" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true" 
+                          onShow="$('#content').addClass('blurx');" onHide="$('#content').removeClass('blurx');">
+                    <h3 class="text-light">Seguro desea eliminar al funcionario #{funcionariosBean.selectedPersonal.psnNombre}?</h3>
+                    <br/>
+                    <div class="grid">
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton value="cancelar" onclick="PF('dlgDeleteFuncionario').hide();" />
+                                <p:commandButton class="primary" value="Aceptar" icon="fa fa-check"  
+                                                 action="#{funcionariosBean.deleteFuncionarioAction()}"                                                 
                                                  update="content,dialogs"
                                                  />
                             </div>

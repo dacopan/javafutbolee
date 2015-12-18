@@ -51,7 +51,7 @@ public class Usuario implements java.io.Serializable {
     @Size(max = 45)
     @Column(name = "usr_password_reset_hash")
     private String usrPasswordResetHash;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "ROL_MIEMBRO",
             joinColumns = {
                 @JoinColumn(name = "usr_id", referencedColumnName = "usr_id")},

@@ -128,6 +128,24 @@ public class FuncionariosBean implements Serializable {
         }
     }
 
+    public void deleteFuncionarioAction() {
+
+        try {
+            personalService.deletePersonal(selectedPersonal);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Eliminar Personal", "Personal eliminado con éxito!"));
+            RequestContext.getCurrentInstance().execute("PF('dlgDeleteFuncionario').hide()");
+            personalList = null;
+            getPersonalList();
+            resetAddFuncionario(null);
+
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo eliminar personal."));
+        }
+        resetAddFuncionario(null);
+    }
+
     public PersonalService getPersonalService() {
         return personalService;
     }
