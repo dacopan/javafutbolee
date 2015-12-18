@@ -16,7 +16,9 @@
  */
 package io.dacopancm.jfee.managedController;
 
+import io.dacopancm.jfee.exceptions.JfeeCustomException;
 import io.dacopancm.jfee.sp.model.Personal;
+import io.dacopancm.jfee.sp.model.Rol;
 import io.dacopancm.jfee.sp.model.Usuario;
 import io.dacopancm.jfee.sp.service.PersonalService;
 import io.dacopancm.jfee.sp.service.RolService;
@@ -24,6 +26,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -32,6 +35,7 @@ import javax.faces.context.FacesContext;
 
 import javax.faces.event.ActionEvent;
 import org.primefaces.context.RequestContext;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -45,8 +49,6 @@ public class FuncionariosBean implements Serializable {
     @ManagedProperty(value = "#{PersonalService}")
     PersonalService personalService;
 
-//    @ManagedProperty(value = "#{helperBean}")
-//    private HelperBean helperBean = null;
     @ManagedProperty(value = "#{RolService}")
     RolService rolService;
 
@@ -54,15 +56,26 @@ public class FuncionariosBean implements Serializable {
     Personal selectedPersonal;
     List<Personal> filteredPersonalList;
 
+    List<Rol> rolList;
+
+    @PostConstruct
+    public void postConstruct() {
+        resetAddFuncionario(null);
+    }
+
     public void resetAddFuncionario(ActionEvent actionEvent) {
         selectedPersonal = new Personal();
+        Usuario u = new Usuario();
+        Rol r = new Rol();
+        r.setRolId(4);
+        u.setRole(r);
+        selectedPersonal.setUsuario(u);
+
         selectedPersonal.setPsnNombre("darwin");
         selectedPersonal.setPsnApellido("correa");
         selectedPersonal.setPsnFechaNac(new Date());
         selectedPersonal.setPsnTelefono("4986489");
         selectedPersonal.setPsnCelular("4986489");
-
-        selectedPersonal.setUsuario(new Usuario());
 
         selectedPersonal.getUsuario().setUsrEmail("dacopan.bsc@gmail.com");
         selectedPersonal.getUsuario().setUsrCi("1719871327");
@@ -73,12 +86,13 @@ public class FuncionariosBean implements Serializable {
         try {
             Personal p = personalService.getPersonalByCi(selectedPersonal.getUsuario().getUsrCi());
             if (p != null) {
+                System.out.println(p.getUsuario().getUsrCi() + " " + selectedPersonal.getUsuario().getUsrCi());
                 FacesContext.getCurrentInstance().addMessage(
                         null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Agregar Personal!", "No se pudo agregar personal, ya existe un funcionario con este CI o email!"));
             } else {
 
                 personalService.addPersonal(selectedPersonal);
-                
+
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Agregar Personal", "Personal Agregado con éxito!"));
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Agregar Personal", "Se ha enviado un email de confirmación."));
                 RequestContext.getCurrentInstance().execute("PF('dlgAddFuncionario').hide()");
@@ -90,6 +104,27 @@ public class FuncionariosBean implements Serializable {
             ex.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo agregar personal."));
+        }
+    }
+
+    public void editFuncionarioAction() {
+
+        try {
+            personalService.updatePersonal(selectedPersonal);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Editar Personal", "Personal Editado con éxito!"));
+            RequestContext.getCurrentInstance().execute("PF('dlgEditFuncionario').hide()");
+            personalList = null;
+            getPersonalList();
+            resetAddFuncionario(null);
+
+        } catch (JfeeCustomException fex) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo editar personal."));
         }
     }
 
@@ -119,7 +154,7 @@ public class FuncionariosBean implements Serializable {
 
     public List<Personal> getPersonalList() {
         if (personalList == null) {
-            personalList = new ArrayList<Personal>();
+            personalList = new ArrayList<>();
             personalList.addAll(getPersonalService().getPersonals());
         }
         return personalList;
@@ -143,6 +178,20 @@ public class FuncionariosBean implements Serializable {
 
     public void setFilteredPersonalList(List<Personal> filteredPersonalList) {
         this.filteredPersonalList = filteredPersonalList;
+    }
+
+    public List<Rol> getRolList() {
+
+        if (rolList == null) {
+            rolList = new ArrayList<>();
+            getRolService().getRoles();
+            rolList.addAll(getRolService().getRoles());
+        }
+        return rolList;
+    }
+
+    public void setRolList(List<Rol> rolList) {
+        this.rolList = rolList;
     }
 
 }

@@ -76,10 +76,13 @@
                             <p:column headerText="Email" sortBy="#{func.usuario.usrEmail}" filterBy="#{func.usuario.usrEmail}" filterStyleClass="no-display" filterMatchMode="contains">
                                 <h:outputText value="#{func.usuario.usrEmail}" />
                             </p:column>
+                            <p:column headerText="Email" sortBy="#{func.usuario.rol.rolNombre}" filterBy="#{func.usuario.rol.rolNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{func.usuario.rol.rolNombre}" />
+                            </p:column>
 
                             <p:column headerText="Acciones">
                                 <p:commandButton update="dialogs" oncomplete="PF('dlgEditFuncionario').show()" icon="fa-pencil" title="Editar">
-                                    <f:setPropertyActionListener value="#{car}" target="#{funcionariosBean.selectedPersonal}" />
+                                    <f:setPropertyActionListener value="#{func}" target="#{funcionariosBean.selectedPersonal}" />
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
@@ -212,6 +215,21 @@
                         </div>
 
                         <div class="row">
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="usrRol">
+                                        <span class="fa fg-gray fa-user-secret"></span>
+                                        Rol                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="usrRol" value="#{funcionariosBean.selectedPersonal.usuario.rol.rolId}">
+                                        <f:selectItems value="#{funcionariosBean.rolList}" var="rol" itemLabel="#{rol.rolNombre}" itemValue="#{rol.rolId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="cell align-right">
                                 <p:commandButton widgetVar="addFuncionarioButton" class="primary" value="Guardar" icon="fa fa-check"  
                                                  validateClient="true" action="#{funcionariosBean.addFuncionarioAction()}"
@@ -225,11 +243,156 @@
                     </div>
 
                 </p:dialog> 
-                
-                <p:dialog header="Añadir Funcionario" widgetVar="dlgEditFuncionario" modal="true" hideEffect="fade" showEffect="fade"
+            </h:form>
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Editar Funcionario" widgetVar="dlgEditFuncionario" modal="true" hideEffect="fade" showEffect="fade"
                           closeOnEscape="true" 
-                    onShow="$('#content').addClass('blurx');" onHide="$('#content').removeClass('blurx');">
-                              
+                          onShow="$('#content').addClass('blurx');" onHide="$('#content').removeClass('blurx');">
+
+
+                    <div class="grid">
+                        <div class="row cells2">                            
+
+                            <div class="cell">                                                             
+                                <div class="input-control">
+                                    <p:outputLabel for="psnNombre2">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombres                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="psnNombre2" value="#{funcionariosBean.selectedPersonal.psnNombre}"
+                                                 required="true" validatorMessage="Nombres inválidos"/> 
+                                </div>
+                                <br/>
+                                <br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="psnApellido2">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Apellidos                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="psnApellido2" value="#{funcionariosBean.selectedPersonal.psnApellido}"
+                                                 required="true" validatorMessage="Apellidos inválidos"/>
+                                </div>
+                                <br/><br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="psnFechaNac2">
+                                        <span class="fa fg-gray fa-calendar"></span>
+                                        nacimiento                                        
+                                    </p:outputLabel>
+                                    <p:calendar id="psnFechaNac2" navigator="true" placeholder="Fecha Nacimiento"
+                                                validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                mask="true" pattern="dd-MM-yyyy"
+                                                value="#{funcionariosBean.selectedPersonal.psnFechaNac}"/>
+                                </div>
+                                <br/><br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="psnGenero2">
+                                        <span class="fa fg-gray fa-venus-mars"></span>
+                                        Género                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="psnGenero2" value="#{funcionariosBean.selectedPersonal.psnGenero}" style="width:125px">
+                                        <f:selectItem itemLabel="Masculino" itemValue="0" />
+                                        <f:selectItem itemLabel="Femenino" itemValue="1" />
+                                    </p:selectOneMenu>
+                                </div>
+                                <br/><br/>
+                            </div>
+
+                            <div class="cell">                                
+                                <div class="input-control">
+                                    <p:outputLabel for="psnDireccion2">
+                                        <span class="fa fg-gray fa-map-marker"></span>
+                                        Dirección                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="psnDireccion2" value="#{funcionariosBean.selectedPersonal.psnDireccion}"/>
+                                </div>
+                                <br/>
+                                <br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="psnTelefono2">
+                                        <span class="fa fg-gray fa-phone"></span>
+                                        Teléfono                                        
+                                    </p:outputLabel>
+                                    <p:inputMask id="psnTelefono2" required="true" mask="" validatorMessage="Teléfono Inválido" 
+                                                 value="#{funcionariosBean.selectedPersonal.psnTelefono}"/>
+                                </div>
+                                <br/><br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="psnCelular2">
+                                        <span class="fa fg-gray fa-mobile-phone"></span>
+                                        Celular                                        
+                                    </p:outputLabel>
+                                    <p:inputMask id="psnCelular2" required="true" validatorMessage="Celular inválido" mask="" 
+                                                 value="#{funcionariosBean.selectedPersonal.psnCelular}"/>
+                                </div>
+                                <br/><br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="usrCi2">
+                                        <span class="fa fg-gray fa-credit-card"></span>
+                                        Cédula                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="usrCi2" value="#{funcionariosBean.selectedPersonal.usuario.usrCi}"
+                                                 required="true" validatorMessage="Cédula inválidos">
+                                        <f:validator validatorId="custom.cedulaValidator"/>
+                                    </p:inputText>
+                                </div>
+                                <br/><br/>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="usrEmail2">
+                                        <span class="fa fg-gray fa-envelope"></span>
+                                        Email                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="usrEmail2" value="#{funcionariosBean.selectedPersonal.usuario.usrEmail}"
+                                                 required="true" type="email" validatorMessage="Email inválidos">
+                                        <p:clientValidator event="keyup"/>
+                                        <f:validateRegex pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)"/>
+                                    </p:inputText>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="usrRol">
+                                        <span class="fa fg-gray fa-user-secret"></span>
+                                        Rol                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="usrRol" value="#{funcionariosBean.selectedPersonal.usuario.rol.rolId}">
+                                        <f:selectItems value="#{funcionariosBean.rolList}" var="rol" itemLabel="#{rol.rolNombre}" itemValue="#{rol.rolId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="editFuncionarioButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{funcionariosBean.editFuncionarioAction()}"
+                                                 oncomplete="PF('editFuncionarioButton').prop('disabled', false);"                                                                                                  
+                                                 onstart="PF('editFuncionarioButton').prop('disabled', true);"
+                                                 onerror="PF('editFuncionarioButton').prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
                 </p:dialog>
             </h:form>
         </ui:define>

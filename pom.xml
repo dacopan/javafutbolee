@@ -7,8 +7,6 @@
   <packaging>pom</packaging>
   <name>javafutbolee</name>
   <modules>
-    <module>javafutbolee-ear</module>
     <module>javafutbolee-web</module>
-    <module>javafutbolee-ejb</module>
   </modules>
 </project>

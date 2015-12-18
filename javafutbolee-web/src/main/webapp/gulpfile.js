@@ -8,7 +8,7 @@ var paths = {
     dist: {
         css: './resources/primefaces-dtic_theme/',
         js: './resources/dt1c/js',
-        fonts: './resources/fonts'
+        fonts: './resources/dt1c/fonts'
     },
     less: ['./assets/less/dtictheme.less'],
     js: ['./assets/js/*.js', './assets/js/**/*.js'],

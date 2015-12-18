@@ -17,36 +17,41 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    </properties> 
     
     <dependencies>
-        <dependency>  
-            <groupId>org.primefaces</groupId>  
-            <artifactId>primefaces</artifactId>  
-            <version>5.3</version>  
-        </dependency>
-          
-           
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
-            <version>3.3.0.Final</version>
-        </dependency>
-       
-        <dependency>
-            <groupId>io.dacopancm</groupId>
-            <artifactId>javafutbolee-ejb</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        <!--FROM EAR-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.0.4.Final</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>5.0.4.Final</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.37</version>
+        </dependency>
         
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
         
+        <!--spring-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -65,8 +70,6 @@
             <version>4.0.3.RELEASE</version>
             <type>jar</type>
         </dependency>
-        
-        
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -86,7 +89,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
+            <artifactId>spring-aspects</artifactId>
             <version>4.2.3.RELEASE</version>
             <type>jar</type>
         </dependency>
@@ -96,6 +99,56 @@
             <version>4.2.3.RELEASE</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.2.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        <!--spring-->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.1</version>
+            <type>jar</type>
+        </dependency>
+        
+        
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!--END FROM EAR-->
+        
+        <dependency>  
+            <groupId>org.primefaces</groupId>  
+            <artifactId>primefaces</artifactId>  
+            <version>5.3</version>  
+        </dependency>
+                     
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.3.0.Final</version>
+        </dependency>       
+                                
+        
+                                
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>4.2.3.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        
         
         
         <dependency>
@@ -108,16 +161,7 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>4.0.3.RELEASE</version>
             <type>jar</type>
-        </dependency>
-        
-        
-        
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
-        </dependency>
-
+        </dependency>                              
 
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
@@ -148,7 +192,7 @@
                 <version>2.3</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>                
-                    <packagingExcludes>bower_components/**,node_modules/**,assets/**,bower.json,gulpfile.js,notes.txt,npm-debug.log,</packagingExcludes>                    
+                    <packagingExcludes>bower_components/**,node_modules/**,assets/**,bower.json,gulpfile.js,notes.txt,npm-debug.log,resources/resources1.tar.gz,resources/resources2.tar.gz</packagingExcludes>                    
                 </configuration>
             </plugin>
             <plugin>
@@ -206,7 +250,19 @@
         </profile>
         
         <profile>            
-            <id>openshift</id>            
+            <id>openshift</id>  
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>2.3</version>
+                        <configuration>
+                            <outputDirectory>deployments</outputDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>          
             <properties>                
                 <env>prod</env>
             </properties>

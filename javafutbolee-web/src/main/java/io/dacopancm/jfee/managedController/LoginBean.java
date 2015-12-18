@@ -22,6 +22,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,17 +43,18 @@ public class LoginBean {
     private AuthenticationManager authenticationManager = null;
 
     public String login() {
-        try {            
+        try {
             Authentication request = new UsernamePasswordAuthenticationToken(this.getUserName(), this.getPassword());
             Authentication result = authenticationManager.authenticate(request);
             SecurityContextHolder.getContext().setAuthentication(result);
 
+        } catch (BadCredentialsException bc) {
+            System.out.println(bc.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Incorrecto", "Usuario o contraseña incorrecto"));
+            return null;
         } catch (Exception e) {
-            //e.printStackTrace();
-
-            FacesContext context = FacesContext.getCurrentInstance();
-
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Incorrecto", "Usuario o contraseña incorrecto"));
+            //e.printStackTrace();           
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Incorrecto", "Cuenta inhabilitada o no confirmada."));
 
             return null;
         }
