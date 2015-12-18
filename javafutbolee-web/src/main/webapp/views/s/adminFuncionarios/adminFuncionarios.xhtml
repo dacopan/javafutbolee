@@ -76,12 +76,18 @@
                             <p:column headerText="Email" sortBy="#{func.usuario.usrEmail}" filterBy="#{func.usuario.usrEmail}" filterStyleClass="no-display" filterMatchMode="contains">
                                 <h:outputText value="#{func.usuario.usrEmail}" />
                             </p:column>
-                            <p:column headerText="Email" sortBy="#{func.usuario.rol.rolNombre}" filterBy="#{func.usuario.rol.rolNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                            <p:column headerText="Rol" sortBy="#{func.usuario.rol.rolNombre}" filterBy="#{func.usuario.rol.rolNombre}" filterStyleClass="no-display" filterMatchMode="contains">
                                 <h:outputText value="#{func.usuario.rol.rolNombre}" />
                             </p:column>
 
-                            <p:column headerText="Acciones">
-                                <p:commandButton update="dialogs" oncomplete="PF('dlgEditFuncionario').show()" icon="fa-pencil" title="Editar">
+                            <p:column headerText="Acciones" class="align-center">
+                                <p:commandButton update="dialogs" oncomplete="PF('dlgEditFuncionario').show()" icon="fa-pencil" title="Editar"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
+                                    <f:setPropertyActionListener value="#{func}" target="#{funcionariosBean.selectedPersonal}" />
+                                </p:commandButton>
+                                <p:commandButton update="content,dialogs" oncomplete="PF('dlgEditFuncionario').show()" icon="fa-trash" title="Eliminar"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-red bg-hover-red fg-hover-white">
+                                    
                                     <f:setPropertyActionListener value="#{func}" target="#{funcionariosBean.selectedPersonal}" />
                                 </p:commandButton>
                             </p:column>

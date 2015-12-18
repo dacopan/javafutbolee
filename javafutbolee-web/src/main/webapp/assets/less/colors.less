@@ -2,6 +2,7 @@
 .color-rgba(@color, @a: 1) {background: rgba(red(@color), green(@color), blue(@color), @a) !important;}
 .fg-color(@color) {color: @color !important;}
 .bg-color(@color) {background: @color !important;}
+.bd-color(@color) {border-color: @color !important;}
 .op-color(@color, @opacity: .7){
     background-color: rgba(red(@color), green(@color), blue(@color), @opacity) !important;
 }
@@ -19,7 +20,7 @@
     .bg-black {.bg-color(@black);}
     .bg-white {.bg-color(@white);}
     .bg-dorado {.bg-color(@dorado);}
-    .bg-red {.bg-color(@red);}
+    .bg-red,.bg-hover-red:hover {.bg-color(@red);}
     .bg-yellow {.bg-color(@yellow);}
     .bg-darkBlue {.bg-color(@darkBlue);}
     .bg-blue {.bg-color(@blue);}
@@ -63,7 +64,7 @@
     .fg-lightGray,.fg-hover-lightGray:hover {.fg-color(@lightGray);}
     .fg-dark,.fg-hover-dark:hover {.fg-color(@dark);}
     .fg-darker,.fg-hover-darker:hover {.fg-color(@darker);}
-    
+
     .fg-lightRed{.fg-color(@lightRed);} 
 }
 
@@ -89,4 +90,23 @@
     .bg-yellow,.bg-hover-yellow:hover{.bg-color(@yellow);}
     .bg-lightYellow,.bg-hover-lightYellow:hover{.bg-color(@lightYellow);}
     .bg-darkYellow,.bg-hover-darkYellow:hover{.bg-color(@darkYellow);}
+}
+
+//border colors
+.dt1c{
+    .bd-black,.bd-hover-black:hover {.bd-color(@black);}
+    .bd-white,.bd-hover-white:hover {.bd-color(@white);}
+    .bd-dorado,.bd-hover-dorado:hover {.bd-color(@dorado);}
+    .bd-red,.bd-hover-red:hover {.bd-color(@red);}
+    .bd-yellow,.bd-hover-yellow:hover {.bd-color(@yellow);}
+    .bd-darkBlue,.bd-hover-darkBlue:hover {.bd-color(@darkBlue);}
+    .bd-blue,.bd-hover-blue:hover {.bd-color(@blue);}
+    .bd-lightBlue,.bd-hover-lightBlue:hover {.bd-color(@lightBlue);}
+    .bd-extraLightBlue,.bd-hover-extraLightBlue:hover {.bd-color(@extraLightBlue);}
+    .bd-gray,.bd-hover-gray:hover {.bd-color(@gray);}
+    .bd-lightGray,.bd-hover-lightGray:hover {.bd-color(@lightGray);}
+    .bd-dark,.bd-hover-dark:hover {.bd-color(@dark);}
+    .bd-darker,.bd-hover-darker:hover {.bd-color(@darker);}
+
+    .bd-lightRed{.bd-color(@lightRed);} 
 }
