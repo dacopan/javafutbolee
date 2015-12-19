@@ -64,17 +64,17 @@
     <navigation-rule>
         <from-view-id>
             /views/s/changePassword.xhtml
-        </from-view-id>        
+        </from-view-id>     
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/views/s/home.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>    
         <navigation-case>
             <from-outcome>login</from-outcome>
             <to-view-id>/views/p/login.xhtml</to-view-id>
             <redirect></redirect>
-        </navigation-case>  
-        <navigation-case>
-            <from-outcome>home</from-outcome>
-            <to-view-id>/views/s/home.xhtml</to-view-id>
-            <redirect></redirect>
-        </navigation-case>              
+        </navigation-case>                      
             
     </navigation-rule>
     
@@ -126,7 +126,7 @@
         </from-view-id>        
         <navigation-case>
             <from-outcome>loggedout</from-outcome>
-            <to-view-id>/views/p/index.xhtml</to-view-id>
+            <to-view-id>/views/index.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>  
         <navigation-case>
@@ -137,6 +137,11 @@
         <navigation-case>
             <from-outcome>adminFuncionarios</from-outcome>
             <to-view-id>/views/s/adminFuncionarios/adminFuncionarios.xhtml</to-view-id> 
+            <redirect></redirect>
+        </navigation-case>  
+        <navigation-case>
+            <from-outcome>changePassword</from-outcome>
+            <to-view-id>/views/s/changePassword.xhtml?return=home</to-view-id> 
             <redirect></redirect>
         </navigation-case>              
     </navigation-rule>

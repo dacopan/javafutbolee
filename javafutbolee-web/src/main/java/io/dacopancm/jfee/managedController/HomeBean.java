@@ -29,6 +29,7 @@ import javax.faces.context.FacesContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -46,6 +47,10 @@ public class HomeBean implements Serializable {
     String hash;
     String ciHash;
     String ci;
+    
+    String oldPassword;
+    String newPassword1;
+    String newPassword2;
     
     @PostConstruct
     public void postConstruct() {
@@ -74,7 +79,7 @@ public class HomeBean implements Serializable {
             Usuario u = usuarioService.getUsuario(ci);
             if (u.getUsrActivationHash() == null) {
                 FacesContext.getCurrentInstance().addMessage(
-                        null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Activado!", "Cuenta confirmada."));                
+                        null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Activado!", "Cuenta confirmada."));
                 return "login";
             }
             if (u.getUsrActivationHash().equalsIgnoreCase(hash)) {
@@ -103,6 +108,26 @@ public class HomeBean implements Serializable {
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo editar email."));
+        }
+    }
+    
+    public void editPasswordAction() {
+        try {
+            if (newPassword1.equals(newPassword2)) {
+                
+                if (!BCrypt.checkpw(oldPassword, currentUsuario.getUsrPassword())) {
+                    FacesContext.getCurrentInstance().addMessage(
+                            null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Su contraseña actual, no coincide."));
+                }
+                currentUsuario.setUsrPassword(new BCryptPasswordEncoder().encode(newPassword1));
+                usuarioService.updateUsuario(currentUsuario);
+                FacesContext.getCurrentInstance().addMessage(
+                        null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado!", ""));
+            }
+            
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo cambiar contraseña."));
         }
     }
     
@@ -144,6 +169,31 @@ public class HomeBean implements Serializable {
     
     public void setCi(String ci) {
         this.ci = ci;
+    }
+
+    //
+    public String getOldPassword() {
+        return oldPassword;
+    }
+    
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+    
+    public String getNewPassword1() {
+        return newPassword1;
+    }
+    
+    public void setNewPassword1(String newPassword1) {
+        this.newPassword1 = newPassword1;
+    }
+    
+    public String getNewPassword2() {
+        return newPassword2;
+    }
+    
+    public void setNewPassword2(String newPassword2) {
+        this.newPassword2 = newPassword2;
     }
     
 }

@@ -48,6 +48,9 @@ PrimeFaces.widget.Growl = PrimeFaces.widget.BaseWidget.extend({
     },
     
     renderMessage: function(msg) {
+        if(!msg.severity){
+            msg.severity='error';
+        }
         var markup = '<div class="ui-growl-item-container ui-state-highlight ui-corner-all ui-helper-hidden ui-shadow" aria-live="polite">';
         markup += '<div class="ui-growl-item ' + msg.severity + '">';
         markup += '<div class="ui-growl-icon-close ui-icon ui-icon-closethick" style="display:none"></div>';
