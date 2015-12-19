@@ -63,8 +63,11 @@ public class PersonalService implements java.io.Serializable {
 
         u.setRole(rolDAO.getRol(p.getUsuario().getRol().getRolId()));
 
+        //confirm email url
+        String confirmUrl = "confirmEmail.xhtml?h=" + u.getUsrActivationHash() + "&c=" + passwordEncoder.encode(u.getUsrCi());
+
         personalDAO.addPersonal(p);
-        emailService.sendAccountEmail(p, tmpPassword);
+        emailService.sendAccountEmail(p.getUsuario(), p.getPsnNombre(), p.getPsnApellido(), tmpPassword, confirmUrl);
     }
 
     @Transactional(readOnly = false)
@@ -89,7 +92,11 @@ public class PersonalService implements java.io.Serializable {
 
         if (!old.getUsuario().getUsrEmail().equalsIgnoreCase(p.getUsuario().getUsrEmail())) {
             p.getUsuario().setUsrActivationHash(java.util.UUID.randomUUID().toString().replace("-", ""));
-            emailService.sendConfirmationEmail(p);
+
+            //confirm email url
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String confirmUrl = "confirmEmail.xhtml?h=" + p.getUsuario().getUsrActivationHash() + "&c=" + passwordEncoder.encode(p.getUsuario().getUsrCi());
+            emailService.sendConfirmationEmail(p.getUsuario(), p.getPsnNombre(), p.getPsnApellido(), confirmUrl);
         }
 
         //TODO: verify if email already in use

@@ -8,10 +8,12 @@ var paths = {
     dist: {
         css: './resources/primefaces-dtic_theme/',
         js: './resources/dt1c/js',
-        fonts: './resources/dt1c/fonts'
+        fonts: './resources/dt1c/fonts',
+        html: '../resources/email'
     },
     less: ['./assets/less/dtictheme.less'],
     js: ['./assets/js/*.js', './assets/js/**/*.js'],
+    html: ['./assets/html/*.html'],
     vendor: {
         css: [
             './bower_components/animate.css/animate.css',
@@ -70,7 +72,14 @@ gulp.task('fonts', function () {
             .pipe(gulp.dest(paths.dist.fonts));
 
 });
-
+gulp.task('html', function () {
+    var opts = {
+        conditionals: true,
+    };    
+    return gulp.src(paths.html)
+            .pipe(plugins.minifyHtml(opts))
+            .pipe(gulp.dest(paths.dist.html));
+});
 
 /**
  * copies vendor specific files to the public folder.
@@ -104,8 +113,6 @@ gulp.task('dist', function () {
 
 
 
-gulp.task('build', ['clean', 'less', 'js', 'dist']);
-gulp.task('nvendor', ['vendor']);
-gulp.task('allx', ['build', 'nvendor', 'fonts']);
-
+gulp.task('build', ['clean', 'less', 'js']);
+gulp.task('allx', ['build', 'vendor', 'fonts', 'html']);
 gulp.task('default', ['build']);

@@ -83,13 +83,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                 break;
             case 2:
                 //admin_soc
-                roles.add("ROLE_SOCIO");
-                roles.add("ROLE_RRPP");
                 roles.add("ROLE_ADMIN_SOCIO");
                 break;
             case 3:
-                //rrpp
-                roles.add("ROLE_SOCIO");
+                //rrpp                
                 roles.add("ROLE_RRPP");
                 break;
             case 4:

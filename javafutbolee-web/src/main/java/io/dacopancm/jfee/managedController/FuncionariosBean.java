@@ -23,9 +23,13 @@ import io.dacopancm.jfee.sp.model.Usuario;
 import io.dacopancm.jfee.sp.service.PersonalService;
 import io.dacopancm.jfee.sp.service.RolService;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -34,8 +38,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -64,6 +68,7 @@ public class FuncionariosBean implements Serializable {
     }
 
     public void resetAddFuncionario(ActionEvent actionEvent) {
+
         selectedPersonal = new Personal();
         Usuario u = new Usuario();
         Rol r = new Rol();
@@ -79,6 +84,7 @@ public class FuncionariosBean implements Serializable {
 
         selectedPersonal.getUsuario().setUsrEmail("dacopan.bsc@gmail.com");
         selectedPersonal.getUsuario().setUsrCi("1719871327");
+
     }
 
     public void addFuncionarioAction() {

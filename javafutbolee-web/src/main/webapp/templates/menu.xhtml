@@ -23,9 +23,13 @@
                                 <span class="icon-bar"></span>
                             </button>
 
-                            <a href="http://www.google.com" class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</a>
+                            <ui:insert name="backLink">
+                                <a href="http://www.google.com" class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</a>
+                            </ui:insert>
 
-                            <a href="http://demo.themeisle.com/parallax-one/" class="navbar-brand" title="Parallax One"><img src="//demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/logo-nav.png" alt="Parallax One"/></a><div class="header-logo-wrap text-header paralax_one_only_customizer"><h1 itemprop="headline" id="site-title" class="site-title"><a href="http://demo.themeisle.com/parallax-one/" title="Parallax One" rel="home">Parallax One</a></h1><p itemprop="description" id="site-description" class="site-description">Just another WordPress site by Themeisle</p></div>
+
+
+                            <a href="#{facesContext.externalContext.requestContextPath}/faces/views/s/home.xhtml" class="navbar-brand" title="Parallax One"><img src="//demo.themeisle.com/parallax-one/wp-content/themes/Parallax-One/images/logo-nav.png" alt="Parallax One"/></a><div class="header-logo-wrap text-header paralax_one_only_customizer"><h1 itemprop="headline" id="site-title" class="site-title"><a href="http://demo.themeisle.com/parallax-one/" title="Parallax One" rel="home">Parallax One</a></h1><p itemprop="description" id="site-description" class="site-description">Just another WordPress site by Themeisle</p></div>
                         </h:form>
                     </div>
 

@@ -17,9 +17,11 @@
 package io.dacopancm.jfee.sp.service;
 
 import io.dacopancm.jfee.sp.model.Personal;
+import io.dacopancm.jfee.sp.model.Usuario;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import javax.faces.context.FacesContext;
 import javax.mail.internet.MimeMessage;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,71 +39,101 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
  */
 @Service
 public class EmailService implements Serializable {
-    
+
     @Autowired
     private JavaMailSender mailSender;
     @Autowired
     private VelocityEngine velocityEngine;
-    
+
     @Value("${jfee.mail.from}")
     String fromAddress;
-    
+    @Value("${jfee.portal.url}")
+    String urlx;
+
     @Async
-    void sendAccountEmail(final Personal p, final String password) {
+    void sendAccountEmail(final Usuario u, final String nombre, final String apellido, final String password, final String confirmUrl) {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
                 MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-                message.setTo(p.getUsuario().getUsrEmail());
+                message.setTo(u.getUsrEmail());
                 message.setFrom(getFromAddress()); // could be parameterized...
-                message.setSubject("Registro en JavaFutbolEE: #BSC-SOC10S");
+                message.setSubject("Registro #BSC SOC10S | JavaFutbolEE");
                 Map model = new HashMap();
-                model.put("user", p.getUsuario());
-                model.put("name", p.getPsnNombre() + " " + p.getPsnApellido());
+
+                model.put("subject", "Registro #BSC SOC10S | JavaFutbolEE");
+                model.put("nombre", nombre + " " + apellido);
+                model.put("email", u.getUsrEmail());
+                model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
+
+                model.put("user", u);
                 model.put("password", password);
-                model.put("email", p.getUsuario().getUsrEmail());
-                
+
                 String text = VelocityEngineUtils.mergeTemplateIntoString(
                         velocityEngine,
-                        "email/ConfirmationEmailTemplate.vm", "UTF-8", model);
-                
+                        "email/JFEE_register.html", "UTF-8", model);
+
                 message.setText(text, true);
             }
         };
         this.mailSender.send(preparator);
-        sendConfirmationEmail(p);
+        sendConfirmationEmail(u, nombre, apellido, confirmUrl);
     }
-    
+
     @Async
-    void sendConfirmationEmail(final Personal p) {
-        
+    void sendConfirmationEmail(final Usuario u, final String nombre, final String apellido, final String confirmUrl) {
+        MimeMessagePreparator preparator = new MimeMessagePreparator() {
+            @Override
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                message.setTo(u.getUsrEmail());
+                message.setFrom(getFromAddress()); // could be parameterized...
+                message.setSubject("Confirmación #BSC SOC10S | JavaFutbolEE");
+                Map model = new HashMap();
+
+                model.put("subject", "Confirmación #BSC SOC10S | JavaFutbolEE");
+                model.put("nombre", nombre + " " + apellido);
+                model.put("email", u.getUsrEmail());
+                model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
+
+                model.put("user", u);
+                model.put("confirmUrl", confirmUrl);
+
+                String text = VelocityEngineUtils.mergeTemplateIntoString(
+                        velocityEngine,
+                        "email/JFEE_confirmEmail.html", "UTF-8", model);
+
+                message.setText(text, true);
+            }
+        };
+        this.mailSender.send(preparator);
     }
-    
+
     public EmailService() {
     }
-    
+
     public JavaMailSender getMailSender() {
         return mailSender;
     }
-    
+
     public void setMailSender(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
-    
+
     public VelocityEngine getVelocityEngine() {
         return velocityEngine;
     }
-    
+
     public void setVelocityEngine(VelocityEngine velocityEngine) {
         this.velocityEngine = velocityEngine;
     }
-    
+
     public String getFromAddress() {
         return fromAddress;
     }
-    
+
     public void setFromAddress(String fromAddress) {
         this.fromAddress = fromAddress;
     }
-    
+
 }
