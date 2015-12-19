@@ -141,8 +141,29 @@
         </navigation-case>  
         <navigation-case>
             <from-outcome>changePassword</from-outcome>
-            <to-view-id>/views/s/changePassword.xhtml?return=home</to-view-id> 
+            <to-view-id>/views/s/changePassword.xhtml?r=home</to-view-id> 
             <redirect></redirect>
-        </navigation-case>              
+        </navigation-case>   
+        <navigation-case>
+            <from-outcome>editarFuncionario</from-outcome>
+            <to-view-id>/views/s/adminFuncionarios/editarFuncionario.xhtml?r=home</to-view-id> 
+            <redirect></redirect>
+        </navigation-case>   
+        
+                   
     </navigation-rule>
+    
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/s/adminFuncionarios/editarFuncionario.xhtml
+        </from-view-id>        
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/views/s/home.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>                                     
+    </navigation-rule>
+    
+    
 </faces-config>

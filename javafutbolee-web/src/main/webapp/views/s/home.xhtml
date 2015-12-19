@@ -88,31 +88,70 @@
                                 <div class="grid">
                                     <div class="row cells3">
                                         <div class="cell">
-                                            <pe:gravatar value="pfcorreap@yahoo.es" size="200" notFound="identicon" style="margin-top: 8px;display: block;margin: auto;"/>  
+                                            <pe:gravatar value="#{homeBean.currentUsuario.usrEmail}" size="200" notFound="identicon" style="margin-top: 8px;display: block;margin: auto;"/>  
                                         </div>
 
-                                        <div class="cell">
-                                            <h4 class="no-margin"><small>Nombres</small></h4>
-                                            <h:outputText value="Darwin Alejandro"/>
-                                            <br/>
-                                            <br/>
+                                        <sec:authorize access="hasAnyRole('ROLE_SOCIO')"> 
+                                            <div class="cell">
+                                                <h4 class="no-margin"><small>Nombres</small></h4>
+                                                <h:outputText value="Darwin Alejandro"/>
+                                                <br/>
+                                                <br/>
 
-                                            <h4 class="no-margin"><small>Apellidos</small></h4>
-                                            <h:outputText value="Correa Panchi"/>
-                                            <br/><br/>
+                                                <h4 class="no-margin"><small>Apellidos</small></h4>
+                                                <h:outputText value="Correa Panchi"/>
+                                                <br/><br/>
 
-                                            <h4 class="no-margin"><small>Nacimiento</small></h4>
-                                            <h:outputText value="20, noviembre 1994"/>
-                                            <br/><br/>
+                                                <h4 class="no-margin"><small>Nacimiento</small></h4>
+                                                <h:outputText value="20, noviembre 1994"/>
+                                                <br/><br/>
 
-                                            <h4 class="no-margin"><small>Lugar</small></h4>
-                                            <h:outputText value="Quito, Ecuador"/>
-                                            <br/><br/>
-                                        </div>
+                                                <h4 class="no-margin"><small>Lugar</small></h4>
+                                                <h:outputText value="Quito, Ecuador"/>
+                                                <br/><br/>
+                                            </div>
 
-                                        <div class="cell">
+                                            <div class="cell">
 
-                                        </div>
+                                            </div>
+                                        </sec:authorize>
+
+                                        <sec:authorize access="hasAnyRole('ROLE_RRPP,ROLE_ADMIN_SOCIO')"> 
+                                            <div class="cell">
+                                                <h4 class="no-margin"><small>Nombres</small></h4>
+                                                <h:outputText value="#{editarFuncionarioBean.selectedPersonal.psnNombre}"/>
+                                                <br/>
+                                                <br/>
+
+                                                <h4 class="no-margin"><small>Apellidos</small></h4>
+                                                <h:outputText value="#{editarFuncionarioBean.selectedPersonal.psnApellido}"/>
+                                                <br/><br/>
+
+                                                <h4 class="no-margin"><small>Nacimiento</small></h4>
+                                                <h:outputText value="#{editarFuncionarioBean.selectedPersonal.psnFechaNac}"/>
+                                                <br/><br/>
+
+                                                <h4 class="no-margin"><small>Lugar</small></h4>
+                                                <h:outputText value="#{editarFuncionarioBean.selectedPersonal.psnDireccion}"/>
+                                                <br/><br/>
+                                            </div>
+
+                                            <div class="cell">
+                                                <h4 class="no-margin"><small>Género</small></h4>
+                                                <h:outputText value="#{editarFuncionarioBean.selectedPersonal.psnGenero==0?'Masculino':'Femenino'}"/>
+                                                <br/>
+                                                <br/>
+
+                                                <h4 class="no-margin"><small>Teléfono</small></h4>
+                                                <h:outputText value="#{editarFuncionarioBean.selectedPersonal.psnTelefono}"/>
+                                                <br/><br/>
+
+                                                <h4 class="no-margin"><small>Rol</small></h4>                                                                                                
+                                                <h:outputText value="#{editarFuncionarioBean.selectedPersonal.usuario.rol.rolNombre}"/>
+                                                <br/><br/>
+
+                                            </div>
+                                        </sec:authorize>
 
                                     </div>
                                 </div>
@@ -120,7 +159,13 @@
                                 <h:panelGroup layout="block" class="grid">
                                     <div class="row cells align-right">
                                         <div class="cell">
-                                            <p:commandButton value="editar" class="primary big-button" icon="fa fa-pencil"/>
+                                            <sec:authorize access="hasAnyRole('ROLE_SOCIO')"> 
+                                                <p:commandButton value="editar" class="primary big-button" icon="fa fa-pencil"/>
+                                            </sec:authorize>
+                                            <sec:authorize access="hasAnyRole('ROLE_RRPP,ROLE_ADMIN_SOCIO')"> 
+                                                <p:commandButton value="editar" class="primary big-button" icon="fa fa-pencil"
+                                                                 action="editarFuncionario"/>                                                
+                                            </sec:authorize>
                                         </div>
                                     </div>
                                 </h:panelGroup>                                                        
@@ -181,14 +226,14 @@
 
                                 <br/><br/>
                                 <sec:authorize access="hasAnyRole('ROLE_SOCIO')"> 
-                                <div class="">
-                                    <p:commandButton icon="fa fa-ticket" value="Reservar" class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
-                                </div>
+                                    <div class="">
+                                        <p:commandButton icon="fa fa-ticket" value="Reservar" class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
+                                    </div>
                                 </sec:authorize>
                                 <sec:authorize access="hasAnyRole('ROLE_RRPP')"> 
-                                <div class="">
-                                    <p:commandButton icon="fa fa-cogs" value="Administrar"  class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
-                                </div>
+                                    <div class="">
+                                        <p:commandButton icon="fa fa-cogs" value="Administrar"  class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
+                                    </div>
                                 </sec:authorize>
                             </div>
 
@@ -321,6 +366,8 @@
                     </div>
                 </p:dialog>
             </h:form>
+
+
         </ui:define>
     </ui:composition>
 </html>

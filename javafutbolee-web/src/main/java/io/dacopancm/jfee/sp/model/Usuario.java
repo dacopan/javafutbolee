@@ -51,6 +51,8 @@ public class Usuario implements java.io.Serializable {
     @Size(max = 45)
     @Column(name = "usr_password_reset_hash")
     private String usrPasswordResetHash;
+    @Column(name = "usr_avatar")
+    private String usrAvatar;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "ROL_MIEMBRO",
             joinColumns = {
@@ -63,7 +65,7 @@ public class Usuario implements java.io.Serializable {
     public Usuario() {
     }
 
-    public Usuario(int usrId, String usrCi, String usrPassword, String usrEmail, Boolean usrActive, Integer usrFailedLogin, Date usrCreationTimestamp, Date usrLastFailedLogin, String usrActivationHash, String usrPasswordResetHash, Rol rol) {
+    public Usuario(int usrId, String usrCi, String usrPassword, String usrEmail, Boolean usrActive, Integer usrFailedLogin, Date usrCreationTimestamp, Date usrLastFailedLogin, String usrActivationHash, String usrPasswordResetHash, String usrAvatar, Rol rol) {
         this.usrId = usrId;
         this.usrCi = usrCi;
         this.usrPassword = usrPassword;
@@ -74,6 +76,7 @@ public class Usuario implements java.io.Serializable {
         this.usrLastFailedLogin = usrLastFailedLogin;
         this.usrActivationHash = usrActivationHash;
         this.usrPasswordResetHash = usrPasswordResetHash;
+        this.usrAvatar = usrAvatar;
         this.rol = rol;
     }
 
@@ -155,6 +158,14 @@ public class Usuario implements java.io.Serializable {
 
     public void setUsrPasswordResetHash(String usrPasswordResetHash) {
         this.usrPasswordResetHash = usrPasswordResetHash;
+    }
+
+    public String getUsrAvatar() {
+        return usrAvatar;
+    }
+
+    public void setUsrAvatar(String usrAvatar) {
+        this.usrAvatar = usrAvatar;
     }
 
     public Rol getRol() {

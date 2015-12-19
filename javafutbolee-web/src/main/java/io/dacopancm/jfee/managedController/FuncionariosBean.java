@@ -55,7 +55,7 @@ public class FuncionariosBean implements Serializable {
     Personal selectedPersonal;
     List<Personal> filteredPersonalList;
 
-    List<Rol> rolList;
+    List<Rol> rolList;    
 
     @PostConstruct
     public void postConstruct() {
@@ -145,7 +145,7 @@ public class FuncionariosBean implements Serializable {
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo eliminar personal."));
         }
         resetAddFuncionario(null);
-    }
+    }    
 
     public PersonalService getPersonalService() {
         return personalService;
