@@ -75,8 +75,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         switch (role) {
             case 1:
-                //admin
-                roles.add("ROLE_SOCIO");
+                //admin                
                 roles.add("ROLE_RRPP");
                 roles.add("ROLE_ADMIN_SOCIO");
                 roles.add("ROLE_ADMIN");

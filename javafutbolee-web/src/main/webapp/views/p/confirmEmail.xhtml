@@ -36,8 +36,13 @@
                                 <div class="sub-heading">Ingrese el token que recibió en su email.</div>					
                             </div>
                             <div class="input-control text icon wow fadeInDown" pt:data-wow-delay="0.75s">
-                                <span class="fa fa-rebel"></span> <p:inputText id="username" placeholder="token confirmación" required="true" type="text"
-                                                                                  requiredMessage="Token Requerido"/>                                
+                                <span class="fa fa-rebel"></span> <p:inputText placeholder="token confirmación" required="true" type="text"
+                                                                               value="#{homeBean.hash}" requiredMessage="Token Requerido"/>                                
+                            </div>
+                            <br/>
+                            <div class="input-control text icon wow fadeInDown" pt:data-wow-delay="0.75s">
+                                <span class="fa fa-user"></span> <p:inputText placeholder="username" required="true"
+                                                                              value="#{homeBean.ci}" requiredMessage="Usuario requerido"/>                                
                             </div>
 
 
@@ -48,7 +53,7 @@
                                                pt:data-wow-delay="1s"/>
                             </div>
 
-                            <p:commandButton action="login" class="call-button big-button wow fadeIn login-button" pt:data-wow-delay="0.35s" update="content"                                             
+                            <p:commandButton action="#{homeBean.confirmEmailAction()}" class="call-button big-button wow fadeIn login-button" pt:data-wow-delay="0.35s" update="content"                                             
                                              value="Aceptar"/>
 
                         </div>                   

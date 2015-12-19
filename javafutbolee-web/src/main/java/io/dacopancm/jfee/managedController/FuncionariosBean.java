@@ -23,13 +23,9 @@ import io.dacopancm.jfee.sp.model.Usuario;
 import io.dacopancm.jfee.sp.service.PersonalService;
 import io.dacopancm.jfee.sp.service.RolService;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -38,7 +34,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import javax.faces.event.ActionEvent;
-import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -208,8 +203,11 @@ public class FuncionariosBean implements Serializable {
 
         if (rolList == null) {
             rolList = new ArrayList<>();
-            getRolService().getRoles();
-            rolList.addAll(getRolService().getRoles());
+            /*getRolService().getRoles();
+             rolList.addAll(getRolService().getRoles());*/
+            rolList.add(new Rol(2, "ADMIN SOCIOS", null));
+            rolList.add(new Rol(3, "RRPP", null));
+
         }
         return rolList;
     }

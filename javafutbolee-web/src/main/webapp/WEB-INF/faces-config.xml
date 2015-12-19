@@ -92,7 +92,12 @@
             <from-outcome>resend</from-outcome>
             <to-view-id>/views/p/sendConfirmEmail.xhtml</to-view-id>
             <redirect></redirect>
-        </navigation-case>             
+        </navigation-case> 
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/views/p/login.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>            
             
     </navigation-rule>
     

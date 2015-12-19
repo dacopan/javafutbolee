@@ -5,124 +5,132 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:pe="http://primefaces.org/ui/extensions">
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/mainTemplate.xhtml">
         <ui:define name="title">
             JavaFutbolEE|Home
         </ui:define>
         <ui:define name="menuitem">
-            
-            <li class="menu-item">
-                <a href="#cuenta" data-scroll="true">
-                    Cuenta 
-                </a>
-            </li>
+
+            <sec:authorize ifNotGranted='ROLE_ADMIN'> 
+                <li class="menu-item">
+                    <a href="#cuenta" data-scroll="true">
+                        Cuenta 
+                    </a>
+                </li>
+            </sec:authorize>
             <li class="menu-item">
                 <a href="#nextMatch" data-scroll="true">
                     Próximo Partido
                 </a>
             </li>
+
             <li class="menu-item">
                 <a href="#adminSocios" data-scroll="true">
-                    Admin Socios
+                    Socios
                 </a>
-            </li>
-            <li class="menu-item">
-                <a href="#adminFuncionarios" data-scroll="true">
-                    Admin Funcionarios
-                </a>
-            </li>
+            </li>            
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN')"> 
+                <li class="menu-item">
+                    <a href="#adminFuncionarios" data-scroll="true">
+                        Funcionarios
+                    </a>
+                </li>
+            </sec:authorize>
         </ui:define>
         <ui:define name="content">
             <h:form>
                 <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
 
-                <section class="services" id="cuenta" role="region" aria-label="Services">
-                    <div class="section-overlay-layer">
-                        <div class="container">
+                <sec:authorize ifNotGranted="ROLE_ADMIN">
+                    <section class="services" id="cuenta" role="region" aria-label="Services">
+                        <div class="section-overlay-layer">
+                            <div class="container">
 
-                            <!-- SECTION HEADER -->
-                            <div class="section-header">
-                                <h2 class="dark-text wow fadeIn" data-wow-delay="0.25s">Mi cuenta</h2>
-                                <div class="colored-line wow fadeInLeftBig"></div>                                					
-                            </div>
-                            <br/>
-                            <div class="grid">
-                                <div class="row cells2">
-
-
-                                    <div class="cell align-center"> 
-                                        <span class="fa fa-envelope colored-text"></span>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <h:outputText value="jhon.doe@javafutbolee.tk"/>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <h:commandLink class="fg-darkBlue" value="editar"/>
-                                    </div>
+                                <!-- SECTION HEADER -->
+                                <div class="section-header">
+                                    <h2 class="dark-text wow fadeIn" data-wow-delay="0.25s">Mi cuenta</h2>
+                                    <div class="colored-line wow fadeInLeftBig"></div>                                					
+                                </div>
+                                <br/>
+                                <div class="grid">
+                                    <div class="row cells2">
 
 
+                                        <div class="cell align-center"> 
+                                            <span class="fa fa-envelope colored-text"></span>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <h:outputText value="#{homeBean.currentUsuario.usrEmail}"/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <p:commandLink class="fg-darkBlue" value="editar" onclick="PF('dlgEditEmail').show();"/>
+                                        </div>
 
-                                    <div class="cell align-center">
-                                        <span class="fa fa-key colored-text"></span>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <h:outputText value="******"/>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <h:commandLink class="fg-darkBlue" value="cambiar"/>
+
+
+                                        <div class="cell align-center">
+                                            <span class="fa fa-key colored-text"></span>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <h:outputText value="******"/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <h:commandLink class="fg-darkBlue" value="cambiar" action="/faces/views/s/changePassword.xhtml?return=home"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
 
-                            <div class="section-header">
-                                <h2 class="dark-text wow fadeIn" data-wow-delay="0.25s">Mis datos</h2>
-                                <div class="colored-line wow fadeInLeftBig"></div>                                					
-                            </div>
-
-                            <div class="grid">
-                                <div class="row cells3">
-                                    <div class="cell">
-                                        <pe:gravatar value="pfcorreap@yahoo.es" size="200" notFound="identicon" style="margin-top: 8px;display: block;margin: auto;"/>  
-                                    </div>
-
-                                    <div class="cell">
-                                        <h4 class="no-margin"><small>Nombres</small></h4>
-                                        <h:outputText value="Darwin Alejandro"/>
-                                        <br/>
-                                        <br/>
-
-                                        <h4 class="no-margin"><small>Apellidos</small></h4>
-                                        <h:outputText value="Correa Panchi"/>
-                                        <br/><br/>
-
-                                        <h4 class="no-margin"><small>Nacimiento</small></h4>
-                                        <h:outputText value="20, noviembre 1994"/>
-                                        <br/><br/>
-
-                                        <h4 class="no-margin"><small>Lugar</small></h4>
-                                        <h:outputText value="Quito, Ecuador"/>
-                                        <br/><br/>
-                                    </div>
-
-                                    <div class="cell">
-
-                                    </div>
-
+                                <div class="section-header">
+                                    <h2 class="dark-text wow fadeIn" data-wow-delay="0.25s">Mis datos</h2>
+                                    <div class="colored-line wow fadeInLeftBig"></div>                                					
                                 </div>
-                            </div>
 
-                            <h:panelGroup layout="block" class="grid">
-                                <div class="row cells align-right">
-                                    <div class="cell">
-                                        <p:commandButton value="editar" class="primary big-button" icon="fa fa-pencil"/>
+                                <div class="grid">
+                                    <div class="row cells3">
+                                        <div class="cell">
+                                            <pe:gravatar value="pfcorreap@yahoo.es" size="200" notFound="identicon" style="margin-top: 8px;display: block;margin: auto;"/>  
+                                        </div>
+
+                                        <div class="cell">
+                                            <h4 class="no-margin"><small>Nombres</small></h4>
+                                            <h:outputText value="Darwin Alejandro"/>
+                                            <br/>
+                                            <br/>
+
+                                            <h4 class="no-margin"><small>Apellidos</small></h4>
+                                            <h:outputText value="Correa Panchi"/>
+                                            <br/><br/>
+
+                                            <h4 class="no-margin"><small>Nacimiento</small></h4>
+                                            <h:outputText value="20, noviembre 1994"/>
+                                            <br/><br/>
+
+                                            <h4 class="no-margin"><small>Lugar</small></h4>
+                                            <h:outputText value="Quito, Ecuador"/>
+                                            <br/><br/>
+                                        </div>
+
+                                        <div class="cell">
+
+                                        </div>
+
                                     </div>
                                 </div>
-                            </h:panelGroup>                                                        
 
-                            <br/><br/>
+                                <h:panelGroup layout="block" class="grid">
+                                    <div class="row cells align-right">
+                                        <div class="cell">
+                                            <p:commandButton value="editar" class="primary big-button" icon="fa fa-pencil"/>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>                                                        
 
+                                <br/><br/>
+
+                            </div>
                         </div>
-                    </div>
-                </section>
-
+                    </section>
+                </sec:authorize>
 
                 <section id="nextMatch" class="call-to-action" style="background-image:url(#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/bg1.jpg);">
                     <div class="section-overlay-layer no-padding">
@@ -172,15 +180,21 @@
                                 </div>
 
                                 <br/><br/>
+                                <sec:authorize access="hasAnyRole('ROLE_SOCIO')"> 
                                 <div class="">
                                     <p:commandButton icon="fa fa-ticket" value="Reservar" class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
                                 </div>
+                                </sec:authorize>
+                                <sec:authorize access="hasAnyRole('ROLE_RRPP')"> 
+                                <div class="">
+                                    <p:commandButton icon="fa fa-cogs" value="Administrar"  class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
+                                </div>
+                                </sec:authorize>
                             </div>
 
                         </div>
                     </div>
                 </section>
-
 
                 <section id="adminSocios" class="">
                     <div class="section-overlay-layer bg-white">
@@ -210,58 +224,102 @@
                                 </div>
                             </div>
 
-                            <div class="text-center padding20">                                
-                                <h:commandButton value="Administración Socios" action="adminSocios" class="primary big-button wow fadeInDown" pt:data-wow-delay="0.25s"/>                               
-                                <br/> 
-                                <br/>
-                                <br/>
-                                <br/>
-                            </div>
+                            <sec:authorize access="hasAnyRole('ROLE_ADMIN_SOCIO')"> 
+
+                                <div class="text-center padding20">                                
+                                    <h:commandButton value="Administración Socios" action="adminSocios" class="primary big-button wow fadeInDown" pt:data-wow-delay="0.25s"/>                               
+                                    <br/> 
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </div>
+                            </sec:authorize>
                         </div>
                     </div>
                 </section>
 
+                <sec:authorize access="hasAnyRole('ROLE_ADMIN')"> 
+                    <section id="adminFuncionarios" class="">
+                        <div class="section-overlay-layer bg-white">
+                            <div class="container">
 
-                <section id="adminFuncionarios" class="">
-                    <div class="section-overlay-layer bg-white">
-                        <div class="container">
+                                <div class="section-header">
+                                    <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administración <strong>Funcionarios</strong></h2>
+                                    <div class="colored-line wow fadeInLeftBig"></div>
+                                    <div class="sub-heading">Administre a todos los funcionarios y sus roles: Administradores de socios, Relacionista Público, etc</div>					
+                                </div>
 
-                            <div class="section-header">
-                                <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administración <strong>Funcionarios</strong></h2>
-                                <div class="colored-line wow fadeInLeftBig"></div>
-                                <div class="sub-heading">Administre a todos los funcionarios y sus roles: Administradores de socios, Relacionista Público, etc</div>					
-                            </div>
-
-                            <div class="grid">
-                                <div class="row cells2">
-
-
-                                    <div class="cell align-center"> 
-                                        <h2 class="text-light wow fadeInLeft" data-wow-delay="0.5s">10</h2>
-                                        <h4 class="no-margin wow fadeInDown" data-wow-delay="0.75s"><small>Admin Socios</small></h4>
-                                    </div>
+                                <div class="grid">
+                                    <div class="row cells2">
 
 
+                                        <div class="cell align-center"> 
+                                            <h2 class="text-light wow fadeInLeft" data-wow-delay="0.5s">10</h2>
+                                            <h4 class="no-margin wow fadeInDown" data-wow-delay="0.75s"><small>Admin Socios</small></h4>
+                                        </div>
 
-                                    <div class="cell align-center">
-                                        <h2 class="text-light wow fadeInRight" data-wow-delay="0.5s">3</h2>
-                                        <h4 class="no-margin wow fadeInDown" data-wow-delay="0.75s"><small>RRPP</small></h4>
+
+
+                                        <div class="cell align-center">
+                                            <h2 class="text-light wow fadeInRight" data-wow-delay="0.5s">3</h2>
+                                            <h4 class="no-margin wow fadeInDown" data-wow-delay="0.75s"><small>RRPP</small></h4>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="text-center padding20">                                
-                                <h:commandButton value="Administración Funcionarios" action="adminFuncionarios" class="primary big-button wow fadeInDown" pt:data-wow-delay="0.25s"/>                               
-                                <br/> 
-                                <br/>
-                                <br/>
-                                <br/>
+                                <div class="text-center padding20">                                
+                                    <h:commandButton value="Administración Funcionarios" action="adminFuncionarios" class="primary big-button wow fadeInDown" pt:data-wow-delay="0.25s"/>                               
+                                    <br/> 
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </div>
                             </div>
                         </div>
+                    </section>
+                </sec:authorize>
+
+            </h:form>
+        </ui:define>
+
+        <ui:define name="dialogs">
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Editar email" widgetVar="dlgEditEmail" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="grid">
+
+                        <div class="row">
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="usrEmail">
+                                        <span class="fa fg-gray fa-envelope"></span>
+                                        Email                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="usrEmail" value="#{homeBean.currentUsuario.usrEmail}"
+                                                 required="true" type="email" validatorMessage="Email inválido">
+                                        <p:clientValidator event="keyup"/>
+                                        <f:validateRegex pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)"/>
+                                    </p:inputText>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{homeBean.editEmailAction()}"
+                                                 onstart="PF('dlgEditEmail').hide();"
+                                                 onerror="PF('dlgEditEmail').hide();" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+
                     </div>
-                </section>
-
-
+                </p:dialog>
             </h:form>
         </ui:define>
     </ui:composition>

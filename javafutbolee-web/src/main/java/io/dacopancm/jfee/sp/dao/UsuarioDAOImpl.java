@@ -20,14 +20,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class UsuarioDAOImpl implements UsuarioDAO {
-
+    
     @Autowired
     private SessionFactory sessionFactory;
-
+    
     private Session openSession() {
         return sessionFactory.getCurrentSession();
     }
-
+    
     @Override
     public Usuario getUsuario(String usr_ci) {
         List<Usuario> userList = new ArrayList<Usuario>();
@@ -40,5 +40,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             return null;
         }
     }
+    
+    @Override
+    public void updateUsuario(Usuario u) {
+        openSession().update(u);
+    }
 
+    @Override
+    public void evictUsuario(Usuario u) {
+        openSession().evict(u);
+    }
+    
 }

@@ -14,4 +14,5 @@ import io.dacopancm.jfee.sp.model.Usuario;
 public interface UsuarioService {
 
     public Usuario getUsuario(String usr_ci);
+    public void updateUsuario(Usuario u);
 }
