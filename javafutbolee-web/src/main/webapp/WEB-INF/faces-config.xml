@@ -148,7 +148,12 @@
             <from-outcome>editarFuncionario</from-outcome>
             <to-view-id>/views/s/adminFuncionarios/editarFuncionario.xhtml?r=home</to-view-id> 
             <redirect></redirect>
-        </navigation-case>   
+        </navigation-case>  
+        <navigation-case>
+            <from-outcome>adminPortal</from-outcome>
+            <to-view-id>/views/s/rrpp/adminPortal.xhtml</to-view-id> 
+            <redirect></redirect>
+        </navigation-case> 
         
                    
     </navigation-rule>
@@ -164,6 +169,15 @@
             <redirect></redirect>
         </navigation-case>                                     
     </navigation-rule>
-    
+    <navigation-rule>
+        <from-view-id>
+            /views/s/adminFuncionarios/adminFuncionarios.xhtml
+        </from-view-id>
+        <navigation-case>
+            <from-outcome>loggedout</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
     
 </faces-config>
