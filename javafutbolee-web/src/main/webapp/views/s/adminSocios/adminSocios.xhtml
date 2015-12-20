@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://java.sun.com/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/standAloneTemplate.xhtml">
+
+
+        <ui:define name="title">
+            JavaFutbolEE|Admin Socios
+        </ui:define>
+
+        <ui:define name="backLink">
+            <a href="#{facesContext.externalContext.requestContextPath}/faces/views/s/home.xhtml" class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</a>
+        </ui:define>
+        <ui:define name="menuitem">
+ 
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="form3">
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+
+                <section id="temporadas" class="call-to-action full-height" style="background-color: #f5f5f5;">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administrar <strong>Socios</strong></h2>
+                            <div class="colored-line wow fadeInLeftBig"></div>
+                            <div class="sub-heading"></div>					
+                        </div>
+
+                        <p:commandButton class="success call-button" value="Añadir" icon="fa fa-user-plus"
+                                         action="registrarSocio"/>                        
+
+                        <br/><br/>
+
+                        <!--TODO DataTable socios, ir a registrar socio, ir a editar socio -->
+                    </div>
+                </section>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

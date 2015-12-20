@@ -148,14 +148,27 @@
             <from-outcome>editarFuncionario</from-outcome>
             <to-view-id>/views/s/adminFuncionarios/editarFuncionario.xhtml?r=home</to-view-id> 
             <redirect></redirect>
-        </navigation-case>  
+        </navigation-case>                 
         <navigation-case>
             <from-outcome>adminPortal</from-outcome>
             <to-view-id>/views/s/rrpp/adminPortal.xhtml</to-view-id> 
             <redirect></redirect>
         </navigation-case> 
-        
-                   
+        <navigation-case>
+            <from-outcome>adminPartidos</from-outcome>
+            <to-view-id>/views/s/rrpp/adminPartidos.xhtml</to-view-id> 
+            <redirect></redirect>
+        </navigation-case> 
+        <navigation-case>
+            <from-outcome>editarSocio</from-outcome>
+            <to-view-id>/views/s/adminSocios/editarSocio.xhtml?r=home</to-view-id> 
+            <redirect></redirect>
+        </navigation-case>            
+        <navigation-case>
+            <from-outcome>reservarBoleto</from-outcome>
+            <to-view-id>/views/s/socio/reservarBoleto.xhtml?r=home</to-view-id> 
+            <redirect></redirect>
+        </navigation-case>                   
     </navigation-rule>
     
     
@@ -169,6 +182,8 @@
             <redirect></redirect>
         </navigation-case>                                     
     </navigation-rule>
+    
+    
     <navigation-rule>
         <from-view-id>
             /views/s/adminFuncionarios/adminFuncionarios.xhtml
@@ -176,6 +191,67 @@
         <navigation-case>
             <from-outcome>loggedout</from-outcome>
             <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/s/adminSocios/adminSocios.xhtml
+        </from-view-id>
+        <navigation-case>
+            <from-outcome>loggedout</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>registrarSocio</from-outcome>
+            <to-view-id>/views/s/adminSocios/registrarSocio.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/s/adminSocios/editarSocio.xhtml
+        </from-view-id>
+        <navigation-case>
+            <from-outcome>loggedout</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminSocio</from-outcome>
+            <to-view-id>/views/s/adminSocios/adminSocios.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/views/s/home.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/s/adminSocios/registrarSocio.xhtml
+        </from-view-id>
+        <navigation-case>
+            <from-outcome>loggedout</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminSocio</from-outcome>
+            <to-view-id>/views/s/adminSocios/adminSocios.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/views/s/home.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
     </navigation-rule>

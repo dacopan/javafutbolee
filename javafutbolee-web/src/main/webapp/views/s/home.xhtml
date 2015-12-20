@@ -160,7 +160,8 @@
                                     <div class="row cells align-right">
                                         <div class="cell">
                                             <sec:authorize access="hasAnyRole('ROLE_SOCIO')"> 
-                                                <p:commandButton value="editar" class="primary big-button" icon="fa fa-pencil"/>
+                                                <p:commandButton value="editar" class="primary big-button" icon="fa fa-pencil"
+                                                                 action="editarSocio"/>
                                             </sec:authorize>
                                             <sec:authorize access="hasAnyRole('ROLE_RRPP,ROLE_ADMIN_SOCIO')"> 
                                                 <p:commandButton value="editar" class="primary big-button" icon="fa fa-pencil"
@@ -227,12 +228,13 @@
                                 <br/><br/>
                                 <sec:authorize access="hasAnyRole('ROLE_SOCIO')"> 
                                     <div class="">
-                                        <p:commandButton icon="fa fa-ticket" value="Reservar" class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
+                                        <p:commandButton action="reservarBoleto" icon="fa fa-ticket" value="Reservar" class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
                                     </div>
                                 </sec:authorize>
                                 <sec:authorize access="hasAnyRole('ROLE_RRPP')"> 
                                     <div class="">
-                                        <p:commandButton action="adminPortal" icon="fa fa-cogs" value="Administrar"  class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
+                                        <p:commandButton action="adminPortal" icon="fa fa-cogs" value="Administrar"  class="call-button primary big-button wow fadeInLeft margin10R" pt:data-wow-delay="1s"/>
+                                        <p:commandButton action="adminPartidos" icon="fa fa-cogs" value="Partidos"  class="call-button primary big-button wow fadeInRight" pt:data-wow-delay="1s"/>
                                     </div>
                                 </sec:authorize>
                             </div>
