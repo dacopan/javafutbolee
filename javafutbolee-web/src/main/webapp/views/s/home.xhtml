@@ -232,7 +232,7 @@
                                 </sec:authorize>
                                 <sec:authorize access="hasAnyRole('ROLE_RRPP')"> 
                                     <div class="">
-                                        <p:commandButton icon="fa fa-cogs" value="Administrar"  class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
+                                        <p:commandButton action="adminPortal" icon="fa fa-cogs" value="Administrar"  class="call-button primary big-button wow fadeInDown" pt:data-wow-delay="1s"/>
                                     </div>
                                 </sec:authorize>
                             </div>
@@ -272,13 +272,13 @@
                             <sec:authorize access="hasAnyRole('ROLE_ADMIN_SOCIO')"> 
 
                                 <div class="text-center padding20">                                
-                                    <h:commandButton value="Administración Socios" action="adminSocios" class="primary big-button wow fadeInDown" pt:data-wow-delay="0.25s"/>                               
-                                    <br/> 
-                                    <br/>
-                                    <br/>
-                                    <br/>
+                                    <h:commandButton value="Administración Socios" action="adminSocios" class="primary big-button wow fadeInDown" pt:data-wow-delay="0.25s"/>                                                                   
                                 </div>
                             </sec:authorize>
+                            <br/> 
+                            <br/>
+                            <br/>
+                            <br/>
                         </div>
                     </div>
                 </section>

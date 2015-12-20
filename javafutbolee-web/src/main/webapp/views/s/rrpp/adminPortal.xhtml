@@ -1,0 +1,574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://java.sun.com/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/standAloneTemplate.xhtml">
+
+
+        <ui:define name="title">
+            JavaFutbolEE|Admin Portal
+        </ui:define>
+
+        <ui:define name="backLink">
+            <a href="#{facesContext.externalContext.requestContextPath}/faces/views/s/home.xhtml" class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</a>
+        </ui:define>
+        <ui:define name="menuitem">
+            <li class="menu-item">
+                <a href="#temporadas" data-scroll="true">
+                    Temporadas 
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#equipos" data-scroll="true">
+                    Equipos 
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#estadios" data-scroll="true">
+                    Estadios 
+                </a>
+            </li>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="form3">
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+
+                <section id="temporadas" class="call-to-action full-height" style="background-color: #f5f5f5;">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administrar <strong>Temporadas</strong></h2>
+                            <div class="colored-line wow fadeInLeftBig"></div>
+                            <div class="sub-heading"></div>					
+                        </div>
+
+                        <p:commandButton class="success call-button" value="Añadir" icon="fa fa-futbol-o"
+                                         ajax="true" actionListener="#{adminPortalBean.resetAddTemporada}" 
+                                         update="dialogs"
+                                         oncomplete="PF('dlgAddTemporada').show();"/>                        
+
+                        <br/><br/>                        
+
+                        <p:dataTable var="tpd" value="#{adminPortalBean.temporadaList}" rows="10"
+                                     paginator="true"  reflow="true" editable="false"
+                                     sortMode="multiple" widgetVar="temporadaTable" filteredValue="#{adminPortalBean.filteredTemporadaList}"
+                                     selectionMode="single" selection="#{adminPortalBean.selectedTemporada}" rowKey="#{tpd.tpdId}"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15" 
+                                     class="wow fadeIn" pt:data-wow-delay="0.5s"
+                                     >
+                            <f:facet name="emptyMessage">
+                                <h2 class="text-light">Ninguna Temporada</h2>
+                            </f:facet>
+                            <f:facet name="header">
+
+                                <div class="align-center pos-rel">
+                                    <span class="fa fa-list-ol" style="position: absolute; left: 5px;font-weight: 300;">&nbsp; #{adminPortalBean.temporadaList.size()}</span>
+                                    Temporadas
+                                    <p:inputText id="globalFilter" onkeyup="PF('temporadaTable').filter()" style="width:150px;position: absolute;right: 50px;" placeholder="Enter keyword"/>
+                                    <span class="fa fa-search" style="position: absolute; right: 5px;"></span>&nbsp;&nbsp;
+                                </div>
+
+
+
+                            </f:facet>
+                            <p:column headerText="Id" sortBy="#{tpd.tpdId}" filterBy="#{tpd.tpdId}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{tpd.tpdId}" />
+                            </p:column>
+
+                            <p:column headerText="Nombre" sortBy="#{tpd.tpdNombre}" filterBy="#{tpd.tpdNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{tpd.tpdNombre}" />
+                            </p:column>
+
+                            <p:column headerText="Inicio" sortBy="#{tpd.tpdInicio}" filterBy="#{tpd.tpdInicio}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{tpd.tpdInicio}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Fin" sortBy="#{tpd.tpdFin}" filterBy="#{tpd.tpdFin}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{tpd.tpdFin}" />
+                            </p:column>                            
+
+                            <p:column headerText="Acciones" class="align-center">
+                                <p:commandButton update="dialogs" oncomplete="PF('dlgEditTemporada').show()" icon="fa-pencil" title="Editar"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
+                                    <f:setPropertyActionListener value="#{tpd}" target="#{adminPortalBean.selectedTemporada}" />
+                                </p:commandButton>                                
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                </section>
+
+                <section id="equipos" class="call-to-action full-height" style="background-color: #f5f5f5;">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administrar <strong>Equipos</strong></h2>
+                            <div class="colored-line wow fadeInLeftBig"></div>
+                            <div class="sub-heading"></div>					
+                        </div>
+
+                        <p:commandButton class="success call-button" value="Añadir" icon="fa fa-users"
+                                         ajax="true" actionListener="#{adminPortalBean.resetAddEquipo}" 
+                                         update="dialogs"
+                                         oncomplete="PF('dlgAddEquipo').show();"/>                        
+
+                        <br/><br/>
+
+                        <p:dataTable var="eqp" value="#{adminPortalBean.equipoList}" rows="10"
+                                     paginator="true"  reflow="true" editable="false"
+                                     sortMode="multiple" widgetVar="equiposTable" filteredValue="#{adminPortalBean.filteredEquipoList}"
+                                     selectionMode="single" selection="#{adminPortalBean.selectedEquipo}" rowKey="#{eqp.eqpId}"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15" 
+                                     class="wow fadeIn" pt:data-wow-delay="0.5s"
+                                     >
+                            <f:facet name="emptyMessage">
+                                <h2 class="text-light">Ningún Equipo</h2>
+                            </f:facet>
+                            <f:facet name="header">
+
+                                <div class="align-center pos-rel">
+                                    <span class="fa fa-list-ol" style="position: absolute; left: 5px;font-weight: 300;">&nbsp; #{adminPortalBean.equipoList.size()}</span>
+                                    Equipos
+                                    <p:inputText id="globalFilter" onkeyup="PF('equiposTable').filter()" style="width:150px;position: absolute;right: 50px;" placeholder="Enter keyword"/>
+                                    <span class="fa fa-search" style="position: absolute; right: 5px;"></span>&nbsp;&nbsp;
+                                </div>
+
+
+
+                            </f:facet>
+                            <p:column headerText="Id" sortBy="#{eqp.eqpId}" filterBy="#{eqp.eqpId}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{eqp.eqpId}" />
+                            </p:column>
+
+                            <p:column headerText="Nombre" sortBy="#{eqp.eqpNombre}" filterBy="#{eqp.eqpNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{eqp.eqpNombre}" />
+                            </p:column>
+
+                            <p:column headerText="Abbr" sortBy="#{eqp.eqpAbbr}" filterBy="#{eqp.eqpAbbr}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{eqp.eqpAbbr}" />
+                            </p:column>
+
+
+                            <p:column headerText="Acciones" class="align-center">
+                                <p:commandButton update="dialogs" oncomplete="PF('dlgEditEquipo').show()" icon="fa-pencil" title="Editar"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
+                                    <f:setPropertyActionListener value="#{eqp}" target="#{adminPortalBean.selectedEquipo}" />
+                                </p:commandButton>                                
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                </section>
+
+                <section id="estadios" class="call-to-action full-height" style="background-color: #f5f5f5;">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administrar <strong>Estadios</strong></h2>
+                            <div class="colored-line wow fadeInLeftBig"></div>
+                            <div class="sub-heading"></div>					
+                        </div>
+
+                        <p:commandButton class="success call-button" value="Añadir" icon="fa fa-bank"
+                                         ajax="true" actionListener="#{adminPortalBean.resetAddEstadio}" 
+                                         update="dialogs"
+                                         oncomplete="PF('dlgAddEstadio').show();"/>                        
+
+                        <br/><br/>
+
+                        <p:dataTable var="est" value="#{adminPortalBean.estadioList}" rows="10"
+                                     paginator="true"  reflow="true" editable="false"
+                                     sortMode="multiple" widgetVar="estadiosTable" filteredValue="#{adminPortalBean.filteredEstadioList}"
+                                     selectionMode="single" selection="#{adminPortalBean.selectedEstadio}" rowKey="#{est.estId}"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15" 
+                                     class="wow fadeIn" pt:data-wow-delay="0.5s"
+                                     >
+                            <f:facet name="emptyMessage">
+                                <h2 class="text-light">Ningún Estadio</h2>
+                            </f:facet>
+                            <f:facet name="header">
+
+                                <div class="align-center pos-rel">
+                                    <span class="fa fa-list-ol" style="position: absolute; left: 5px;font-weight: 300;">&nbsp; #{adminPortalBean.estadioList.size()}</span>
+                                    Estadios
+                                    <p:inputText id="globalFilter" onkeyup="PF('estadiosTable').filter()" style="width:150px;position: absolute;right: 50px;" placeholder="Enter keyword"/>
+                                    <span class="fa fa-search" style="position: absolute; right: 5px;"></span>&nbsp;&nbsp;
+                                </div>
+
+
+
+                            </f:facet>
+                            <p:column headerText="Id" sortBy="#{est.estId}" filterBy="#{est.estId}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{est.estId}" />
+                            </p:column>
+
+                            <p:column headerText="Nombre" sortBy="#{est.estNombre}" filterBy="#{est.estNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{est.estNombre}" />
+                            </p:column>
+
+
+                            <p:column headerText="Acciones" class="align-center">
+                                <p:commandButton update="dialogs" oncomplete="PF('dlgEditEstadio').show()" icon="fa-pencil" title="Editar"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
+                                    <f:setPropertyActionListener value="#{est}" target="#{adminPortalBean.selectedEstadio}" />
+                                </p:commandButton>                                
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                </section>
+
+            </h:form>
+        </ui:define>
+
+        <ui:define name="dialogs">
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Añadir Temporada" widgetVar="dlgAddTemporada" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="grid">
+                        <div class="row">                            
+
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="tpdNombre">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombre                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="tpdNombre" value="#{adminPortalBean.selectedTemporada.tpdNombre}"
+                                                 required="true" validatorMessage="Nombre inválidos"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+
+                            </div>                            
+                        </div>
+
+                        <div class="row cells2">
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="tpdInicio">
+                                        <span class="fa fg-gray fa-calendar"></span>
+                                        Inicio                                        
+                                    </p:outputLabel>
+                                    <p:calendar id="tpdInicio" navigator="true" placeholder="Fecha Inicio"
+                                                validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                mask="true" pattern="dd-MM-yyyy"
+                                                value="#{adminPortalBean.selectedTemporada.tpdInicio}"/>
+                                </div>
+                                <br/><br/>
+                            </div>
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="tpdFin">
+                                        <span class="fa fg-gray fa-calendar"></span>
+                                        Fin                                        
+                                    </p:outputLabel>
+                                    <p:calendar id="tpdFin" navigator="true" placeholder="Fecha Fin"
+                                                validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                mask="true" pattern="dd-MM-yyyy"
+                                                value="#{adminPortalBean.selectedTemporada.tpdFin}"/>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="addTemporadaButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{adminPortalBean.addTemporadaAction()}"
+                                                 oncomplete="$(PF('addTemporadaButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('addTemporadaButton')).prop('disabled', true);"
+                                                 onerror="$(PF('addTemporadaButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog> 
+            </h:form>
+
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Editar Temporada" widgetVar="dlgEditTemporada" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="grid">
+                        <div class="row">                            
+
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="tpdNombre2">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombre                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="tpdNombre2" value="#{adminPortalBean.selectedTemporada.tpdNombre}"
+                                                 required="true" validatorMessage="Nombre inválidos"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+
+                            </div>                            
+                        </div>
+
+                        <div class="row cells2">
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="tpdInicio2">
+                                        <span class="fa fg-gray fa-calendar"></span>
+                                        Inicio                                        
+                                    </p:outputLabel>
+                                    <p:calendar id="tpdInicio2" navigator="true" placeholder="Fecha inicio"
+                                                validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                mask="true" pattern="dd-MM-yyyy"
+                                                value="#{adminPortalBean.selectedTemporada.tpdInicio}"/>
+                                </div>
+                                <br/><br/>
+                            </div>
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="tpdFin2">
+                                        <span class="fa fg-gray fa-calendar"></span>
+                                        Fin                                        
+                                    </p:outputLabel>
+                                    <p:calendar id="tpdFin2" navigator="true" placeholder="Fecha Fin"
+                                                validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                mask="true" pattern="dd-MM-yyyy"
+                                                value="#{adminPortalBean.selectedTemporada.tpdFin}"/>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="editTemporadaButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{adminPortalBean.editTemporadaAction()}"
+                                                 oncomplete="$(PF('editTemporadaButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('editTemporadaButton')).prop('disabled', true);"
+                                                 onerror="$(PF('editTemporadaButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog> 
+            </h:form>
+
+
+
+
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Añadir Equipo" widgetVar="dlgAddEquipo" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="grid">
+                        <div class="row">                            
+
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="eqpNombre">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombre                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="eqpNombre" value="#{adminPortalBean.selectedEquipo.eqpNombre}"
+                                                 required="true" validatorMessage="Nombre inválido"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+
+                            </div>                            
+                        </div>
+
+                        <div class="row">                            
+
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="eqpAbbr">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Abreviatura                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="eqpAbbr" value="#{adminPortalBean.selectedEquipo.eqpAbbr}"
+                                                 required="true" validatorMessage="Abreviatura inválida" maxlength="5"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+
+                            </div>                            
+                        </div>                        
+
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="addEquipoButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{adminPortalBean.addEquipoAction()}"
+                                                 oncomplete="$(PF('addEquipoButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('addEquipoButton')).prop('disabled', true);"
+                                                 onerror="$(PF('addEquipoButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog> 
+            </h:form>
+
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Editar Equipo" widgetVar="dlgEditEquipo" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="grid">
+                        <div class="row">                            
+
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="eqpNombre2">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombre                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="eqpNombre2" value="#{adminPortalBean.selectedEquipo.eqpNombre}"
+                                                 required="true" validatorMessage="Nombre inválido"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+
+                            </div>                            
+                        </div>
+
+                        <div class="row">                            
+
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="eqpAbbr2">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Abreviatura                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="eqpAbbr2" value="#{adminPortalBean.selectedEquipo.eqpAbbr}"
+                                                 required="true" validatorMessage="Abreviatura inválida" maxlength="5"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+
+                            </div>                            
+                        </div>                        
+
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="editEquipoButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{adminPortalBean.editEquipoAction()}"
+                                                 oncomplete="$(PF('editEquipoButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('editEquipoButton')).prop('disabled', true);"
+                                                 onerror="$(PF('editEquipoButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog> 
+            </h:form>
+            
+            
+            
+            
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Añadir Estadio" widgetVar="dlgAddEstadio" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="grid">
+                        <div class="row">                            
+
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="estNombre">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombre                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="estNombre" value="#{adminPortalBean.selectedEstadio.estNombre}"
+                                                 required="true" validatorMessage="Nombre inválido"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+
+                            </div>                            
+                        </div>
+                                             
+
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="addEstadioButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{adminPortalBean.addEstadioAction()}"
+                                                 oncomplete="$(PF('addEstadioButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('addEstadioButton')).prop('disabled', true);"
+                                                 onerror="$(PF('addEstadioButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog> 
+            </h:form>
+            
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Añadir Estadio" widgetVar="dlgEditEstadio" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="grid">
+                        <div class="row">                            
+
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="estNombre2">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombre                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="estNombre2" value="#{adminPortalBean.selectedEstadio.estNombre}"
+                                                 required="true" validatorMessage="Nombre inválido"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+
+                            </div>                            
+                        </div>
+                                             
+
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="editEstadioButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{adminPortalBean.editEstadioAction()}"
+                                                 oncomplete="$(PF('editEstadioButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('editEstadioButton')).prop('disabled', true);"
+                                                 onerror="$(PF('editEstadioButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog> 
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+</html>
