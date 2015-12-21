@@ -259,6 +259,7 @@
                         <version>2.3</version>
                         <configuration>
                             <outputDirectory>deployments</outputDirectory>
+                            <warName>ROOT.war</warName>
                         </configuration>
                     </plugin>
                 </plugins>

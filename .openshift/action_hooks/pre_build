@@ -21,7 +21,8 @@ curl -L -o $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/res
 curl -L -o $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources2.tar.gz https://www.dropbox.com/s/dfezes4tdn9bh8k/resources2.tar.gz?dl=1
 tar -zxvf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources1.tar.gz -C $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/
 tar -zxvf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources2.tar.gz -C $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/
-mv $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources/email $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/resources/email
+mkdir $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/resources/email/
+mv $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources/email/* $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/resources/email/
 echo "PRE_BUILD DOWNLOAD resources END"
 
 
