@@ -4,15 +4,17 @@ pwd
 
 # clean repo
 rm -rf $OPENSHIFT_HOMEDIR/app-root/repo/deployments
-rm -rf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-ear/target
-rm -rf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-ejb/target
+#rm -rf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-ear/target
+#rm -rf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-ejb/target
 rm -rf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/target
+rm -rf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/deployments
 
 # clean deploy
 rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/deployments
-rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/javafutbolee-ear/target
-rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/javafutbolee-ejb/target
+#rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/javafutbolee-ear/target
+#rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/javafutbolee-ejb/target
 rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/javafutbolee-web/target
+rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/javafutbolee-web/deployments
 
 echo "PRE_BUILD DOWNLOAD resources START"
 curl -L -o $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources1.tar.gz https://www.dropbox.com/s/qumz51q04u9ncuw/resources1.tar.gz?dl=1
