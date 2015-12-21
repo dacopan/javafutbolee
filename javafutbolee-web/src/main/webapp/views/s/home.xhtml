@@ -116,7 +116,7 @@
                                             </div>
                                         </sec:authorize>
 
-                                        <sec:authorize access="hasAnyRole('ROLE_RRPP,ROLE_ADMIN_SOCIO')"> 
+                                        <sec:authorize access="hasAnyRole('ROLE_RRPP','ROLE_ADMIN_SOCIO')"> 
                                             <div class="cell">
                                                 <h4 class="no-margin"><small>Nombres</small></h4>
                                                 <h:outputText value="#{editarFuncionarioBean.selectedPersonal.psnNombre}"/>

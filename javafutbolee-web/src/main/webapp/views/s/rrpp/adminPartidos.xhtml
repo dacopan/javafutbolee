@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://java.sun.com/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="/templates/standAloneTemplate.xhtml">
 
 
@@ -30,13 +31,294 @@
                             <div class="colored-line wow fadeInLeftBig"></div>
                             <div class="sub-heading"></div>					
                         </div>
-                        
-                        
-                        <!--TODO Añadir partidos por temporada, poner precios, habilitar/deshabilitar partido.-->
-                        TODO Añadir partidos por temporada, poner precios, habilitar/deshabilitar partido.
+
+
+                        <p:commandButton class="success call-button" value="Añadir Partido" icon="fa fa-user-plus"
+                                         ajax="true" actionListener="#{adminPartidosBean.resetAddPartido}" 
+                                         update="dialogs"
+                                         oncomplete="PF('dlgAddPartido').show();"/>                        
+
+                        <br/><br/>
+
+                        <p:dataTable var="prt" value="#{adminPartidosBean.partidoList}" rows="10"
+                                     paginator="true"  reflow="true" editable="false"
+                                     sortMode="multiple" widgetVar="funcionariosTable" filteredValue="#{adminPartidosBean.filteredPartidoList}"
+                                     selectionMode="single" selection="#{adminPartidosBean.selectedPartido}" rowKey="#{prt.prtId}"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15" 
+                                     >
+                            <f:facet name="emptyMessage">
+                                <h2 class="text-light">Ningún Partido</h2>
+                            </f:facet>
+                            <f:facet name="header">
+
+                                <div class="align-center pos-rel">
+                                    Partidos
+                                    <p:inputText id="globalFilter" onkeyup="PF('funcionariosTable').filter()" style="width:150px;position: absolute;right: 50px;" placeholder="Enter keyword"/>
+                                    <span class="fa fa-search" style="position: absolute; right: 5px;"></span>&nbsp;&nbsp;
+                                </div>
+                            </f:facet>
+                            <p:column headerText="Fecha" sortBy="#{prt.prtFecha}" filterBy="#{fprt.prtFecha}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{prt.prtFecha}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Tipo" sortBy="#{prt.prtLocal?'local':'visita'}" filterBy="#{prt.prtLocal?'local':'visita'}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{prt.prtLocal?'local':'visita'}"/>
+                            </p:column>
+                            <p:column headerText="Rival" sortBy="#{prt.equipo.eqpNombre}" filterBy="#{prt.equipo.eqpNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{prt.equipo.eqpNombre}"/>
+                            </p:column>
+                            <p:column headerText="Estadio" sortBy="#{prt.estadio.estNombre}" filterBy="#{prt.estadio.estNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{prt.estadio.estNombre}"/>
+                            </p:column>
+
+                            <p:column headerText="Acciones" class="align-center">
+                                <p:commandButton update="dialogs" oncomplete="PF('dlgEditPartido').show()" icon="fa-pencil" title="Editar"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
+                                    <f:setPropertyActionListener value="#{prt}" target="#{adminPartidosBean.selectedPartido}" />
+                                </p:commandButton>
+                                <p:commandButton update="content,dialogs" oncomplete="PF('dlgDeletePartido').show()" icon="fa-trash" title="Eliminar"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-red bg-hover-red fg-hover-white" disabled="true">
+
+                                    <f:setPropertyActionListener value="#{prt}" target="#{adminPartidosBean.selectedPartido}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
                     </div>
                 </section>
             </h:form>
+        </ui:define>
+        <ui:define name="dialogs">
+
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Añadir Partido" widgetVar="dlgAddPartido" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true" minWidth="460" style="min-width: 460px;">
+
+                    <div class="grid">
+                        <div class="row"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="temporada">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Temporada                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="temporada" value="#{adminPartidosBean.selectedPartido.temporada.tpdId}">
+                                        <f:selectItems value="#{adminPortalBean.temporadaList}" var="tpd" itemLabel="#{tpd.tpdNombre}" itemValue="#{tpd.tpdId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="rival">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Rival                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="rival" value="#{adminPartidosBean.selectedPartido.equipo.eqpId}">
+                                        <f:selectItems value="#{adminPortalBean.equipoList}" var="eqp" itemLabel="#{eqp.eqpNombre}" itemValue="#{eqp.eqpId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+
+                        <div class="row"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="estadio">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Estadio                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="estadio" value="#{adminPartidosBean.selectedPartido.estadio.estId}">
+                                        <f:selectItems value="#{adminPortalBean.estadioList}" var="est" itemLabel="#{est.estNombre}" itemValue="#{est.estId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row cells2"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="fecha">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Fecha                                        
+                                    </p:outputLabel>
+                                    <p:calendar id="fecha" navigator="true" placeholder="Fecha del partido"
+                                                validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                mask="true" pattern="dd-MM-yyyy HH:mm" 
+                                                value="#{adminPartidosBean.selectedPartido.prtFecha}"/>
+                                </div>
+                                <br/><br/>
+                            </div>
+                            <div class="cell align-right">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="isLocal">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Localidad                                        
+                                    </p:outputLabel>
+                                    <p:inputSwitch onLabel="On" offLabel="Off" id="isLocal" value="#{adminPartidosBean.selectedPartido.prtLocal}"/>                                   
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="cell">
+                                <c:forEach  var="loc" items="#{adminPartidosBean.selectedPartido.partidoPrecios}" varStatus="locStatus">                                    
+                                    <div class="input-control">
+                                        <p:outputLabel for="precio">
+                                            <span class="fa fg-gray fa-money"></span>
+                                            #{loc.localidad.locNombre}                             
+                                        </p:outputLabel> 
+                                        <p:spinner id="precio" min="0" max="100" stepFactor="0.25"
+                                                   value="#{loc.prtPreMonto}" validatorMessage="xxx"/>
+                                    </div>
+
+                                    <ui:fragment rendered="#{locStatus.getCount()%3==0}">                                    
+                                        <br/>
+                                    </ui:fragment>
+                                </c:forEach>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="addPartidoButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{adminPartidosBean.addPartidoAction()}"
+                                                 oncomplete="$(PF('addPartidoButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('addPartidoButton')).prop('disabled', true);"
+                                                 onerror="$(PF('addPartidoButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+
+                    </div>
+                </p:dialog>
+            </h:form>
+
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Editar Partido" widgetVar="dlgEditPartido" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true" minWidth="460" style="min-width: 460px;">
+
+                    <div class="grid">
+                        <div class="row"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="temporada">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Temporada                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="temporada" value="#{adminPartidosBean.selectedPartido.temporada.tpdId}">
+                                        <f:selectItems value="#{adminPortalBean.temporadaList}" var="tpd" itemLabel="#{tpd.tpdNombre}" itemValue="#{tpd.tpdId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="rival">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Rival                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="rival" value="#{adminPartidosBean.selectedPartido.equipo.eqpId}">
+                                        <f:selectItems value="#{adminPortalBean.equipoList}" var="eqp" itemLabel="#{eqp.eqpNombre}" itemValue="#{eqp.eqpId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+
+                        <div class="row"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="estadio">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Estadio                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="estadio" value="#{adminPartidosBean.selectedPartido.estadio.estId}">
+                                        <f:selectItems value="#{adminPortalBean.estadioList}" var="est" itemLabel="#{est.estNombre}" itemValue="#{est.estId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row cells2"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="fecha">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Fecha                                        
+                                    </p:outputLabel>
+                                    <p:calendar id="fecha" navigator="true" placeholder="Fecha del partido"
+                                                validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                mask="true" pattern="dd-MM-yyyy HH:mm" 
+                                                value="#{adminPartidosBean.selectedPartido.prtFecha}"/>
+                                </div>
+                                <br/><br/>
+                            </div>
+                            <div class="cell align-right">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="isLocal">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Localidad                                        
+                                    </p:outputLabel>
+                                    <p:inputSwitch onLabel="On" offLabel="Off" id="isLocal" value="#{adminPartidosBean.selectedPartido.prtLocal}"/>                                   
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="cell">
+                                <c:forEach  var="loc" items="#{adminPartidosBean.selectedPartido.partidoPrecios}" varStatus="locStatus">                                    
+                                    <div class="input-control">
+                                        <p:outputLabel for="precio">
+                                            <span class="fa fg-gray fa-money"></span>
+                                            #{loc.localidad.locNombre}                             
+                                        </p:outputLabel> 
+                                        <p:spinner id="precio" min="0" max="100" stepFactor="0.25"
+                                                   value="#{loc.prtPreMonto}" validatorMessage="xxx"/>
+                                    </div>
+
+                                    <ui:fragment rendered="#{locStatus.getCount()%3==0}">                                    
+                                        <br/>
+                                    </ui:fragment>
+                                </c:forEach>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="editPartidoButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{adminPartidosBean.editPartidoAction()}"
+                                                 oncomplete="$(PF('editPartidoButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('editPartidoButton')).prop('disabled', true);"
+                                                 onerror="$(PF('editPartidoButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+
+                    </div>
+                </p:dialog>
+            </h:form>
+
         </ui:define>
     </ui:composition>
 </html>

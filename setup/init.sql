@@ -39,6 +39,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
+INSERT INTO `equipo` VALUES (1,'Liga de Quito','LDU');
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,6 +49,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `estadio` WRITE;
 /*!40000 ALTER TABLE `estadio` DISABLE KEYS */;
+INSERT INTO `estadio` VALUES (1,'Monumental Bco. Pchincha'),(2,'casa blanca'),(3,'casa blanca3');
 /*!40000 ALTER TABLE `estadio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,6 +68,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `localidad` WRITE;
 /*!40000 ALTER TABLE `localidad` DISABLE KEYS */;
+INSERT INTO `localidad` VALUES (1,'General Norte',15000),(2,'General Sur',15000),(3,'Tribuna Oeste',12500),(4,'Tribuna Este',12500),(5,'Palco 1',1875),(6,'Palco 2',1875),(7,'Palco 3',1875),(8,'Palco 4',1875),(9,'Palco 5',1875),(10,'Palco 6',1875),(11,'Palco 7',1875),(12,'Palco 8',1875),(13,'Suite Oeste',5000),(14,'Suite Este',5000);
 /*!40000 ALTER TABLE `localidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,6 +114,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `personal` WRITE;
 /*!40000 ALTER TABLE `personal` DISABLE KEYS */;
+INSERT INTO `personal` VALUES (28,28,'darwin','correa',0,'2015-12-19','4986489','4986489','tumbaco'),(29,29,'darwin','correa',0,'2015-12-20','4986489','4986489','');
 /*!40000 ALTER TABLE `personal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +133,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (1,'ROL_ADMIN'),(2,'ROL_ADMIN_SOCIO'),(3,'ROL_RRPP'),(4,'ROL_SOCIO');
+INSERT INTO `rol` VALUES (1,'ROL_ADMIN'),(2,'ROL_ADMIN_SOCIO'),(3,'ROL_RRPP');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,6 +143,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `rol_miembro` WRITE;
 /*!40000 ALTER TABLE `rol_miembro` DISABLE KEYS */;
+INSERT INTO `rol_miembro` VALUES (25,28,3),(26,29,2);
 /*!40000 ALTER TABLE `rol_miembro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,6 +162,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `temporada` WRITE;
 /*!40000 ALTER TABLE `temporada` DISABLE KEYS */;
+INSERT INTO `temporada` VALUES (1,'2015-12-12','2015-12-21','Campeonato ecuatoriano de futbol 2015'),(2,'2015-12-20','2016-12-15','campeonato pilsener 2016');
 /*!40000 ALTER TABLE `temporada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,6 +172,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (28,'1719871327','$2a$10$Sx5o3CHkq3GyZF7kP5YCe.OGE/V6wsTDpPGpsHHt9awMUfgajzTcC','dacopan.bsc@gmail.com',1,NULL,'2015-12-19 05:27:02',NULL,NULL,NULL,NULL),(29,'1722590948','$2a$10$PPYYGGxHyUYvX.ziX/Y1AuA03w0G.oOE7C34HNpEqEFILgy3SGPgy','dacopan.bsc@gmail.com',1,NULL,'2015-12-20 13:58:20',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -178,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-17  5:00:54
+-- Dump completed on 2015-12-20 18:48:48
