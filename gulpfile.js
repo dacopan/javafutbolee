@@ -9,7 +9,7 @@ var paths = {
         css: './javafutbolee-web/src/main/webapp/resources/primefaces-dtic_theme/',
         js: './javafutbolee-web/src/main/webapp/resources/dt1c/js',
         fonts: './javafutbolee-web/src/main/webapp/resources/dt1c/fonts',
-        html: '../javafutbolee-web/src/main/webapp/resources/email'
+        html: './javafutbolee-web/src/main/resources/email'
     },
     less: ['./javafutbolee-web/src/main/webapp/assets/less/dtictheme.less'],
     js: ['./javafutbolee-web/src/main/webapp/assets/js/*.js', './javafutbolee-web/src/main/webapp/assets/js/**/*.js'],
