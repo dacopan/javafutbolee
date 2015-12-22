@@ -6,14 +6,14 @@ var rimraf = require('rimraf');
 
 var paths = {
     dist: {
-        css: './resources/primefaces-dtic_theme/',
-        js: './resources/dt1c/js',
-        fonts: './resources/dt1c/fonts',
-        html: '../resources/email'
+        css: './javafutbolee-web/src/main/webapp/resources/primefaces-dtic_theme/',
+        js: './javafutbolee-web/src/main/webapp/resources/dt1c/js',
+        fonts: './javafutbolee-web/src/main/webapp/resources/dt1c/fonts',
+        html: '../javafutbolee-web/src/main/webapp/resources/email'
     },
-    less: ['./assets/less/dtictheme.less'],
-    js: ['./assets/js/*.js', './assets/js/**/*.js'],
-    html: ['./assets/html/*.html'],
+    less: ['./javafutbolee-web/src/main/webapp/assets/less/dtictheme.less'],
+    js: ['./javafutbolee-web/src/main/webapp/assets/js/*.js', './javafutbolee-web/src/main/webapp/assets/js/**/*.js'],
+    html: ['./javafutbolee-web/src/main/webapp/assets/html/*.html'],
     vendor: {
         css: [
             './bower_components/animate.css/animate.css',
@@ -36,7 +36,7 @@ var paths = {
 
     },
     preloader: {
-        css: ['./assets/less/preloader.less']
+        css: ['./javafutbolee-web/src/main/webapp/assets/less/preloader.less']
     }
 };
 

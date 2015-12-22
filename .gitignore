@@ -1,9 +1,8 @@
-/javafutbolee-ejb/target/
 /javafutbolee-web/target/
-/javafutbolee-ear/target/
-/javafutbolee-web/src/main/webapp/node_modules/
-/javafutbolee-web/src/main/webapp/bower_components/
+/node_modules/
+/bower_components/
 /javafutbolee-web/src/main/webapp/npm-debug.log
+/npm-debug.log
 /javafutbolee-web/src/main/resources/primefaces-dtic_theme/js/
 /javafutbolee-web/src/main/resources/primefaces-dtic_theme/theme.css
 /javafutbolee-web/src/main/webapp/notes.txt
@@ -12,7 +11,7 @@
 /javafutbolee-web/src/main/webapp/resources/dt1c/js/
 /javafutbolee-web/src/main/webapp/resources/fonts/
 /deployments/
-/javafutbolee-ear/deployments/
+
 /javafutbolee-web/src/main/java/io/dacopancm/jfee/validators/Helper.java
 /javafutbolee-web/src/main/webapp/resources/resources1.tar.gz
 /javafutbolee-web/src/main/webapp/resources/resources2.tar.gz
