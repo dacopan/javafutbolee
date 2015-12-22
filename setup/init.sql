@@ -16,99 +16,63 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ciudad`
+-- Dumping data for table `ciudad`
 --
 
-DROP TABLE IF EXISTS `ciudad`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ciudad` (
-  `CIU_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `PAI_ID` int(11) DEFAULT NULL,
-  `CIU_NOMBRE` text,
-  PRIMARY KEY (`CIU_ID`),
-  KEY `FK_RELATIONSHIP_13` (`PAI_ID`),
-  CONSTRAINT `FK_RELATIONSHIP_13` FOREIGN KEY (`PAI_ID`) REFERENCES `pais` (`PAI_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=681 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `ciudad` WRITE;
+/*!40000 ALTER TABLE `ciudad` DISABLE KEYS */;
+INSERT INTO `ciudad` VALUES (137,61,'Guayaquil'),(138,61,'Quito'),(139,61,'Cuenca'),(140,61,'Machala'),(141,61,'Santo Domingo de los Colorados'),(142,61,'Portoviejo'),(143,61,'Ambato'),(144,61,'Manta'),(145,61,'Duran [Eloy Alfaro]'),(146,61,'Ibarra'),(147,61,'Quevedo'),(148,61,'Milagro'),(149,61,'Loja'),(150,61,'RÃ­obamba'),(151,61,'Esmeraldas'),(152,142,'Ciudad de MÃ©xico'),(153,142,'Guadalajara'),(154,142,'Ecatepec de Morelos'),(155,142,'Puebla'),(156,142,'NezahualcÃ³yotl'),(157,142,'JuÃ¡rez'),(158,142,'Tijuana'),(159,142,'LeÃ³n'),(160,142,'Monterrey'),(161,142,'Zapopan'),(162,142,'Naucalpan de JuÃ¡rez'),(163,142,'Mexicali'),(164,142,'CuliacÃ¡n'),(165,142,'Acapulco de JuÃ¡rez'),(166,142,'Tlalnepantla de Baz'),(167,142,'MÃ©rida'),(168,142,'Chihuahua'),(169,142,'San Luis PotosÃ­'),(170,142,'Guadalupe'),(171,142,'Toluca'),(172,142,'Aguascalientes'),(173,142,'QuerÃ©taro'),(174,142,'Morelia'),(175,142,'Hermosillo'),(176,142,'Saltillo'),(177,142,'TorreÃ³n'),(178,142,'Centro (Villahermosa)'),(179,142,'San NicolÃ¡s de los Garza'),(180,142,'Durango'),(181,142,'ChimalhuacÃ¡n'),(182,142,'Tlaquepaque'),(183,142,'AtizapÃ¡n de Zaragoza'),(184,142,'Veracruz'),(185,142,'CuautitlÃ¡n Izcalli'),(186,142,'Irapuato'),(187,142,'Tuxtla GutiÃ©rrez'),(188,142,'TultitlÃ¡n'),(189,142,'Reynosa'),(190,142,'Benito JuÃ¡rez'),(191,142,'Matamoros'),(192,142,'Xalapa'),(193,142,'Celaya'),(194,142,'MazatlÃ¡n'),(195,142,'Ensenada'),(196,142,'Ahome'),(197,142,'Cajeme'),(198,142,'Cuernavaca'),(199,142,'TonalÃ¡'),(200,142,'Valle de Chalco Solidaridad'),(201,142,'Nuevo Laredo'),(202,142,'Tepic'),(203,142,'Tampico'),(204,142,'Ixtapaluca'),(205,142,'Apodaca'),(206,142,'Guasave'),(207,142,'GÃ³mez Palacio'),(208,142,'Tapachula'),(209,142,'NicolÃ¡s Romero'),(210,142,'Coatzacoalcos'),(211,142,'Uruapan'),(212,142,'Victoria'),(213,142,'Oaxaca de JuÃ¡rez'),(214,142,'Coacalco de BerriozÃ¡bal'),(215,142,'Pachuca de Soto'),(216,142,'General Escobedo'),(217,142,'Salamanca'),(218,142,'Santa Catarina'),(219,142,'TehuacÃ¡n'),(220,142,'Chalco'),(221,142,'CÃ¡rdenas'),(222,142,'Campeche'),(223,142,'La Paz'),(224,142,'OthÃ³n P. Blanco (Chetumal)'),(225,142,'Texcoco'),(226,142,'La Paz'),(227,142,'Metepec'),(228,142,'Monclova'),(229,142,'Huixquilucan'),(230,142,'Chilpancingo de los Bravo'),(231,142,'Puerto Vallarta'),(232,142,'Fresnillo'),(233,142,'Ciudad Madero'),(234,142,'Soledad de Graciano SÃ¡nchez'),(235,142,'San Juan del RÃ­o'),(236,142,'San Felipe del Progreso'),(237,142,'CÃ³rdoba'),(238,142,'TecÃ¡mac'),(239,142,'Ocosingo'),(240,142,'Carmen'),(241,142,'LÃ¡zaro CÃ¡rdenas'),(242,142,'Jiutepec'),(243,142,'Papantla'),(244,142,'Comalcalco'),(245,142,'Zamora'),(246,142,'Nogales'),(247,142,'Huimanguillo'),(248,142,'Cuautla'),(249,142,'MinatitlÃ¡n'),(250,142,'Poza Rica de Hidalgo'),(251,142,'Ciudad Valles'),(252,142,'Navolato'),(253,142,'San Luis RÃ­o Colorado'),(254,142,'PÃ©njamo'),(255,142,'San AndrÃ©s Tuxtla'),(256,142,'Guanajuato'),(257,142,'Navojoa'),(258,142,'ZitÃ¡cuaro'),(259,142,'Boca del RÃ­o'),(260,142,'Allende'),(261,142,'Silao'),(262,142,'Macuspana'),(263,142,'San Juan Bautista Tuxtepec'),(264,142,'San CristÃ³bal de las Casas'),(265,142,'Valle de Santiago'),(266,142,'Guaymas'),(267,142,'Colima'),(268,142,'Dolores Hidalgo'),(269,142,'Lagos de Moreno'),(270,142,'Piedras Negras'),(271,142,'Altamira'),(272,142,'TÃºxpam'),(273,142,'San Pedro Garza GarcÃ­a'),(274,142,'CuauhtÃ©moc'),(275,142,'Manzanillo'),(276,142,'Iguala de la Independencia'),(277,142,'Zacatecas'),(278,142,'Tlajomulco de ZÃºÃ±iga'),(279,142,'Tulancingo de Bravo'),(280,142,'Zinacantepec'),(281,142,'San MartÃ­n Texmelucan'),(282,142,'TepatitlÃ¡n de Morelos'),(283,142,'MartÃ­nez de la Torre'),(284,142,'Orizaba'),(285,142,'ApatzingÃ¡n'),(286,142,'Atlixco'),(287,142,'Delicias'),(288,142,'Ixtlahuaca'),(289,142,'El Mante'),(290,142,'Lerdo'),(291,142,'Almoloya de JuÃ¡rez'),(292,142,'AcÃ¡mbaro'),(293,142,'AcuÃ±a'),(294,142,'Guadalupe'),(295,142,'Huejutla de Reyes'),(296,142,'Hidalgo'),(297,142,'Los Cabos'),(298,142,'ComitÃ¡n de DomÃ­nguez'),(299,142,'CunduacÃ¡n'),(300,142,'RÃ­o Bravo'),(301,142,'Temapache'),(302,142,'Chilapa de Alvarez'),(303,142,'Hidalgo del Parral'),(304,142,'San Francisco del RincÃ³n'),(305,142,'Taxco de AlarcÃ³n'),(306,142,'Zumpango'),(307,142,'San Pedro Cholula'),(308,142,'Lerma'),(309,142,'TecomÃ¡n'),(310,142,'Las Margaritas'),(311,142,'Cosoleacaque'),(312,142,'San Luis de la Paz'),(313,142,'JosÃ© Azueta'),(314,142,'Santiago Ixcuintla'),(315,142,'San Felipe'),(316,142,'Tejupilco'),(317,142,'Tantoyuca'),(318,142,'Salvatierra'),(319,142,'Tultepec'),(320,142,'Temixco'),(321,142,'Matamoros'),(322,142,'PÃ¡nuco'),(323,142,'El Fuerte'),(324,142,'Tierra Blanca'),(407,230,'New York'),(408,230,'Los Angeles'),(409,230,'Chicago'),(410,230,'Houston'),(411,230,'Philadelphia'),(412,230,'Phoenix'),(413,230,'San Diego'),(414,230,'Dallas'),(415,230,'San Antonio'),(416,230,'Detroit'),(417,230,'San Jose'),(418,230,'Indianapolis'),(419,230,'San Francisco'),(420,230,'Jacksonville'),(421,230,'Columbus'),(422,230,'Austin'),(423,230,'Baltimore'),(424,230,'Memphis'),(425,230,'Milwaukee'),(426,230,'Boston'),(427,230,'Washington'),(428,230,'Nashville-Davidson'),(429,230,'El Paso'),(430,230,'Seattle'),(431,230,'Denver'),(432,230,'Charlotte'),(433,230,'Fort Worth'),(434,230,'Portland'),(435,230,'Oklahoma City'),(436,230,'Tucson'),(437,230,'New Orleans'),(438,230,'Las Vegas'),(439,230,'Cleveland'),(440,230,'Long Beach'),(441,230,'Albuquerque'),(442,230,'Kansas City'),(443,230,'Fresno'),(444,230,'Virginia Beach'),(445,230,'Atlanta'),(446,230,'Sacramento'),(447,230,'Oakland'),(448,230,'Mesa'),(449,230,'Tulsa'),(450,230,'Omaha'),(451,230,'Minneapolis'),(452,230,'Honolulu'),(453,230,'Miami'),(454,230,'Colorado Springs'),(455,230,'Saint Louis'),(456,230,'Wichita'),(457,230,'Santa Ana'),(458,230,'Pittsburgh'),(459,230,'Arlington'),(460,230,'Cincinnati'),(461,230,'Anaheim'),(462,230,'Toledo'),(463,230,'Tampa'),(464,230,'Buffalo'),(465,230,'Saint Paul'),(466,230,'Corpus Christi'),(467,230,'Aurora'),(468,230,'Raleigh'),(469,230,'Newark'),(470,230,'Lexington-Fayette'),(471,230,'Anchorage'),(472,230,'Louisville'),(473,230,'Riverside'),(474,230,'Saint Petersburg'),(475,230,'Bakersfield'),(476,230,'Stockton'),(477,230,'Birmingham'),(478,230,'Jersey City'),(479,230,'Norfolk'),(480,230,'Baton Rouge'),(481,230,'Hialeah'),(482,230,'Lincoln'),(483,230,'Greensboro'),(484,230,'Plano'),(485,230,'Rochester'),(486,230,'Glendale'),(487,230,'Akron'),(488,230,'Garland'),(489,230,'Madison'),(490,230,'Fort Wayne'),(491,230,'Fremont'),(492,230,'Scottsdale'),(493,230,'Montgomery'),(494,230,'Shreveport'),(495,230,'Augusta-Richmond County'),(496,230,'Lubbock'),(497,230,'Chesapeake'),(498,230,'Mobile'),(499,230,'Des Moines'),(500,230,'Grand Rapids'),(501,230,'Richmond'),(502,230,'Yonkers'),(503,230,'Spokane'),(504,230,'Glendale'),(505,230,'Tacoma'),(506,230,'Irving'),(507,230,'Huntington Beach'),(508,230,'Modesto'),(509,230,'Durham'),(510,230,'Columbus'),(511,230,'Orlando'),(512,230,'Boise City'),(513,230,'Winston-Salem'),(514,230,'San Bernardino'),(515,230,'Jackson'),(516,230,'Little Rock'),(517,230,'Salt Lake City'),(518,230,'Reno'),(519,230,'Newport News'),(520,230,'Chandler'),(521,230,'Laredo'),(522,230,'Henderson'),(523,230,'Arlington'),(524,230,'Knoxville'),(525,230,'Amarillo'),(526,230,'Providence'),(527,230,'Chula Vista'),(528,230,'Worcester'),(529,230,'Oxnard'),(530,230,'Dayton'),(531,230,'Garden Grove'),(532,230,'Oceanside'),(533,230,'Tempe'),(534,230,'Huntsville'),(535,230,'Ontario'),(536,230,'Chattanooga'),(537,230,'Fort Lauderdale'),(538,230,'Springfield'),(539,230,'Springfield'),(540,230,'Santa Clarita'),(541,230,'Salinas'),(542,230,'Tallahassee'),(543,230,'Rockford'),(544,230,'Pomona'),(545,230,'Metairie'),(546,230,'Paterson'),(547,230,'Overland Park'),(548,230,'Santa Rosa'),(549,230,'Syracuse'),(550,230,'Kansas City'),(551,230,'Hampton'),(552,230,'Lakewood'),(553,230,'Vancouver'),(554,230,'Irvine'),(555,230,'Aurora'),(556,230,'Moreno Valley'),(557,230,'Pasadena'),(558,230,'Hayward'),(559,230,'Brownsville'),(560,230,'Bridgeport'),(561,230,'Hollywood'),(562,230,'Warren'),(563,230,'Torrance'),(564,230,'Eugene'),(565,230,'Pembroke Pines'),(566,230,'Salem'),(567,230,'Pasadena'),(568,230,'Escondido'),(569,230,'Sunnyvale'),(570,230,'Savannah'),(571,230,'Fontana'),(572,230,'Orange'),(573,230,'Naperville'),(574,230,'Alexandria'),(575,230,'Rancho Cucamonga'),(576,230,'Grand Prairie'),(577,230,'East Los Angeles'),(578,230,'Fullerton'),(579,230,'Corona'),(580,230,'Flint'),(581,230,'Paradise'),(582,230,'Mesquite'),(583,230,'Sterling Heights'),(584,230,'Sioux Falls'),(585,230,'New Haven'),(586,230,'Topeka'),(587,230,'Concord'),(588,230,'Evansville'),(589,230,'Hartford'),(590,230,'Fayetteville'),(591,230,'Cedar Rapids'),(592,230,'Elizabeth'),(593,230,'Lansing'),(594,230,'Lancaster'),(595,230,'Fort Collins'),(596,230,'Coral Springs'),(597,230,'Stamford'),(598,230,'Thousand Oaks'),(599,230,'Vallejo'),(600,230,'Palmdale'),(601,230,'Columbia'),(602,230,'El Monte'),(603,230,'Abilene'),(604,230,'North Las Vegas'),(605,230,'Ann Arbor'),(606,230,'Beaumont'),(607,230,'Waco'),(608,230,'Macon'),(609,230,'Independence'),(610,230,'Peoria'),(611,230,'Inglewood'),(612,230,'Springfield'),(613,230,'Simi Valley'),(614,230,'Lafayette'),(615,230,'Gilbert'),(616,230,'Carrollton'),(617,230,'Bellevue'),(618,230,'West Valley City'),(619,230,'Clarksville'),(620,230,'Costa Mesa'),(621,230,'Peoria'),(622,230,'South Bend'),(623,230,'Downey'),(624,230,'Waterbury'),(625,230,'Manchester'),(626,230,'Allentown'),(627,230,'McAllen'),(628,230,'Joliet'),(629,230,'Lowell'),(630,230,'Provo'),(631,230,'West Covina'),(632,230,'Wichita Falls'),(633,230,'Erie'),(634,230,'Daly City'),(635,230,'Citrus Heights'),(636,230,'Norwalk'),(637,230,'Gary'),(638,230,'Berkeley'),(639,230,'Santa Clara'),(640,230,'Green Bay'),(641,230,'Cape Coral'),(642,230,'Arvada'),(643,230,'Pueblo'),(644,230,'Sandy'),(645,230,'Athens-Clarke County'),(646,230,'Cambridge'),(647,230,'Westminster'),(648,230,'San Buenaventura'),(649,230,'Portsmouth'),(650,230,'Livonia'),(651,230,'Burbank'),(652,230,'Clearwater'),(653,230,'Midland'),(654,230,'Davenport'),(655,230,'Mission Viejo'),(656,230,'Miami Beach'),(657,230,'Sunrise Manor'),(658,230,'New Bedford'),(659,230,'El Cajon'),(660,230,'Norman'),(661,230,'Richmond'),(662,230,'Albany'),(663,230,'Brockton'),(664,230,'Roanoke'),(665,230,'Billings'),(666,230,'Compton'),(667,230,'Gainesville'),(668,230,'Fairfield'),(669,230,'Arden-Arcade'),(670,230,'San Mateo'),(671,230,'Visalia'),(672,230,'Boulder'),(673,230,'Cary'),(674,230,'Santa Monica'),(675,230,'Fall River'),(676,230,'Kenosha'),(677,230,'Elgin'),(678,230,'Odessa'),(679,230,'Carson'),(680,230,'Charleston');
+/*!40000 ALTER TABLE `ciudad` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `forma_pago`
+-- Dumping data for table `forma_pago`
 --
 
-DROP TABLE IF EXISTS `forma_pago`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `forma_pago` (
-  `FRM_PAG_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `FRM_PAG_NOMBRE` text,
-  PRIMARY KEY (`FRM_PAG_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `forma_pago` WRITE;
+/*!40000 ALTER TABLE `forma_pago` DISABLE KEYS */;
+INSERT INTO `forma_pago` VALUES (1,'EFECTIVO'),(2,'TARJETA DE CRÉDITO'),(3,'DÉBITO BANCARIO');
+/*!40000 ALTER TABLE `forma_pago` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `localidad`
+-- Dumping data for table `localidad`
 --
 
-DROP TABLE IF EXISTS `localidad`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `localidad` (
-  `LOC_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `LOC_NOMBRE` text,
-  `LOCA_CAPACIDAD` int(11) DEFAULT NULL,
-  PRIMARY KEY (`LOC_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `localidad` WRITE;
+/*!40000 ALTER TABLE `localidad` DISABLE KEYS */;
+INSERT INTO `localidad` VALUES (1,'General Norte',15000),(2,'General Sur',15000),(3,'Tribuna Oeste',12500),(4,'Tribuna Este',12500),(5,'Palco 1',1875),(6,'Palco 2',1875),(7,'Palco 3',1875),(8,'Palco 4',1875),(9,'Palco 5',1875),(10,'Palco 6',1875),(11,'Palco 7',1875),(12,'Palco 8',1875),(13,'Suite Oeste',5000),(14,'Suite Este',5000);
+/*!40000 ALTER TABLE `localidad` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `pais`
+-- Dumping data for table `pais`
 --
 
-DROP TABLE IF EXISTS `pais`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pais` (
-  `PAI_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `PAI_CODE` varchar(5) DEFAULT NULL,
-  `PAI_NOMBRE` varchar(65) DEFAULT NULL,
-  PRIMARY KEY (`PAI_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `pais` WRITE;
+/*!40000 ALTER TABLE `pais` DISABLE KEYS */;
+INSERT INTO `pais` VALUES (1,'AF','Afghanistan'),(2,'AL','Albania'),(3,'DZ','Algeria'),(4,'DS','American Samoa'),(5,'AD','Andorra'),(6,'AO','Angola'),(7,'AI','Anguilla'),(8,'AQ','Antarctica'),(9,'AG','Antigua and Barbuda'),(10,'AR','Argentina'),(11,'AM','Armenia'),(12,'AW','Aruba'),(13,'AU','Australia'),(14,'AT','Austria'),(15,'AZ','Azerbaijan'),(16,'BS','Bahamas'),(17,'BH','Bahrain'),(18,'BD','Bangladesh'),(19,'BB','Barbados'),(20,'BY','Belarus'),(21,'BE','Belgium'),(22,'BZ','Belize'),(23,'BJ','Benin'),(24,'BM','Bermuda'),(25,'BT','Bhutan'),(26,'BO','Bolivia'),(27,'BA','Bosnia and Herzegovina'),(28,'BW','Botswana'),(29,'BV','Bouvet Island'),(30,'BR','Brazil'),(31,'IO','British Indian Ocean Territory'),(32,'BN','Brunei Darussalam'),(33,'BG','Bulgaria'),(34,'BF','Burkina Faso'),(35,'BI','Burundi'),(36,'KH','Cambodia'),(37,'CM','Cameroon'),(38,'CA','Canada'),(39,'CV','Cape Verde'),(40,'KY','Cayman Islands'),(41,'CF','Central African Republic'),(42,'TD','Chad'),(43,'CL','Chile'),(44,'CN','China'),(45,'CX','Christmas Island'),(46,'CC','Cocos (Keeling) Islands'),(47,'CO','Colombia'),(48,'KM','Comoros'),(49,'CG','Congo'),(50,'CK','Cook Islands'),(51,'CR','Costa Rica'),(52,'HR','Croatia (Hrvatska)'),(53,'CU','Cuba'),(54,'CY','Cyprus'),(55,'CZ','Czech Republic'),(56,'DK','Denmark'),(57,'DJ','Djibouti'),(58,'DM','Dominica'),(59,'DO','Dominican Republic'),(60,'TP','East Timor'),(61,'EC','Ecuador'),(62,'EG','Egypt'),(63,'SV','El Salvador'),(64,'GQ','Equatorial Guinea'),(65,'ER','Eritrea'),(66,'EE','Estonia'),(67,'ET','Ethiopia'),(68,'FK','Falkland Islands (Malvinas)'),(69,'FO','Faroe Islands'),(70,'FJ','Fiji'),(71,'FI','Finland'),(72,'FR','France'),(73,'FX','France, Metropolitan'),(74,'GF','French Guiana'),(75,'PF','French Polynesia'),(76,'TF','French Southern Territories'),(77,'GA','Gabon'),(78,'GM','Gambia'),(79,'GE','Georgia'),(80,'DE','Germany'),(81,'GH','Ghana'),(82,'GI','Gibraltar'),(83,'GK','Guernsey'),(84,'GR','Greece'),(85,'GL','Greenland'),(86,'GD','Grenada'),(87,'GP','Guadeloupe'),(88,'GU','Guam'),(89,'GT','Guatemala'),(90,'GN','Guinea'),(91,'GW','Guinea-Bissau'),(92,'GY','Guyana'),(93,'HT','Haiti'),(94,'HM','Heard and Mc Donald Islands'),(95,'HN','Honduras'),(96,'HK','Hong Kong'),(97,'HU','Hungary'),(98,'IS','Iceland'),(99,'IN','India'),(100,'IM','Isle of Man'),(101,'ID','Indonesia'),(102,'IR','Iran (Islamic Republic of)'),(103,'IQ','Iraq'),(104,'IE','Ireland'),(105,'IL','Israel'),(106,'IT','Italy'),(107,'CI','Ivory Coast'),(108,'JE','Jersey'),(109,'JM','Jamaica'),(110,'JP','Japan'),(111,'JO','Jordan'),(112,'KZ','Kazakhstan'),(113,'KE','Kenya'),(114,'KI','Kiribati'),(115,'KP','Korea, Democratic People\'s Republic of'),(116,'KR','Korea, Republic of'),(117,'XK','Kosovo'),(118,'KW','Kuwait'),(119,'KG','Kyrgyzstan'),(120,'LA','Lao People\'s Democratic Republic'),(121,'LV','Latvia'),(122,'LB','Lebanon'),(123,'LS','Lesotho'),(124,'LR','Liberia'),(125,'LY','Libyan Arab Jamahiriya'),(126,'LI','Liechtenstein'),(127,'LT','Lithuania'),(128,'LU','Luxembourg'),(129,'MO','Macau'),(130,'MK','Macedonia'),(131,'MG','Madagascar'),(132,'MW','Malawi'),(133,'MY','Malaysia'),(134,'MV','Maldives'),(135,'ML','Mali'),(136,'MT','Malta'),(137,'MH','Marshall Islands'),(138,'MQ','Martinique'),(139,'MR','Mauritania'),(140,'MU','Mauritius'),(141,'TY','Mayotte'),(142,'MX','Mexico'),(143,'FM','Micronesia, Federated States of'),(144,'MD','Moldova, Republic of'),(145,'MC','Monaco'),(146,'MN','Mongolia'),(147,'ME','Montenegro'),(148,'MS','Montserrat'),(149,'MA','Morocco'),(150,'MZ','Mozambique'),(151,'MM','Myanmar'),(152,'NA','Namibia'),(153,'NR','Nauru'),(154,'NP','Nepal'),(155,'NL','Netherlands'),(156,'AN','Netherlands Antilles'),(157,'NC','New Caledonia'),(158,'NZ','New Zealand'),(159,'NI','Nicaragua'),(160,'NE','Niger'),(161,'NG','Nigeria'),(162,'NU','Niue'),(163,'NF','Norfolk Island'),(164,'MP','Northern Mariana Islands'),(165,'NO','Norway'),(166,'OM','Oman'),(167,'PK','Pakistan'),(168,'PW','Palau'),(169,'PS','Palestine'),(170,'PA','Panama'),(171,'PG','Papua New Guinea'),(172,'PY','Paraguay'),(173,'PE','Peru'),(174,'PH','Philippines'),(175,'PN','Pitcairn'),(176,'PL','Poland'),(177,'PT','Portugal'),(178,'PR','Puerto Rico'),(179,'QA','Qatar'),(180,'RE','Reunion'),(181,'RO','Romania'),(182,'RU','Russian Federation'),(183,'RW','Rwanda'),(184,'KN','Saint Kitts and Nevis'),(185,'LC','Saint Lucia'),(186,'VC','Saint Vincent and the Grenadines'),(187,'WS','Samoa'),(188,'SM','San Marino'),(189,'ST','Sao Tome and Principe'),(190,'SA','Saudi Arabia'),(191,'SN','Senegal'),(192,'RS','Serbia'),(193,'SC','Seychelles'),(194,'SL','Sierra Leone'),(195,'SG','Singapore'),(196,'SK','Slovakia'),(197,'SI','Slovenia'),(198,'SB','Solomon Islands'),(199,'SO','Somalia'),(200,'ZA','South Africa'),(201,'GS','South Georgia South Sandwich Islands'),(202,'ES','Spain'),(203,'LK','Sri Lanka'),(204,'SH','St. Helena'),(205,'PM','St. Pierre and Miquelon'),(206,'SD','Sudan'),(207,'SR','Suriname'),(208,'SJ','Svalbard and Jan Mayen Islands'),(209,'SZ','Swaziland'),(210,'SE','Sweden'),(211,'CH','Switzerland'),(212,'SY','Syrian Arab Republic'),(213,'TW','Taiwan'),(214,'TJ','Tajikistan'),(215,'TZ','Tanzania, United Republic of'),(216,'TH','Thailand'),(217,'TG','Togo'),(218,'TK','Tokelau'),(219,'TO','Tonga'),(220,'TT','Trinidad and Tobago'),(221,'TN','Tunisia'),(222,'TR','Turkey'),(223,'TM','Turkmenistan'),(224,'TC','Turks and Caicos Islands'),(225,'TV','Tuvalu'),(226,'UG','Uganda'),(227,'UA','Ukraine'),(228,'AE','United Arab Emirates'),(229,'GB','United Kingdom'),(230,'US','United States'),(231,'UM','United States minor outlying islands'),(232,'UY','Uruguay'),(233,'UZ','Uzbekistan'),(234,'VU','Vanuatu'),(235,'VA','Vatican City State'),(236,'VE','Venezuela'),(237,'VN','Vietnam'),(238,'VG','Virgin Islands (British)'),(239,'VI','Virgin Islands (U.S.)'),(240,'WF','Wallis and Futuna Islands'),(241,'EH','Western Sahara'),(242,'YE','Yemen'),(243,'YU','Yugoslavia'),(244,'ZR','Zaire'),(245,'ZM','Zambia'),(246,'ZW','Zimbabwe');
+/*!40000 ALTER TABLE `pais` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `plan`
+-- Dumping data for table `plan`
 --
 
-DROP TABLE IF EXISTS `plan`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `plan` (
-  `PLN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `LOC_ID` int(11) DEFAULT NULL,
-  `PLN_NOMBRE` text,
-  `PLN_COSTO` decimal(10,0) DEFAULT NULL,
-  `PLN_ACTIVO` tinyint(1) DEFAULT NULL,
-  `PLN_EDAD` int(11) DEFAULT NULL,
-  PRIMARY KEY (`PLN_ID`),
-  KEY `FK_RELATIONSHIP_6` (`LOC_ID`),
-  CONSTRAINT `FK_RELATIONSHIP_6` FOREIGN KEY (`LOC_ID`) REFERENCES `localidad` (`LOC_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `plan` WRITE;
+/*!40000 ALTER TABLE `plan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `plan` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `rol`
+-- Dumping data for table `rol`
 --
 
-DROP TABLE IF EXISTS `rol`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rol` (
-  `ROL_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ROL_Nombre` text NOT NULL,
-  PRIMARY KEY (`ROL_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `rol` WRITE;
+/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+INSERT INTO `rol` VALUES (1,'ROL_ADMIN'),(2,'ROL_ADMIN_SOCIO'),(3,'ROL_RRPP'),(4,'ROL_SOCIO');
+/*!40000 ALTER TABLE `rol` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -119,4 +83,4 @@ CREATE TABLE `rol` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-22  7:21:15
+-- Dump completed on 2015-12-22  7:52:51
