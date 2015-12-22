@@ -17,6 +17,11 @@
             <from-outcome>loginx</from-outcome>
             <to-view-id>/views/p/login.xhtml</to-view-id> 
             <redirect></redirect>
+        </navigation-case> 
+        <navigation-case>
+            <from-outcome>afiliarse</from-outcome>
+            <to-view-id>/views/s/adminSocios/registrarSocio.xhtml</to-view-id> 
+            <redirect></redirect>
         </navigation-case>                
     </navigation-rule>
     
