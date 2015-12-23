@@ -72,6 +72,10 @@ public class PartidoService implements java.io.Serializable {
         return partidoDAO.getByTemporadaID(tpdId);
     }
 
+    public Partido getNext() {
+        return partidoDAO.getNext();
+    }
+
     public PartidoDAO getPartidoDAO() {
         return partidoDAO;
     }

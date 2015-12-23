@@ -69,4 +69,8 @@ public class PartidoDAO implements java.io.Serializable {
     public List<Partido> getByTemporadaID(Integer tpdId) {
         return getSessionFactory().getCurrentSession().createQuery("from Partido where temporada.tpdId=:tpdId").setParameter("tpdId", tpdId).list();
     }
+    public Partido getNext() {
+        List list = getSessionFactory().getCurrentSession().createQuery("from Partido where prtFecha>=current_date order by prtFecha asc").setMaxResults(1).list();
+        return list.size() < 1 ? null : (Partido) list.get(0);
+    }
 }

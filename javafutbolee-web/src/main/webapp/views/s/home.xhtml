@@ -7,7 +7,8 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:pe="http://primefaces.org/ui/extensions"
       xmlns:sec="http://www.springframework.org/security/tags"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="/templates/mainTemplate.xhtml">
         <ui:define name="title">
             JavaFutbolEE|Home
@@ -197,19 +198,43 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="wow fadeInDown" data-wow-delay="0.5s">
-                                                    <span class="fa fa-calendar-check-o"></span> Domingo 06, diciembre 2015 
+                                                    <span class="fa fa-calendar-check-o"></span>&nbsp;
+                                                    <h:outputText value="#{boletoBean.selectedPartido.prtFecha}">
+                                                        <f:convertDateTime dateStyle="full" pattern="EEEE dd, MMMM yyyy"/>
+                                                    </h:outputText>
+                                                    <br/><br/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="wow fadeInDown" data-wow-delay="0.5s">
+                                                    <span class="fa fa-clock-o"></span>&nbsp;
+                                                    <h:outputText value="#{boletoBean.selectedPartido.prtFecha}">
+                                                        <f:convertDateTime dateStyle="full" pattern="HH:mm"/>
+                                                    </h:outputText>
                                                     <br/><br/>
                                                 </td>
                                             </tr>
                                             <tr class="wow fadeInDown" data-wow-delay="0.5s">
-                                                <td>MRA</td>
-                                                <td style="font-size: 30px;">VS</td>
-                                                <td>BSC</td>
+
+                                                <ui:fragment rendered="#{boletoBean.selectedPartido.prtLocal==true}">                                                                                               
+                                                    <td>BSC</td>
+                                                    <td style="font-size: 30px;">VS</td>
+                                                    <td>#{boletoBean.selectedPartido.equipo.eqpAbbr}</td>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{boletoBean.selectedPartido.prtLocal==false}">
+                                                    <td>#{boletoBean.selectedPartido.equipo.eqpAbbr}</td>
+                                                    <td style="font-size: 30px;">VS</td>
+                                                    <td>BSC</td>
+                                                </ui:fragment>
                                             </tr>
                                             <tr>
-                                                <td class="wow bounceIn" data-wow-delay="0.75s"><img class="pulse" data-wow-delay="1.3s" data-wow-duration="2.2s" data-wow-iteration="infinite" src="http://www.barcelonasc.com.ec/img/widget/mra.png"/></td>
+                                                <td class="wow bounceIn" data-wow-delay="0.75s">
+                                                    <img class="pulse" data-wow-delay="1.3s" data-wow-duration="2.2s" data-wow-iteration="infinite" src="http://www.barcelonasc.com.ec/img/widget/#{boletoBean.selectedPartido.prtLocal?'bsc':'lduq'.toString().toLowerCase()}.png"/>
+                                                </td>
                                                 <td>|</td>
-                                                <td class="wow bounceIn" data-wow-delay="0.75s"><img class="pulse" data-wow-delay="1.3s" data-wow-duration="2.2s" data-wow-iteration="infinite" src="http://www.barcelonasc.com.ec/img/widget/bsc.png"/></td>
+                                                <td class="wow bounceIn" data-wow-delay="0.75s">
+                                                    <img class="pulse" data-wow-delay="1.3s" data-wow-duration="2.2s" data-wow-iteration="infinite" src="http://www.barcelonasc.com.ec/img/widget/#{boletoBean.selectedPartido.prtLocal?'LDUQ'.toString().toLowerCase():'bsc'}.png"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="wow fadeInUpBig" data-wow-delay="0.75s">
@@ -218,7 +243,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="wow fadeInDown" data-wow-delay="0.75s">
-                                                    ESTADIO - Bellavista
+                                                    ESTADIO - #{boletoBean.selectedPartido.estadio.estNombre}
                                                 </td>
                                             </tr>
                                         </tbody>
