@@ -55,7 +55,7 @@ public class EmailService implements Serializable {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage,"UTF-8");
                 message.setTo(u.getUsrEmail());
                 message.setFrom(getFromAddress()); // could be parameterized...
                 message.setSubject("Registro #BSC SOC10S | JavaFutbolEE");
@@ -73,9 +73,11 @@ public class EmailService implements Serializable {
                         velocityEngine,
                         "email/JFEE_register.html", "UTF-8", model);
 
+                mimeMessage.setHeader("Content-Type", "text/plain; charset=UTF-8");
                 message.setText(text, true);
             }
         };
+
         this.mailSender.send(preparator);
         sendConfirmationEmail(u, nombre, apellido, confirmUrl);
     }
@@ -85,7 +87,7 @@ public class EmailService implements Serializable {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage,"UTF-8");
                 message.setTo(u.getUsrEmail());
                 message.setFrom(getFromAddress()); // could be parameterized...
                 message.setSubject("Confirmación #BSC SOC10S | JavaFutbolEE");
@@ -103,6 +105,7 @@ public class EmailService implements Serializable {
                         velocityEngine,
                         "email/JFEE_confirmEmail.html", "UTF-8", model);
 
+                mimeMessage.setHeader("Content-Type", "text/plain; charset=UTF-8");
                 message.setText(text, true);
             }
         };
