@@ -19,6 +19,7 @@ package io.dacopancm.jfee.sp.service;
 import io.dacopancm.jfee.exceptions.JfeeCustomException;
 import io.dacopancm.jfee.sp.dao.PartidoDAO;
 import io.dacopancm.jfee.sp.model.Partido;
+import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +66,10 @@ public class PartidoService implements java.io.Serializable {
 
     public List<Partido> getPartidoAll() {
         return partidoDAO.getAll();
+    }
+
+    public List<Partido> getPartidoByTemporadaID(Integer tpdId) {
+        return partidoDAO.getByTemporadaID(tpdId);
     }
 
     public PartidoDAO getPartidoDAO() {

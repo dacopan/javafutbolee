@@ -60,12 +60,18 @@ public class AdminPartidosBean implements Serializable {
     List<Partido> filteredPartidoList;
 
     Partido selectedPartido;
+    Temporada selectedTemporada;
 
     public AdminPartidosBean() {
     }
 
     @PostConstruct
     public void postConstruct() {
+        selectedTemporada = new Temporada();
+        if (partidoList == null) {
+            partidoList = new ArrayList<>();
+            partidoList.addAll(partidoService.getPartidoAll());
+        }
         resetAddPartido(null);
     }
 
@@ -131,6 +137,12 @@ public class AdminPartidosBean implements Serializable {
 
     }
 
+    public void onTemporadaChange() {
+        log.info("jfee: "+selectedTemporada.getTpdId());
+        partidoList = new ArrayList<>();
+        partidoList.addAll(partidoService.getPartidoByTemporadaID(selectedTemporada.getTpdId()));
+    }
+
     //get and set
     public LocalidadService getLocalidadService() {
         return localidadService;
@@ -164,7 +176,7 @@ public class AdminPartidosBean implements Serializable {
     public List<Partido> getPartidoList() {
         if (partidoList == null) {
             partidoList = new ArrayList<>();
-            partidoList.addAll(partidoService.getPartidoAll());
+            partidoList.addAll(partidoService.getPartidoByTemporadaID(selectedTemporada.getTpdId()));
         }
         return partidoList;
     }
@@ -187,6 +199,14 @@ public class AdminPartidosBean implements Serializable {
 
     public void setSelectedPartido(Partido selectedPartido) {
         this.selectedPartido = selectedPartido;
+    }
+
+    public Temporada getSelectedTemporada() {
+        return selectedTemporada;
+    }
+
+    public void setSelectedTemporada(Temporada selectedTemporada) {
+        this.selectedTemporada = selectedTemporada;
     }
 
 }

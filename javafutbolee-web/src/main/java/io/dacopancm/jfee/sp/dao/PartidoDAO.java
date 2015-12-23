@@ -17,6 +17,7 @@
 package io.dacopancm.jfee.sp.dao;
 
 import io.dacopancm.jfee.sp.model.Partido;
+import java.util.Collection;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,9 @@ public class PartidoDAO implements java.io.Serializable {
 
     public List<Partido> getAll() {
         return getSessionFactory().getCurrentSession().createQuery("from Partido").list();
+    }
+
+    public List<Partido> getByTemporadaID(Integer tpdId) {
+        return getSessionFactory().getCurrentSession().createQuery("from Partido where temporada.tpdId=:tpdId").setParameter("tpdId", tpdId).list();
     }
 }

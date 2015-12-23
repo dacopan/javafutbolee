@@ -40,9 +40,23 @@
 
                         <br/><br/>
 
-                        <p:dataTable var="prt" value="#{adminPartidosBean.partidoList}" rows="10"
+                        <div class="input-control full-size">
+                            <p:outputLabel for="temporada">
+                                <span class="fa fg-gray fa-bookmark"></span>
+                                Temporada                                        
+                            </p:outputLabel>
+                            <p:selectOneMenu id="temporada" value="#{adminPartidosBean.selectedTemporada.tpdId}" >
+                                <p:ajax listener="#{adminPartidosBean.onTemporadaChange}" update="partidosTable" />
+                                <f:selectItem itemLabel="Seleccionar Temporada" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{adminPortalBean.temporadaList}" var="tpd" itemLabel="#{tpd.tpdNombre}" itemValue="#{tpd.tpdId}" />
+                            </p:selectOneMenu> 
+                        </div>
+                        <br/>
+                        <br/>
+                        
+                        <p:dataTable id="partidosTable" var="prt" value="#{adminPartidosBean.partidoList}" rows="10"
                                      paginator="true"  reflow="true" editable="false"
-                                     sortMode="multiple" widgetVar="funcionariosTable" filteredValue="#{adminPartidosBean.filteredPartidoList}"
+                                     sortMode="multiple" widgetVar="partidosTable" filteredValue="#{adminPartidosBean.filteredPartidoList}"
                                      selectionMode="single" selection="#{adminPartidosBean.selectedPartido}" rowKey="#{prt.prtId}"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="5,10,15" 
@@ -54,7 +68,7 @@
 
                                 <div class="align-center pos-rel">
                                     Partidos
-                                    <p:inputText id="globalFilter" onkeyup="PF('funcionariosTable').filter()" style="width:150px;position: absolute;right: 50px;" placeholder="Enter keyword"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('partidosTable').filter()" style="width:150px;position: absolute;right: 50px;" placeholder="Enter keyword"/>
                                     <span class="fa fa-search" style="position: absolute; right: 5px;"></span>&nbsp;&nbsp;
                                 </div>
                             </f:facet>
@@ -87,6 +101,10 @@
                             </p:column>
                         </p:dataTable>
 
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                     </div>
                 </section>
             </h:form>
