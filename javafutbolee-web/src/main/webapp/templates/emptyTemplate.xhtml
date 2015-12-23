@@ -8,7 +8,8 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       >
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />                    
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <h:outputStylesheet library="dt1c" name="css/preloader.css"/>
         <link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/dt1c/css/vendor.css"/>            
         <title><ui:insert name="title" /></title>
@@ -30,7 +31,7 @@
                     <div><span class="fa fa-futbol-o fa-2x fg-yellow"></span></div>
                 </div>
             </div>
-            
+
 
             <!--main content-->
             <main style="margin-bottom: 400px;opacity: 0;height: 100%;" id="main">
@@ -42,7 +43,7 @@
                 </p:outputPanel>
                 <!--end main content-->               
             </main>
-            
+
             <ui:include src="footer.xhtml"/>
         </div>
 
