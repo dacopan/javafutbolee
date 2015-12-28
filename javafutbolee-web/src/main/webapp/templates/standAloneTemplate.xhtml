@@ -14,6 +14,7 @@
         <link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/dt1c/css/vendor.css"/>           
         <title><ui:insert name="title" /></title>
         <ui:insert name="headx"></ui:insert>
+        <h:outputScript library="dt1c" name="js/dt1ctheme.js"></h:outputScript>
     </h:head>
     <h:body class="dt1c fullscreen">
         <p:ajaxStatus style="width: 32px;height: 32px;position: fixed;right: 7px;bottom: 7px;">
@@ -56,6 +57,6 @@
         </div>
 
         <script src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/dt1c/js/vendor.js" type="text/javascript" async="true"></script>
-        <h:outputScript library="dt1c" name="js/dt1ctheme.js"></h:outputScript> 
+         
     </h:body>
 </html>
