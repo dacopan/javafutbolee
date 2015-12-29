@@ -9,9 +9,9 @@
     $.Metro.initAppBar = function (area) {
         if (area != undefined) {
             $(area).find('[role=menubar]').appbar();
-            console.log($(area).find('[role=menubar]'));
+            //console.log($(area).find('[role=menubar]'));
         } else {
-            console.log($('[role=menubar]'));
+            //console.log($('[role=menubar]'));
             $('[role=menubar]').appbar();
         }
     };
@@ -19,8 +19,8 @@
 })(jQuery);
 
 $(function () {
-    $.Metro.initAppBar($('body'));    
-    setTimeout(function() {        
+    $.Metro.initAppBar($('body'));
+    setTimeout(function () {
         $("#main").animate({
             opacity: 1
         }, {

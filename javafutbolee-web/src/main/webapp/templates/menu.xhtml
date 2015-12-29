@@ -41,32 +41,12 @@
                                 <div class="menu-menu-1-container">
                                     <ul id="menu-menu-1" class="primary-menu small-text">
                                         <sec:authorize access="isAnonymous()">
-                                            <li class="menu-item">
-                                                <a href="#header" data-scroll="true">
-                                                    Home
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="#beneficios" data-scroll="true">
-                                                    Beneficios
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="#afiliarse" data-scroll="true">
-                                                    Afiliarse
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="#ingresar" data-scroll="true">
-                                                    Inresar
-                                                </a>
-                                            </li>
+
                                         </sec:authorize>
-                                        <sec:authorize access="isAuthenticated()">
-                                            <ui:insert name="menuitem">
+                                        <ui:insert name="menuitem">
 
-                                            </ui:insert>
-
+                                        </ui:insert>
+                                        <sec:authorize access="isAuthenticated()">                                            
                                             <li class="menu-item fg-hover-red item-red">
                                                 <h:form>
                                                     <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
