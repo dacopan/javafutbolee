@@ -94,6 +94,7 @@ DROP TABLE IF EXISTS `forma_pago`;
 CREATE TABLE `forma_pago` (
   `FRM_PAG_ID` int(11) NOT NULL AUTO_INCREMENT,
   `FRM_PAG_NOMBRE` text,
+  `FRM_PAG_PORCENTAJE` double DEFAULT NULL,
   PRIMARY KEY (`FRM_PAG_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -360,4 +361,4 @@ CREATE TABLE `usuario` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-28 15:42:44
+-- Dump completed on 2015-12-29 12:00:31

@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `forma_pago` WRITE;
 /*!40000 ALTER TABLE `forma_pago` DISABLE KEYS */;
-INSERT INTO `forma_pago` VALUES (1,'EFECTIVO'),(2,'TARJETA DE CRÉDITO'),(3,'DÉBITO BANCARIO');
+INSERT INTO `forma_pago` VALUES (1,'EFECTIVO',0),(2,'TARJETA DE CRÉDITO',5),(3,'DÉBITO BANCARIO',2);
 /*!40000 ALTER TABLE `forma_pago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,15 +56,6 @@ INSERT INTO `pais` VALUES (1,'AF','Afghanistan'),(2,'AL','Albania'),(3,'DZ','Alg
 UNLOCK TABLES;
 
 --
--- Dumping data for table `plan`
---
-
-LOCK TABLES `plan` WRITE;
-/*!40000 ALTER TABLE `plan` DISABLE KEYS */;
-/*!40000 ALTER TABLE `plan` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `rol`
 --
 
@@ -83,4 +74,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-22  7:52:51
+-- Dump completed on 2015-12-29 12:01:10
