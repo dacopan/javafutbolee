@@ -20,7 +20,7 @@
             <span></span>
         </ui:define>
 
-        <ui:define name="content">
+        <ui:define name="content">            
             <h:form id="form3">
                 <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
 
@@ -53,7 +53,7 @@
                         </div>
                         <br/>
                         <br/>
-                        
+
                         <p:dataTable id="partidosTable" var="prt" value="#{adminPartidosBean.partidoList}" rows="10"
                                      paginator="true"  reflow="true" editable="false"
                                      sortMode="multiple" widgetVar="partidosTable" filteredValue="#{adminPartidosBean.filteredPartidoList}"
@@ -233,11 +233,11 @@
                         <div class="row"> 
                             <div class="cell">
                                 <div class="input-control full-size">
-                                    <p:outputLabel for="temporada">
+                                    <p:outputLabel for="temporada2">
                                         <span class="fa fg-gray fa-bookmark"></span>
                                         Temporada                                        
                                     </p:outputLabel>
-                                    <p:selectOneMenu id="temporada" value="#{adminPartidosBean.selectedPartido.temporada.tpdId}">
+                                    <p:selectOneMenu id="temporada2" value="#{adminPartidosBean.selectedPartido.temporada.tpdId}">
                                         <f:selectItems value="#{adminPortalBean.temporadaList}" var="tpd" itemLabel="#{tpd.tpdNombre}" itemValue="#{tpd.tpdId}" />
                                     </p:selectOneMenu> 
                                 </div>
@@ -248,11 +248,11 @@
                         <div class="row"> 
                             <div class="cell">
                                 <div class="input-control full-size">
-                                    <p:outputLabel for="rival">
+                                    <p:outputLabel for="rival2">
                                         <span class="fa fg-gray fa-bookmark"></span>
                                         Rival                                        
                                     </p:outputLabel>
-                                    <p:selectOneMenu id="rival" value="#{adminPartidosBean.selectedPartido.equipo.eqpId}">
+                                    <p:selectOneMenu id="rival2" value="#{adminPartidosBean.selectedPartido.equipo.eqpId}">
                                         <f:selectItems value="#{adminPortalBean.equipoList}" var="eqp" itemLabel="#{eqp.eqpNombre}" itemValue="#{eqp.eqpId}" />
                                     </p:selectOneMenu> 
                                 </div>
@@ -264,11 +264,11 @@
                         <div class="row"> 
                             <div class="cell">
                                 <div class="input-control full-size">
-                                    <p:outputLabel for="estadio">
+                                    <p:outputLabel for="estadio2">
                                         <span class="fa fg-gray fa-bookmark"></span>
                                         Estadio                                        
                                     </p:outputLabel>
-                                    <p:selectOneMenu id="estadio" value="#{adminPartidosBean.selectedPartido.estadio.estId}">
+                                    <p:selectOneMenu id="estadio2" value="#{adminPartidosBean.selectedPartido.estadio.estId}">
                                         <f:selectItems value="#{adminPortalBean.estadioList}" var="est" itemLabel="#{est.estNombre}" itemValue="#{est.estId}" />
                                     </p:selectOneMenu> 
                                 </div>
@@ -279,11 +279,11 @@
                         <div class="row cells2"> 
                             <div class="cell">
                                 <div class="input-control full-size">
-                                    <p:outputLabel for="fecha">
+                                    <p:outputLabel for="fecha2">
                                         <span class="fa fg-gray fa-bookmark"></span>
                                         Fecha                                        
                                     </p:outputLabel>
-                                    <p:calendar id="fecha" navigator="true" placeholder="Fecha del partido"
+                                    <p:calendar id="fecha2" navigator="true" placeholder="Fecha del partido"
                                                 validatorMessage="Fecha Nacimiento Inválida" required="true"
                                                 mask="true" pattern="dd-MM-yyyy HH:mm" 
                                                 value="#{adminPartidosBean.selectedPartido.prtFecha}"/>
@@ -292,11 +292,11 @@
                             </div>
                             <div class="cell align-right">
                                 <div class="input-control full-size">
-                                    <p:outputLabel for="isLocal">
+                                    <p:outputLabel for="isLocal2">
                                         <span class="fa fg-gray fa-bookmark"></span>
                                         Localidad                                        
                                     </p:outputLabel>
-                                    <p:inputSwitch onLabel="On" offLabel="Off" id="isLocal" value="#{adminPartidosBean.selectedPartido.prtLocal}"/>                                   
+                                    <p:inputSwitch onLabel="On" offLabel="Off" id="isLocal2" value="#{adminPartidosBean.selectedPartido.prtLocal}"/>                                   
                                 </div>
                                 <br/><br/>
                             </div>
@@ -306,11 +306,11 @@
                             <div class="cell">
                                 <c:forEach  var="loc" items="#{adminPartidosBean.selectedPartido.partidoPrecios}" varStatus="locStatus">                                    
                                     <div class="input-control">
-                                        <p:outputLabel for="precio">
+                                        <p:outputLabel for="precio2">
                                             <span class="fa fg-gray fa-money"></span>
                                             #{loc.localidad.locNombre}                             
                                         </p:outputLabel> 
-                                        <p:spinner id="precio" min="0" max="100" stepFactor="0.25"
+                                        <p:spinner id="precio2" min="0" max="100" stepFactor="0.25"
                                                    value="#{loc.prtPreMonto}" validatorMessage="xxx"/>
                                     </div>
 

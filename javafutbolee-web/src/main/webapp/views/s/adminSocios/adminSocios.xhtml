@@ -13,17 +13,28 @@
         </ui:define>
 
         <ui:define name="backLink">
-            <a href="#{facesContext.externalContext.requestContextPath}/faces/views/s/home.xhtml" class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</a>
+            <a href="#{facesContext.externalContext.requestContextPath}/faces/views/s/home.xhtml" 
+               title="#{sociosBean.returnPage}"
+               class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</a>
         </ui:define>
         <ui:define name="menuitem">
- 
+            <li class="menu-item">
+                <a href="#socios" data-scroll="true">
+                    Socios 
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#planes" data-scroll="true">
+                    Planes 
+                </a>
+            </li>
         </ui:define>
 
         <ui:define name="content">
             <h:form id="form3">
                 <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
 
-                <section id="temporadas" class="call-to-action full-height" style="background-color: #f5f5f5;">
+                <section id="socios" class="call-to-action full-height" style="background-color: #f5f5f5;">
                     <div class="container">
                         <div class="section-header">
                             <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administrar <strong>Socios</strong></h2>
@@ -42,10 +53,533 @@
                         TODO aqui mostrar tabla con socios, y boton de editar, cuando da allí se va a editarSocio.xhtml                        
                         similar a AdminFUncionarios pero la edición se va a otra pagina (editarSocio.xhtml)
                         <br/>
-                        TODO CRUD para los planes y con sus precios, similar a CRUD temporadas en adminPortal
-                        IGNORAR PLAN EDAD, muy complejo, no lo aremos segregando por edad.
+
+                        <p:dataTable var="soc" value="#{sociosBean.socioList}" rows="10"
+                                     paginator="true"  reflow="true" editable="false"
+                                     sortMode="multiple" widgetVar="planesTable"
+                                     selectionMode="single" selection="#{sociosBean.selectedSocio}" rowKey="#{soc.socId}"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15" 
+                                     class="wow fadeIn" pt:data-wow-delay="0.5s"
+                                     >
+                            <f:facet name="emptyMessage">
+                                <h2 class="text-light">Ningún Socio</h2>
+                            </f:facet>
+                            <f:facet name="header">
+
+                                <div class="align-center pos-rel">
+                                    <span class="fa fa-list-ol" style="position: absolute; left: 5px;font-weight: 300;">&nbsp; #{sociosBean.socioList.size()}</span>
+                                    Socios                                    
+                                </div>
+
+
+
+                            </f:facet>
+                            <p:column headerText="Id" sortBy="#{soc.socId}" filterBy="#{soc.socId}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{soc.socId}" />
+                            </p:column>
+
+                            <p:column headerText="CI" sortBy="#{soc.usuario.usrCi}" filterBy="#{soc.usuario.usrCi}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{soc.usuario.usrCi}" />
+                            </p:column>
+
+                            <p:column headerText="Nombres" sortBy="#{soc.socNombre}" filterBy="#{soc.socNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{soc.socNombre}" />
+                            </p:column>
+
+                            <p:column headerText="Nombres" sortBy="#{soc.socApellido}" filterBy="#{soc.socApellido}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{soc.socApellido}" />
+                            </p:column>
+
+                            <p:column headerText="Email" sortBy="#{soc.usuario.usrEmail}" filterBy="#{soc.usuario.usrEmail}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{soc.usuario.usrEmail}" />
+                            </p:column>
+
+                            <p:column headerText="Plan" sortBy="#{soc.plan.plnNombre}" filterBy="#{soc.plan.plnNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{soc.plan.plnNombre}" />
+                            </p:column>
+
+
+
+
+                            <p:column headerText="Acciones" class="align-center">
+                                <p:commandButton update="showSocio" oncomplete="PF('dlgShowSocio').show()" icon="fa-eye" title="Ver"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
+                                    <f:setPropertyActionListener value="#{soc}" target="#{sociosBean.selectedSocio}" />
+                                </p:commandButton> 
+                                <p:commandButton icon="fa-pencil" title="Editar"
+                                                 action="#{sociosBean.editSocioRequestPageAction()}"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
+                                    <f:setPropertyActionListener value="#{soc}" target="#{sociosBean.selectedSocio}" />
+                                </p:commandButton> 
+                            </p:column>
+                        </p:dataTable>
                     </div>
                 </section>
+
+                <section id="planes" class="call-to-action full-height" style="background-color: #f5f5f5;">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Administrar <strong>Planes</strong></h2>
+                            <div class="colored-line wow fadeInLeftBig"></div>
+                            <div class="sub-heading"></div>					
+                        </div>
+
+                        <p:commandButton class="success call-button" value="Añadir" icon="fa fa-bank"
+                                         ajax="true" actionListener="#{sociosBean.resetAddPlan}" 
+                                         update="dialogs"
+                                         oncomplete="PF('dlgAddPlan').show();"/>                        
+
+                        <br/><br/>
+
+                        <p:dataTable var="plan" value="#{sociosBean.planList}" rows="10"
+                                     paginator="true"  reflow="true" editable="false"
+                                     sortMode="multiple" widgetVar="planesTable"
+                                     selectionMode="single" selection="#{sociosBean.selectedPlan}" rowKey="#{plan.plnId}"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15" 
+                                     class="wow fadeIn" pt:data-wow-delay="0.5s"
+                                     >
+                            <f:facet name="emptyMessage">
+                                <h2 class="text-light">Ningún Plan</h2>
+                            </f:facet>
+                            <f:facet name="header">
+
+                                <div class="align-center pos-rel">
+                                    <span class="fa fa-list-ol" style="position: absolute; left: 5px;font-weight: 300;">&nbsp; #{sociosBean.planList.size()}</span>
+                                    Planes                                    
+                                </div>
+
+
+
+                            </f:facet>
+                            <p:column headerText="Id" sortBy="#{plan.plnId}" filterBy="#{plan.plnId}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{plan.plnId}" />
+                            </p:column>
+
+                            <p:column headerText="Nombre" sortBy="#{plan.plnNombre}" filterBy="#{plan.plnNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{plan.plnNombre}" />
+                            </p:column>
+
+                            <p:column headerText="Costo" sortBy="#{plan.plnCosto}" filterBy="#{plan.plnCosto}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="$#{plan.plnCosto}" />
+                            </p:column>
+
+                            <p:column headerText="Localidad" sortBy="#{plan.localidad.locNombre}" filterBy="#{plan.localidad.locNombre}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{plan.localidad.locNombre}" />
+                            </p:column>
+
+
+                            <p:column headerText="Acciones" class="align-center">
+                                <p:commandButton update="dialogs" oncomplete="PF('dlgEditPlan').show()" icon="fa-pencil" title="Editar"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
+                                    <f:setPropertyActionListener value="#{plan}" target="#{sociosBean.selectedPlan}" />
+                                </p:commandButton>                                
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                </section>
+            </h:form>
+        </ui:define>
+        <ui:define name="dialogs">
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Añadir Plan" widgetVar="dlgAddPlan" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="grid">
+                        <div class="row"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="locId">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Localidad                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="locId" value="#{sociosBean.selectedPlan.localidad.locId}">
+                                        <f:selectItems value="#{sociosBean.localidadlList}" var="loc" itemLabel="#{loc.locNombre}" itemValue="#{loc.locId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row">                            
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="plnNombre">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombre                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="plnNombre" value="#{sociosBean.selectedPlan.plnNombre}"
+                                                 required="true" validatorMessage="Nombre inválido"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+                            </div>                            
+                        </div>
+
+                        <div class="row">
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="plnCosto">
+                                        <span class="fa fg-gray fa-calendar"></span>
+                                        Precio                                        
+                                    </p:outputLabel>
+                                    <p:spinner id="plnCosto" min="0" max="1000" stepFactor="0.25"
+                                               value="#{sociosBean.selectedPlan.plnCosto}" validatorMessage="xxx"/>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="addPlanButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{sociosBean.addPlanAction()}"
+                                                 oncomplete="$(PF('addPlanButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('addPlanButton')).prop('disabled', true);"
+                                                 onerror="$(PF('addPlanButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog> 
+            </h:form>
+
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Editar Plan" widgetVar="dlgEditPlan" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+
+                    <div class="grid">
+                        <div class="row"> 
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="locId2">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Localidad                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu id="locId2" value="#{sociosBean.selectedPlan.localidad.locId}">
+                                        <f:selectItems value="#{sociosBean.localidadlList}" var="loc" itemLabel="#{loc.locNombre}" itemValue="#{loc.locId}" />
+                                    </p:selectOneMenu> 
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row">                            
+                            <div class="cell">                                                             
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="plnNombre2">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombre                                        
+                                    </p:outputLabel>
+                                    <p:inputText id="plnNombre2" value="#{sociosBean.selectedPlan.plnNombre}"
+                                                 required="true" validatorMessage="Nombre inválido"/> 
+                                </div>
+                                <br/>
+                                <br/>                                                                
+                            </div>                            
+                        </div>
+
+                        <div class="row">
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="plnCosto2">
+                                        <span class="fa fg-gray fa-calendar"></span>
+                                        Precio                                        
+                                    </p:outputLabel>
+                                    <p:spinner id="plnCosto2" min="0" max="1000" stepFactor="0.25"
+                                               value="#{sociosBean.selectedPlan.plnCosto}" validatorMessage="xxx"/>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton widgetVar="editPlanButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                 validateClient="true" action="#{sociosBean.editPlanAction()}"
+                                                 oncomplete="$(PF('editPlanButton')).prop('disabled', false);"                                                                                                  
+                                                 onstart="$(PF('editPlanButton')).prop('disabled', true);"
+                                                 onerror="$(PF('editPlanButton')).prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog> 
+            </h:form>
+
+            <h:form id="showSocio" >
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Ver Socio" widgetVar="dlgShowSocio" modal="true" hideEffect="fade" showEffect="fade"
+                          style="max-height: 100%;overflow: auto;"
+                          closeOnEscape="true">
+
+
+
+                    <div class="grid" style="max-width: 600px;margin: auto;">
+                        <div class="row cells2"> 
+                            <div class="cell">                                                             
+                                <div class="input-control">
+                                    <p:outputLabel for="socNombre">
+                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                        Nombres                                        
+                                    </p:outputLabel>
+                                    <p:inputText readonly="true" id="socNombre" value="#{sociosBean.selectedSocio.socNombre}"
+                                                 placeholder="nombre" requiredMessage="Nombres requeridos"
+                                                 required="true" validatorMessage="Nombres inválidos"/> 
+                                </div>
+                                <br/>
+                                <br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="socApellido">
+                                        <span class="fa fg-gray fa-bookmark"></span>
+                                        Apellidos                                        
+                                    </p:outputLabel>
+                                    <p:inputText readonly="true" id="socApellido" value="#{sociosBean.selectedSocio.socApellido}"
+                                                 placeholder="Apellidos"
+                                                 required="true" validatorMessage="Apellidos inválidos"/>
+                                </div>
+                                <br/><br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="socFechaNac">
+                                        <span class="fa fg-gray fa-calendar"></span>
+                                        nacimiento                                        
+                                    </p:outputLabel>
+                                    <p:calendar readonly="true" id="socFechaNac" navigator="true" placeholder="Fecha Nacimiento"
+                                                validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                mask="true" pattern="dd-MM-yyyy"
+                                                value="#{sociosBean.selectedSocio.socFechaNac}"/>
+                                </div>
+                                <br/><br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="socGenero">
+                                        <span class="fa fg-gray fa-venus-mars"></span>
+                                        Género                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu editable="false" id="socGenero" value="#{sociosBean.selectedSocio.socGenero}" 
+                                                     required="true" requiredMessage="Seleccione Género" >
+
+                                        <f:selectItem itemLabel="Seleccionar" itemValue="-1" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="Masculino" itemValue="0" />
+                                        <f:selectItem itemLabel="Femenino" itemValue="1" />
+                                    </p:selectOneMenu>
+                                </div>
+                                <br/><br/>
+                            </div>
+
+                            <div class="cell"> 
+                                <div class="input-control">
+                                    <p:outputLabel for="socTipoSangre">
+                                        <span class="fa fg-gray fa-diamond"></span>
+                                        Tipo Sangre                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu editable="false" id="socTipoSangre" value="#{sociosBean.selectedSocio.socTipoSangre}" style="width:125px"
+                                                     required="true" requiredMessage="Seleccione Tipo de Sangre">
+                                        <f:selectItem itemLabel="Seleccionar" itemValue="" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="ORH+" itemValue="ORH+" />
+                                        <f:selectItem itemLabel="ORH-" itemValue="ORH-" />
+                                    </p:selectOneMenu>
+                                </div>
+                                <br/><br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="socNumHijos">
+                                        <span class="fa fg-gray fa-child"></span>
+                                        Número Hijos                
+                                    </p:outputLabel> 
+                                    <p:spinner readonly="true" id="socNumHijos" min="0" max="100" required="true"
+                                               requiredMessage="Ingrese número de hijos"
+                                               value="#{sociosBean.selectedSocio.socNumHijos}" validatorMessage="Hijos"/>
+                                </div>
+                                <br/><br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="socPais">
+                                        <span class="fa fg-gray fa-globe"></span>
+                                        Pais                                      
+                                    </p:outputLabel>
+                                    <p:selectOneMenu editable="false" id="socPais" value="#{sociosBean.selectedSocio.ciudad.pais.paiId}" style="width:125px"
+                                                     filter="true" filterMatchMode="startsWith"
+                                                     required="true" requiredMessage="Seleccione País">          
+                                        <f:selectItem itemLabel="Seleccionar Pais" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{sociosBean.paislList}" var="pais" itemLabel="#{pais.paiNombre}" itemValue="#{pais.paiId}" />
+                                        <p:ajax listener="#{sociosBean.onPaisChange}" update="socCiudad"/>
+                                    </p:selectOneMenu>
+                                </div>
+                                <br/><br/>
+
+                                <div class="input-control">
+                                    <p:outputLabel for="socCiudad">
+                                        <span class="fa fg-gray fa-map"></span>
+                                        Ciudad                                        
+                                    </p:outputLabel>
+                                    <p:selectOneMenu editable="false" id="socCiudad" value="#{sociosBean.selectedSocio.ciudad.ciuId}" style="width:125px"
+                                                     filter="true" filterMatchMode="startsWith"
+                                                     required="true" requiredMessage="Seleccione Ciudad"> 
+                                        <f:selectItem itemLabel="Seleccionar Ciudad" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{sociosBean.ciudadlList}" var="ciudad" itemLabel="#{ciudad.ciuNombre}" itemValue="#{ciudad.ciuId}" />
+                                    </p:selectOneMenu>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row cells2"> 
+                            <div class="cell">                                                
+                                <div class="input-control">
+                                    <p:outputLabel for="socTelefono">
+                                        <span class="fa fg-gray fa-phone"></span>
+                                        Teléfono                                        
+                                    </p:outputLabel>
+                                    <p:inputMask readonly="true" id="socTelefono" required="true" mask="" validatorMessage="Teléfono Inválido" 
+                                                 requiredMessage="Ingrese Teléfono"
+                                                 value="#{sociosBean.selectedSocio.socTelefono}"/>
+                                </div>
+                                <br/><br/>
+
+                            </div>
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="socCelular">
+                                        <span class="fa fg-gray fa-mobile-phone"></span>
+                                        Celular                                        
+                                    </p:outputLabel>
+                                    <p:inputMask readonly="true" id="socCelular" required="true" validatorMessage="Celular inválido" mask="" 
+                                                 requiredMessage="Ingrese Celular"
+                                                 value="#{sociosBean.selectedSocio.socCelular}"/>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row cells2">
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="usrCi">
+                                        <span class="fa fg-gray fa-credit-card"></span>
+                                        Cédula                                        
+                                    </p:outputLabel>
+                                    <p:inputText readonly="true" id="usrCi" value="#{sociosBean.selectedSocio.usuario.usrCi}"
+                                                 required="true" validatorMessage="Cédula inválidos">
+                                        <f:validator validatorId="custom.cedulaValidator"/>
+                                    </p:inputText>
+                                </div>
+                                <br/><br/>
+                            </div>
+
+                            <div class="cell">
+                                <div class="input-control">
+                                    <p:outputLabel for="usrEmail">
+                                        <span class="fa fg-gray fa-envelope"></span>
+                                        Email                                        
+                                    </p:outputLabel>
+                                    <p:inputText readonly="true" id="usrEmail" value="#{sociosBean.selectedSocio.usuario.usrEmail}"
+                                                 required="true" type="email" validatorMessage="Email inválidos">
+                                        <p:clientValidator event="keyup"/>
+                                        <f:validateRegex pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)"/>
+                                    </p:inputText>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+                        <div class="row cells2">
+                            <div class="cell">
+                                <div class="input-control full-sizel">
+                                    <p:outputLabel for="socDireccion">
+                                        <span class="fa fg-gray fa-map-marker"></span>
+                                        Dirección                                        
+                                    </p:outputLabel>
+                                    <p:inputText readonly="true" id="socDireccion" value="#{sociosBean.selectedSocio.socDireccion}"
+                                                 required="true" requiredMessage="Ingrese Dirección"/>
+                                </div>
+                                <br/>
+                                <br/>
+                            </div> 
+
+                            <div class="cell">
+                                <div class="input-control full-size">
+                                    <p:outputLabel for="socTrabaja">
+                                        <span class="fa fg-gray fa-briefcase"></span>
+                                        Trabaja                                        
+                                    </p:outputLabel>
+                                    <p:inputSwitch onLabel="On" offLabel="Off" id="socTrabaja" 
+                                                   value="#{sociosBean.selectedSocio.socTrabaja}"/>                                   
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+
+
+
+                        <br/>
+                        <hr class="thin bg-gray"/>
+                        <br/>
+
+                        <div class="row">
+                            <div class="ptp-pricing-table">
+
+                                <div class="ptp-col planx ptp-highlight" style="width: 100%;">
+                                    <div class="ptp-most-popular">Seleccionado</div>
+                                    <div class="ptp-item-container">
+                                        <div class="ptp-plan" style="height: 55px;">
+                                            #{sociosBean.selectedSocio.plan.plnNombre}
+                                        </div> 
+                                        <div class="ptp-price" style="height: 70px;">
+                                            $#{sociosBean.selectedSocio.plan.plnCosto}/año
+                                        </div>                                                                                                                
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <br/>                                            
+                        </div>
+
+                        <br/>
+                        <hr class="thin bg-gray"/>
+                        <br/>
+
+                        <div class="row">
+                            <div class="Card pago shadow" style="width: 100%;margin: 0;">
+                                <div class="wrapper">
+                                    <div class="icon-wrap">
+                                        <i class="fa fa-credit-card fg-yellow Fs100"></i>
+                                    </div>
+                                    <p></p>
+                                    <span class="fg-gray Fs20 text-light">
+                                        #{sociosBean.selectedSocio.formaPago.frmPagNombre}
+                                    </span>
+                                    <br/>
+                                    <span class="fg-yellow Fs30 bold">$
+                                        <h:outputText value="#{sociosBean.selectedSocio.plan.plnCosto*(1+sociosBean.selectedSocio.formaPago.frmPagPorcentaje/100)}">
+                                            <f:convertNumber pattern="#0.00"/>
+                                        </h:outputText>
+                                    </span>
+                                </div>                                                
+                            </div>
+                            <br/>
+                            <br/>
+
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+
+
+                </p:dialog>
             </h:form>
         </ui:define>
     </ui:composition>

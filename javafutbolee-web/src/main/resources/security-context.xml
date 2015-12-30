@@ -17,6 +17,7 @@
         <sec:intercept-url pattern="/faces/views/s/adminFuncionarios/**" access="hasAuthority('ROLE_ADMIN')"/>  
         
         
+        <sec:intercept-url pattern="/faces/views/s/adminSocios/facturaAfiliacion.xhtml" access="permitAll"/>  
         <sec:intercept-url pattern="/faces/views/s/adminSocios/registrarSocio.xhtml" access="permitAll"/>        
         <sec:intercept-url pattern="/faces/views/s/adminSocios/editarSocio.xhtml" access="hasAnyAuthority('ROLE_ADMIN','ROLE_SOCIO','ROLE_ADMIN_SOCIO')"/>
         <sec:intercept-url pattern="/faces/views/s/adminSocios/**" access="hasAuthority('ROLE_ADMIN_SOCIO')" />        

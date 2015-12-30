@@ -13,7 +13,9 @@
         </ui:define>
 
         <ui:define name="backLink">
-            <a href="#{facesContext.externalContext.requestContextPath}/faces/views/s/home.xhtml" class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</a>
+            <p:commandLink action="#{editarSocioBean.getReturnPage()}" 
+                           title="#{editarSocioBean.returnPage}"
+                           class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</p:commandLink>
         </ui:define>
         <ui:define name="menuitem">
 
@@ -30,9 +32,223 @@
                             <div class="colored-line wow fadeInLeftBig"></div>
                             <div class="sub-heading"></div>					
                         </div>
-                        
+
                         <!--TODO Editar socio, si soy socio regresar a home, caso contrario regresar a adminSocio -->
                         TODO Editar socio, si soy socio regresar a home, caso contrario regresar a adminSocio
+
+                        <div class="grid" style="max-width: 600px;margin: auto;">
+                            <div class="row cells2"> 
+                                <div class="cell">                                                             
+                                    <div class="input-control">
+                                        <p:outputLabel for="socNombre">
+                                            <span class="fa fg-gray fa-bookmark-o"></span>
+                                            Nombres                                        
+                                        </p:outputLabel>
+                                        <p:inputText id="socNombre" value="#{editarSocioBean.selectedSocio.socNombre}"
+                                                     placeholder="nombre" requiredMessage="Nombres requeridos"
+                                                     required="true" validatorMessage="Nombres inválidos"/> 
+                                    </div>
+                                    <br/>
+                                    <br/>
+
+                                    <div class="input-control">
+                                        <p:outputLabel for="socApellido">
+                                            <span class="fa fg-gray fa-bookmark"></span>
+                                            Apellidos                                        
+                                        </p:outputLabel>
+                                        <p:inputText id="socApellido" value="#{editarSocioBean.selectedSocio.socApellido}"
+                                                     placeholder="Apellidos"
+                                                     required="true" validatorMessage="Apellidos inválidos"/>
+                                    </div>
+                                    <br/><br/>
+
+                                    <div class="input-control">
+                                        <p:outputLabel for="socFechaNac">
+                                            <span class="fa fg-gray fa-calendar"></span>
+                                            nacimiento                                        
+                                        </p:outputLabel>
+                                        <p:calendar id="socFechaNac" navigator="true" placeholder="Fecha Nacimiento"
+                                                    validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                    mask="true" pattern="dd-MM-yyyy"
+                                                    value="#{editarSocioBean.selectedSocio.socFechaNac}"/>
+                                    </div>
+                                    <br/><br/>
+
+                                    <div class="input-control">
+                                        <p:outputLabel for="socGenero">
+                                            <span class="fa fg-gray fa-venus-mars"></span>
+                                            Género                                        
+                                        </p:outputLabel>
+                                        <p:selectOneMenu id="socGenero" value="#{editarSocioBean.selectedSocio.socGenero}" 
+                                                         required="true" requiredMessage="Seleccione Género" >
+
+                                            <f:selectItem itemLabel="Seleccionar" itemValue="-1" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="Masculino" itemValue="0" />
+                                            <f:selectItem itemLabel="Femenino" itemValue="1" />
+                                        </p:selectOneMenu>
+                                    </div>
+                                    <br/><br/>
+                                </div>
+
+                                <div class="cell"> 
+                                    <div class="input-control">
+                                        <p:outputLabel for="socTipoSangre">
+                                            <span class="fa fg-gray fa-diamond"></span>
+                                            Tipo Sangre                                        
+                                        </p:outputLabel>
+                                        <p:selectOneMenu id="socTipoSangre" value="#{editarSocioBean.selectedSocio.socTipoSangre}" style="width:125px"
+                                                         required="true" requiredMessage="Seleccione Tipo de Sangre">
+                                            <f:selectItem itemLabel="Seleccionar" itemValue="" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="ORH+" itemValue="ORH+" />
+                                            <f:selectItem itemLabel="ORH-" itemValue="ORH-" />
+                                        </p:selectOneMenu>
+                                    </div>
+                                    <br/><br/>
+
+                                    <div class="input-control">
+                                        <p:outputLabel for="socNumHijos">
+                                            <span class="fa fg-gray fa-child"></span>
+                                            Número Hijos                
+                                        </p:outputLabel> 
+                                        <p:spinner id="socNumHijos" min="0" max="100" required="true"
+                                                   requiredMessage="Ingrese número de hijos"
+                                                   value="#{editarSocioBean.selectedSocio.socNumHijos}" validatorMessage="Hijos"/>
+                                    </div>
+                                    <br/><br/>
+
+                                    <div class="input-control">
+                                        <p:outputLabel for="socPais">
+                                            <span class="fa fg-gray fa-globe"></span>
+                                            Pais                                      
+                                        </p:outputLabel>
+                                        <p:selectOneMenu id="socPais" value="#{editarSocioBean.selectedSocio.ciudad.pais.paiId}" style="width:125px"
+                                                         filter="true" filterMatchMode="startsWith"
+                                                         required="true" requiredMessage="Seleccione País">          
+                                            <f:selectItem itemLabel="Seleccionar Pais" itemValue="" noSelectionOption="true" />
+                                            <f:selectItems value="#{editarSocioBean.paislList}" var="pais" itemLabel="#{pais.paiNombre}" itemValue="#{pais.paiId}" />
+                                            <p:ajax listener="#{editarSocioBean.onPaisChange}" update="socCiudad"/>
+                                        </p:selectOneMenu>
+                                    </div>
+                                    <br/><br/>
+
+                                    <div class="input-control">
+                                        <p:outputLabel for="socCiudad">
+                                            <span class="fa fg-gray fa-map"></span>
+                                            Ciudad                                        
+                                        </p:outputLabel>
+                                        <p:selectOneMenu id="socCiudad" value="#{editarSocioBean.selectedSocio.ciudad.ciuId}" style="width:125px"
+                                                         filter="true" filterMatchMode="startsWith"
+                                                         required="true" requiredMessage="Seleccione Ciudad"> 
+                                            <f:selectItem itemLabel="Seleccionar Ciudad" itemValue="" noSelectionOption="true" />
+                                            <f:selectItems value="#{editarSocioBean.ciudadlList}" var="ciudad" itemLabel="#{ciudad.ciuNombre}" itemValue="#{ciudad.ciuId}" />
+                                        </p:selectOneMenu>
+                                    </div>
+                                    <br/><br/>
+                                </div>
+                            </div>
+
+                            <div class="row cells2"> 
+                                <div class="cell">                                                
+                                    <div class="input-control">
+                                        <p:outputLabel for="socTelefono">
+                                            <span class="fa fg-gray fa-phone"></span>
+                                            Teléfono                                        
+                                        </p:outputLabel>
+                                        <p:inputMask id="socTelefono" required="true" mask="" validatorMessage="Teléfono Inválido" 
+                                                     requiredMessage="Ingrese Teléfono"
+                                                     value="#{editarSocioBean.selectedSocio.socTelefono}"/>
+                                    </div>
+                                    <br/><br/>
+
+                                </div>
+                                <div class="cell">
+                                    <div class="input-control">
+                                        <p:outputLabel for="socCelular">
+                                            <span class="fa fg-gray fa-mobile-phone"></span>
+                                            Celular                                        
+                                        </p:outputLabel>
+                                        <p:inputMask id="socCelular" required="true" validatorMessage="Celular inválido" mask="" 
+                                                     requiredMessage="Ingrese Celular"
+                                                     value="#{editarSocioBean.selectedSocio.socCelular}"/>
+                                    </div>
+                                    <br/><br/>
+                                </div>
+                            </div>
+
+                            <div class="row cells2">
+                                <div class="cell">
+                                    <div class="input-control">
+                                        <p:outputLabel for="usrCi">
+                                            <span class="fa fg-gray fa-credit-card"></span>
+                                            Cédula                                        
+                                        </p:outputLabel>
+                                        <p:inputText id="usrCi" value="#{editarSocioBean.selectedSocio.usuario.usrCi}"
+                                                     required="true" validatorMessage="Cédula inválidos">
+                                            <f:validator validatorId="custom.cedulaValidator"/>
+                                        </p:inputText>
+                                    </div>
+                                    <br/><br/>
+                                </div>
+
+                                <div class="cell">
+                                    <div class="input-control">
+                                        <p:outputLabel for="usrEmail">
+                                            <span class="fa fg-gray fa-envelope"></span>
+                                            Email                                        
+                                        </p:outputLabel>
+                                        <p:inputText id="usrEmail" value="#{editarSocioBean.selectedSocio.usuario.usrEmail}"
+                                                     required="true" type="email" validatorMessage="Email inválidos">
+                                            <p:clientValidator event="keyup"/>
+                                            <f:validateRegex pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)"/>
+                                        </p:inputText>
+                                    </div>
+                                    <br/><br/>
+                                </div>
+                            </div>
+
+                            <div class="row cells2">
+                                <div class="cell">
+                                    <div class="input-control full-sizel">
+                                        <p:outputLabel for="socDireccion">
+                                            <span class="fa fg-gray fa-map-marker"></span>
+                                            Dirección                                        
+                                        </p:outputLabel>
+                                        <p:inputText id="socDireccion" value="#{editarSocioBean.selectedSocio.socDireccion}"
+                                                     required="true" requiredMessage="Ingrese Dirección"/>
+                                    </div>
+                                    <br/>
+                                    <br/>
+                                </div> 
+
+                                <div class="cell">
+                                    <div class="input-control full-size">
+                                        <p:outputLabel for="socTrabaja">
+                                            <span class="fa fg-gray fa-briefcase"></span>
+                                            Trabaja                                        
+                                        </p:outputLabel>
+                                        <p:inputSwitch onLabel="On" offLabel="Off" id="socTrabaja" 
+                                                       value="#{editarSocioBean.selectedSocio.socTrabaja}"/>                                   
+                                    </div>
+                                    <br/><br/>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="cell align-right">
+                                    <p:commandButton widgetVar="editSocioButton" class="primary" value="Guardar" icon="fa fa-check"  
+                                                     validateClient="true" action="#{editarSocioBean.editSocioAction()}"
+                                                     oncomplete="PF('editSocioButton').jq.prop('disabled', false);" 
+                                                     onclick="PF('editSocioButton').jq.prop('disabled', true);"                                                     
+                                                     onerror="PF('editSocioButton').jq.prop('disabled', false);" 
+                                                     update="content,dialogs"
+                                                     />
+                                </div>
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </section>
             </h:form>

@@ -2,25 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:pt="http://java.sun.com/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="/templates/standAloneTemplate.xhtml">
 
 
         <ui:define name="title">
-            JavaFutbolEE|Registrar Socios
+            JavaFutbolEE | Registrar Socios
         </ui:define>
 
         <ui:define name="backLink">
-            <a href="#{facesContext.externalContext.requestContextPath}/faces/views/s/home.xhtml" class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</a>
+            <p:commandLink action="#{sociosBean.getReturnPage()}" 
+                           title="#{sociosBean.returnPage}"
+                           class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</p:commandLink>
         </ui:define>
         <ui:define name="menuitem">
+            <span></span>
 
         </ui:define>
 
         <ui:define name="content">
-            <h:form id="form3">
+            <h:form>
                 <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
 
                 <section id="temporadas" class="call-to-action full-height" style="background-color: #f5f5f5;">
@@ -33,44 +37,520 @@
 
                         <!--TODO Registrar socio, si soy socio regresar a home, caso contrario regresar a adminSocio -->
                         TODO Registrar socio, si soy socio regresar a home, caso contrario regresar a adminSocio
-
-                        <p:wizard>
+                        <p:wizard >
                             <p:tab title="Datos Personales">
                                 <p:panel header="Datos Personales">
                                     <p:messages />
+                                    <br/>
+                                    <br/>
+                                    <div class="grid" style="max-width: 600px;margin: auto;">
+                                        <div class="row cells2"> 
+                                            <div class="cell">                                                             
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socNombre">
+                                                        <span class="fa fg-gray fa-bookmark-o"></span>
+                                                        Nombres                                        
+                                                    </p:outputLabel>
+                                                    <p:inputText id="socNombre" value="#{sociosBean.selectedSocio.socNombre}"
+                                                                 placeholder="nombre" requiredMessage="Nombres requeridos"
+                                                                 required="true" validatorMessage="Nombres inválidos"/> 
+                                                </div>
+                                                <br/>
+                                                <br/>
 
-                                    <br/>nombre 
-                                    <br/>apellido
-                                    <br/>genero
-                                    <br/>fecha nacimeiento
-                                    <br/>sangre
-                                    <br/>num hijos
-                                    <br/>pais/ciudad
-                                    <br/>pais/ciudad
-                                    <br/>direccion
-                                    <br/>trabaja?
-                                    <br/>telefono
-                                    <br/>celular
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socApellido">
+                                                        <span class="fa fg-gray fa-bookmark"></span>
+                                                        Apellidos                                        
+                                                    </p:outputLabel>
+                                                    <p:inputText id="socApellido" value="#{sociosBean.selectedSocio.socApellido}"
+                                                                 placeholder="Apellidos"
+                                                                 required="true" validatorMessage="Apellidos inválidos"/>
+                                                </div>
+                                                <br/><br/>
+
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socFechaNac">
+                                                        <span class="fa fg-gray fa-calendar"></span>
+                                                        nacimiento                                        
+                                                    </p:outputLabel>
+                                                    <p:calendar id="socFechaNac" navigator="true" placeholder="Fecha Nacimiento"
+                                                                validatorMessage="Fecha Nacimiento Inválida" required="true"
+                                                                mask="true" pattern="dd-MM-yyyy"
+                                                                value="#{sociosBean.selectedSocio.socFechaNac}"/>
+                                                </div>
+                                                <br/><br/>
+
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socGenero">
+                                                        <span class="fa fg-gray fa-venus-mars"></span>
+                                                        Género                                        
+                                                    </p:outputLabel>
+                                                    <p:selectOneMenu id="socGenero" value="#{sociosBean.selectedSocio.socGenero}" 
+                                                                     required="true" requiredMessage="Seleccione Género" >
+
+                                                        <f:selectItem itemLabel="Seleccionar" itemValue="-1" noSelectionOption="true" />
+                                                        <f:selectItem itemLabel="Masculino" itemValue="0" />
+                                                        <f:selectItem itemLabel="Femenino" itemValue="1" />
+                                                    </p:selectOneMenu>
+                                                </div>
+                                                <br/><br/>
+                                            </div>
+
+                                            <div class="cell"> 
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socTipoSangre">
+                                                        <span class="fa fg-gray fa-diamond"></span>
+                                                        Tipo Sangre                                        
+                                                    </p:outputLabel>
+                                                    <p:selectOneMenu id="socTipoSangre" value="#{sociosBean.selectedSocio.socTipoSangre}" style="width:125px"
+                                                                     required="true" requiredMessage="Seleccione Tipo de Sangre">
+                                                        <f:selectItem itemLabel="Seleccionar" itemValue="" noSelectionOption="true" />
+                                                        <f:selectItem itemLabel="ORH+" itemValue="ORH+" />
+                                                        <f:selectItem itemLabel="ORH-" itemValue="ORH-" />
+                                                    </p:selectOneMenu>
+                                                </div>
+                                                <br/><br/>
+
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socNumHijos">
+                                                        <span class="fa fg-gray fa-child"></span>
+                                                        Número Hijos                
+                                                    </p:outputLabel> 
+                                                    <p:spinner id="socNumHijos" min="0" max="100" required="true"
+                                                               requiredMessage="Ingrese número de hijos"
+                                                               value="#{sociosBean.selectedSocio.socNumHijos}" validatorMessage="Hijos"/>
+                                                </div>
+                                                <br/><br/>
+
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socPais">
+                                                        <span class="fa fg-gray fa-globe"></span>
+                                                        Pais                                      
+                                                    </p:outputLabel>
+                                                    <p:selectOneMenu id="socPais" value="#{sociosBean.selectedSocio.ciudad.pais.paiId}" style="width:125px"
+                                                                     filter="true" filterMatchMode="startsWith"
+                                                                     required="true" requiredMessage="Seleccione País">          
+                                                        <f:selectItem itemLabel="Seleccionar Pais" itemValue="" noSelectionOption="true" />
+                                                        <f:selectItems value="#{sociosBean.paislList}" var="pais" itemLabel="#{pais.paiNombre}" itemValue="#{pais.paiId}" />
+                                                        <p:ajax listener="#{sociosBean.onPaisChange}" update="socCiudad"/>
+                                                    </p:selectOneMenu>
+                                                </div>
+                                                <br/><br/>
+
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socCiudad">
+                                                        <span class="fa fg-gray fa-map"></span>
+                                                        Ciudad                                        
+                                                    </p:outputLabel>
+                                                    <p:selectOneMenu id="socCiudad" value="#{sociosBean.selectedSocio.ciudad.ciuId}" style="width:125px"
+                                                                     filter="true" filterMatchMode="startsWith"
+                                                                     required="true" requiredMessage="Seleccione Ciudad"> 
+                                                        <f:selectItem itemLabel="Seleccionar Ciudad" itemValue="" noSelectionOption="true" />
+                                                        <f:selectItems value="#{sociosBean.ciudadlList}" var="ciudad" itemLabel="#{ciudad.ciuNombre}" itemValue="#{ciudad.ciuId}" />
+                                                    </p:selectOneMenu>
+                                                </div>
+                                                <br/><br/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row cells2"> 
+                                            <div class="cell">                                                
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socTelefono">
+                                                        <span class="fa fg-gray fa-phone"></span>
+                                                        Teléfono                                        
+                                                    </p:outputLabel>
+                                                    <p:inputMask id="socTelefono" required="true" mask="" validatorMessage="Teléfono Inválido" 
+                                                                 requiredMessage="Ingrese Teléfono"
+                                                                 value="#{sociosBean.selectedSocio.socTelefono}"/>
+                                                </div>
+                                                <br/><br/>
+
+                                            </div>
+                                            <div class="cell">
+                                                <div class="input-control">
+                                                    <p:outputLabel for="socCelular">
+                                                        <span class="fa fg-gray fa-mobile-phone"></span>
+                                                        Celular                                        
+                                                    </p:outputLabel>
+                                                    <p:inputMask id="socCelular" required="true" validatorMessage="Celular inválido" mask="" 
+                                                                 requiredMessage="Ingrese Celular"
+                                                                 value="#{sociosBean.selectedSocio.socCelular}"/>
+                                                </div>
+                                                <br/><br/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row cells2">
+                                            <div class="cell">
+                                                <div class="input-control">
+                                                    <p:outputLabel for="usrCi">
+                                                        <span class="fa fg-gray fa-credit-card"></span>
+                                                        Cédula                                        
+                                                    </p:outputLabel>
+                                                    <p:inputText id="usrCi" value="#{sociosBean.selectedSocio.usuario.usrCi}"
+                                                                 required="true" validatorMessage="Cédula inválidos">
+                                                        <f:validator validatorId="custom.cedulaValidator"/>
+                                                    </p:inputText>
+                                                </div>
+                                                <br/><br/>
+                                            </div>
+
+                                            <div class="cell">
+                                                <div class="input-control">
+                                                    <p:outputLabel for="usrEmail">
+                                                        <span class="fa fg-gray fa-envelope"></span>
+                                                        Email                                        
+                                                    </p:outputLabel>
+                                                    <p:inputText id="usrEmail" value="#{sociosBean.selectedSocio.usuario.usrEmail}"
+                                                                 required="true" type="email" validatorMessage="Email inválidos">
+                                                        <p:clientValidator event="keyup"/>
+                                                        <f:validateRegex pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)"/>
+                                                    </p:inputText>
+                                                </div>
+                                                <br/><br/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row cells2">
+                                            <div class="cell">
+                                                <div class="input-control full-sizel">
+                                                    <p:outputLabel for="socDireccion">
+                                                        <span class="fa fg-gray fa-map-marker"></span>
+                                                        Dirección                                        
+                                                    </p:outputLabel>
+                                                    <p:inputText id="socDireccion" value="#{sociosBean.selectedSocio.socDireccion}"
+                                                                 required="true" requiredMessage="Ingrese Dirección"/>
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                            </div> 
+
+                                            <div class="cell">
+                                                <div class="input-control full-size">
+                                                    <p:outputLabel for="socTrabaja">
+                                                        <span class="fa fg-gray fa-briefcase"></span>
+                                                        Trabaja                                        
+                                                    </p:outputLabel>
+                                                    <p:inputSwitch onLabel="On" offLabel="Off" id="socTrabaja" 
+                                                                   value="#{sociosBean.selectedSocio.socTrabaja}"/>                                   
+                                                </div>
+                                                <br/><br/>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row">
+
+                                        </div>
+                                    </div>
+
                                     <br/>
                                 </p:panel>
                             </p:tab>
                             <p:tab title="Planes">
                                 <p:panel header="Planes">
                                     <p:messages />
-                                    aqui mostrar planes y seleccionar
+                                    <br/><br/>
+                                    <div layout="block" id="pricing-table-1" class="ptp-pricing-table">
+                                        <h3 class="text-light">
+                                            Seleccione el Plan de su preferencia
+                                        </h3>
+                                        <p:inputText required="true" requiredMessage="Seleccione Plan" 
+                                                     value="#{sociosBean.selectedSocio.plan.plnId}" 
+                                                     class="pricing-table-target-id no-display"/>
+                                        <p:inputText value="#{sociosBean.selectedPrecio}" immediate="true"
+                                                     class="pricing-table-target-costo no-display"/>
+                                        <c:forEach var="plan" items="#{sociosBean.planList}">
+                                            <div class="ptp-col ptp-five-col planx" id="plan-#{plan.plnId}">
+                                                <div class="ptp-most-popular">Seleccionado</div>
+                                                <div class="ptp-item-container">
+                                                    <div class="ptp-plan" style="height: 55px;">
+                                                        #{plan.plnNombre}
+                                                    </div> 
+                                                    <div class="ptp-price" style="height: 70px;">
+                                                        $#{plan.plnCosto}/año
+                                                    </div>
+                                                    <div class="ptp-bullet-item" style="height: 49px;">
+                                                        1 Socio
+                                                    </div>
+                                                    <div class="ptp-bullet-item" style="height: 49px;">
+                                                        #{plan.localidad.locNombre}
+                                                    </div>
+                                                    <div class="ptp-bullet-item" style="height: 49px;">
+                                                        #{plan.localidad.locaCapacidad} asientos
+                                                    </div>                                                
+                                                    <div class="ptp-cta" style="height: 89px;">
+                                                        <p:commandButton value="Seleccionar" class="pricing-table-button"
+                                                                         pt:data-plan-id="#{plan.plnId}"   
+                                                                         pt:data-plan-costo="#{plan.plnCosto}"   
+                                                                         onclick="return false;"
+                                                                         onstart="return false;"
+                                                                         ></p:commandButton>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                        <script type="text/javascript">
+                                            $(function () {
+                                                var planButton = $('#pricing-table-1 .pricing-table-button');
+                                                var target_id = $('#pricing-table-1 .pricing-table-target-id');
+                                                if (target_id.val()) {
+                                                    var plan = $('#plan-' + target_id.val());
+                                                    $('#pricing-table-1 .planx').removeClass('ptp-highlight');
+                                                    plan.addClass('ptp-highlight');
+                                                }
+
+                                                planButton.on("click.pricingTable", function (e) {
+                                                    var $this = $(this);
+                                                    var planes = $('#pricing-table-1 .planx');
+                                                    var planId = $this.data('planId');
+                                                    var plan = $('#plan-' + planId);
+                                                    var target_id = $('#pricing-table-1 .pricing-table-target-id');
+                                                    var target_val = $('#pricing-table-1 .pricing-table-target-costo');
+
+                                                    planes.removeClass('ptp-highlight');
+                                                    plan.addClass('ptp-highlight');
+                                                    target_id.val(planId);
+                                                    target_val.val($this.data('planCosto'));
+
+                                                    return false;
+
+                                                });
+
+
+
+
+                                            });
+
+                                        </script>
+                                    </div>
                                 </p:panel>
                             </p:tab>
                             <p:tab title="Forma de Pago">
                                 <p:panel header="Forma de Pago">
                                     <p:messages />
-                                    aqui metodos de pago, y seleccionar q metodo de pago.
+                                    <br/>
+                                    <br/>
+                                    <div class="grid" style="max-width: 720px;margin: auto;">
+                                        <div class="row" id="forma-pago-1">
+                                            <h3 class="text-light">
+                                                Seleccione Forma de Pago de su preferencia | $#{sociosBean.selectedPrecio}
+                                            </h3>
+                                            <p:inputText required="true" requiredMessage="Seleccione Forma de Pago" 
+                                                         value="#{sociosBean.selectedSocio.formaPago.frmPagId}" 
+                                                         class="forma-pago-target-id no-display"/>
+                                            <p:inputText value="#{sociosBean.selectedPago}" immediate="true"
+                                                         class="forma-pago-target-costo no-display"/>
+                                            <c:forEach var="pago" items="#{sociosBean.formaPagolList}">
+                                                <div class="Card pago shadow" style="max-width: 350px;width:350px;" id="pago-#{pago.frmPagId}"
+                                                     data-pago-id="#{pago.frmPagId}" 
+                                                     data-pago-costo="#{sociosBean.selectedPrecio*(1+pago.frmPagPorcentaje/100)}">
+                                                    <div class="wrapper">
+                                                        <div class="icon-wrap">
+                                                            <i class="fa fa-credit-card fg-yellow Fs100"></i>
+                                                        </div>
+                                                        <p></p>
+                                                        <span class="fg-gray Fs20 text-light">#{pago.frmPagNombre}</span><br/>
+                                                        <span class="fg-yellow Fs30 bold">$
+                                                            <h:outputText value="#{sociosBean.selectedPrecio*(1+pago.frmPagPorcentaje/100)}">
+                                                                <f:convertNumber pattern="#0.00"/>
+                                                            </h:outputText>
+                                                        </span>
+                                                    </div>
+                                                    <div class="CardFooter">
+                                                        <span class="fg-green place-left Fs18 ">#{pago.frmPagPorcentaje>=0?'+':'-'} #{pago.frmPagPorcentaje}%</span>
+                                                        <a href="#" onclick="javascript:void(0);" class="CardFooterBtn fg-gray border-left place-right fg-hover-red"><i class="fa fa-check"></i></a>                                                    
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                            <script type="text/javascript">
+                                                $(function () {
+                                                    var pagoButton = $('#forma-pago-1 .pago');
+                                                    var target_id = $('#forma-pago-1 .forma-pago-target-id');
+                                                    if (target_id.val()) {
+                                                        var pago = $('#pago-' + target_id.val());
+                                                        $('#forma-pago-1 .pago').removeClass('ptp-highlight');
+                                                        pago.addClass('ptp-highlight');
+                                                    }
+
+                                                    pagoButton.on("click.formaPago", function (e) {
+                                                        var $this = $(this);
+                                                        var planes = $('#forma-pago-1 .pago');
+                                                        var pagoId = $this.data('pagoId');
+                                                        var pago = $('#pago-' + pagoId);
+                                                        var target_id = $('#forma-pago-1 .forma-pago-target-id');
+                                                        var target_val = $('#forma-pago-1 .forma-pago-target-costo');
+
+                                                        planes.removeClass('ptp-highlight');
+                                                        pago.addClass('ptp-highlight');
+                                                        target_id.val(pagoId);
+                                                        target_val.val($this.data('pagoCosto'));
+
+                                                        return false;
+
+                                                    });
+
+
+
+
+                                                });
+
+                                            </script>
+
+                                        </div>
+                                    </div>
                                 </p:panel>
                             </p:tab>
                             <p:tab title="Confirmar Orden">
-                                <p:panel header="Forma de Pago">
+                                <p:panel header="Confirmar Orden">
                                     <p:messages />
-                                    aqui resumen y costo, total, tipo factura....
-                                    MOSTRAR CAPTCHA y checkbox de aceptar trminos y condiciones
+                                    <br/>
+                                    <br/>
+                                    <h3 class="text-light text-center">
+                                        Resumen <strong>Afiliación</strong>
+                                    </h3>
+                                    <div class="grid" style="max-width: 450px;margin: auto;">
+                                        <div class="row cells2">
+                                            <div class="cell">
+                                                <h4 class="no-margin"><small>Nombres</small></h4>
+                                                <h:outputText value="#{sociosBean.selectedSocio.socNombre}"/>
+                                                <br/>
+                                                <br/>
+
+                                                <h4 class="no-margin"><small>Apellidos</small></h4>
+                                                <h:outputText value="#{sociosBean.selectedSocio.socApellido}"/>
+                                                <br/>
+                                                <br/>
+                                            </div>
+                                            <div class="cell align-right">
+                                                <h4 class="no-margin"><small>CI</small></h4>
+                                                <h:outputText value="#{sociosBean.selectedSocio.usuario.usrCi}"/>
+                                                <br/>
+                                                <br/>
+
+                                                <h4 class="no-margin"><small>Email</small></h4>
+                                                <h:outputText value="#{sociosBean.selectedSocio.usuario.usrEmail}"/>
+                                                <br/>
+                                                <br/>
+                                            </div>
+                                        </div>
+
+                                        <br/>
+                                        <hr class="thin bg-gray"/>
+                                        <br/>
+
+                                        <div class="row">
+                                            <div class="ptp-pricing-table">
+
+                                                <div class="ptp-col planx ptp-highlight" style="width: 100%;">
+                                                    <div class="ptp-most-popular">Seleccionado</div>
+                                                    <div class="ptp-item-container">
+                                                        <div class="ptp-plan" style="height: 55px;">
+                                                            <p:selectOneMenu value="#{sociosBean.selectedSocio.plan.plnId}"
+                                                                             editable="false" style="width: 100%;">
+                                                                <f:selectItems var="planx" value="#{sociosBean.planList}" itemValue="#{planx.plnId}"
+                                                                               itemLabel="#{planx.plnNombre}"/>
+                                                            </p:selectOneMenu>
+                                                        </div> 
+                                                        <div class="ptp-price" style="height: 70px;">
+                                                            $#{sociosBean.selectedPrecio}/año
+                                                        </div>                                                                                                                
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <br/>                                            
+                                        </div>
+
+                                        <br/>
+                                        <hr class="thin bg-gray"/>
+                                        <br/>
+
+                                        <div class="row">
+                                            <div class="Card pago shadow" style="width: 100%;margin: 0;">
+                                                <div class="wrapper">
+                                                    <div class="icon-wrap">
+                                                        <i class="fa fa-credit-card fg-yellow Fs100"></i>
+                                                    </div>
+                                                    <p></p>
+                                                    <span class="fg-gray Fs20 text-light">
+                                                        <p:selectOneMenu value="#{sociosBean.selectedSocio.formaPago.frmPagId}"
+                                                                         editable="false">
+                                                            <f:selectItems var="pagox" value="#{sociosBean.formaPagolList}" itemValue="#{pagox.frmPagId}"
+                                                                           itemLabel="#{pagox.frmPagNombre}"/>
+                                                        </p:selectOneMenu>
+                                                    </span>
+                                                    <br/>
+                                                    <span class="fg-yellow Fs30 bold">$
+                                                        <h:outputText value="#{sociosBean.selectedPago}">
+                                                            <f:convertNumber pattern="#0.00"/>
+                                                        </h:outputText>
+                                                    </span>
+                                                </div>                                                
+                                            </div>
+                                            <br/>
+                                            <br/>
+
+                                        </div>
+                                        <br/>
+                                        <br/>
+
+
+                                        <div class="row">
+                                            <div class="input-control full-size">
+                                                <p:selectBooleanCheckbox id="ch3" style="float: left;margin-right: 10px;"
+                                                                         itemLabel="" widgetVar="aceptTerms"
+                                                                         required="true"
+                                                                         onchange="if ($(this).prop('checked')) {
+                                                                                     PF('addSocioButton').jq.fadeIn();
+                                                                                 } else {
+                                                                                     PF('addSocioButton').jq.fadeOut();
+                                                                                 }"
+                                                                         />          
+                                                <p:outputLabel value="Marque aquí para indicar que ha leído y acepta los términos del Acuerdo de Socios de Barcelona SC | SOC10S"
+                                                               style=""/>
+                                            </div>
+                                            <br/><br/>
+                                        </div>
+
+                                        <br/>
+                                        <hr class="thin bg-gray"/>
+                                        <br/>
+
+                                        <div class="row">
+                                            <p:captcha label="Captcha" language="es" pt:style="margin:auto;" required="true" requiredMessage="Comprube que nos es un Robot"/>
+                                            <br/><br/>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="cell align-right">
+                                            <p:commandButton widgetVar="addSocioButton" class="primary" value="Aceptar y Afiliarse" icon="fa fa-check"  
+                                                             validateClient="true" action="#{sociosBean.addSocioAction()}"
+                                                             oncomplete="('addSocioButton').jq.prop('disabled', false);"                                                                                                  
+                                                             onstart="('addSocioButton').jq.prop('disabled', true);"
+                                                             onerror="('addSocioButton').jq.prop('disabled', false);" 
+                                                             update="content,dialogs" style="display: none;"
+                                                             />
+                                            <script type="text/javascript">
+                                                $(function () {
+                                                    if (PF('aceptTerms').isChecked()) {
+                                                        PF('addSocioButton').jq.fadeIn();
+                                                    } else {
+                                                        PF('addSocioButton').jq.fadeOut();
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <br/><br/>
+
                                 </p:panel>
                             </p:tab>
                         </p:wizard>

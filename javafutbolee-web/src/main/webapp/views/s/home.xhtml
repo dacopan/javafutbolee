@@ -95,24 +95,36 @@
                                         <sec:authorize access="hasAnyRole('ROLE_SOCIO')"> 
                                             <div class="cell">
                                                 <h4 class="no-margin"><small>Nombres</small></h4>
-                                                <h:outputText value="Darwin Alejandro"/>
+                                                <h:outputText value="#{editarSocioBean.selectedSocio.socNombre}"/>
                                                 <br/>
                                                 <br/>
 
                                                 <h4 class="no-margin"><small>Apellidos</small></h4>
-                                                <h:outputText value="Correa Panchi"/>
+                                                <h:outputText value="#{editarSocioBean.selectedSocio.socApellido}"/>
                                                 <br/><br/>
 
                                                 <h4 class="no-margin"><small>Nacimiento</small></h4>
-                                                <h:outputText value="20, noviembre 1994"/>
+                                                <h:outputText value="#{editarSocioBean.selectedSocio.socFechaNac}"/>
                                                 <br/><br/>
 
                                                 <h4 class="no-margin"><small>Lugar</small></h4>
-                                                <h:outputText value="Quito, Ecuador"/>
+                                                <h:outputText value="#{editarSocioBean.selectedSocio.socDireccion}"/>
                                                 <br/><br/>
                                             </div>
 
                                             <div class="cell">
+                                                <h4 class="no-margin"><small>Género</small></h4>
+                                                <h:outputText value="#{editarSocioBean.selectedSocio.socGenero==0?'Masculino':'Femenino'}"/>
+                                                <br/>
+                                                <br/>
+
+                                                <h4 class="no-margin"><small>Teléfono</small></h4>
+                                                <h:outputText value="#{editarSocioBean.selectedSocio.socTelefono}"/>
+                                                <br/><br/>
+
+                                                <h4 class="no-margin"><small>Localidad</small></h4>                                                                                                
+                                                <h:outputText value="#{editarSocioBean.selectedSocio.plan.plnNombre}"/>
+                                                <br/><br/>
 
                                             </div>
                                         </sec:authorize>

@@ -136,7 +136,7 @@
         </navigation-case>  
         <navigation-case>
             <from-outcome>adminSocios</from-outcome>
-            <to-view-id>/views/s/adminSocios/adminSocios.xhtml</to-view-id> 
+            <to-view-id>/views/s/adminSocios/adminSocios.xhtml?r=home</to-view-id> 
             <redirect></redirect>
         </navigation-case> 
         <navigation-case>
@@ -212,7 +212,12 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>registrarSocio</from-outcome>
-            <to-view-id>/views/s/adminSocios/registrarSocio.xhtml</to-view-id>
+            <to-view-id>/views/s/adminSocios/registrarSocio.xhtml?r=adminSocios</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/views/s/home.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
     </navigation-rule>
@@ -229,7 +234,7 @@
             <redirect></redirect>
         </navigation-case>
         <navigation-case>
-            <from-outcome>adminSocio</from-outcome>
+            <from-outcome>adminSocios</from-outcome>
             <to-view-id>/views/s/adminSocios/adminSocios.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
@@ -250,14 +255,47 @@
             <redirect></redirect>
         </navigation-case>
         <navigation-case>
-            <from-outcome>adminSocio</from-outcome>
+            <from-outcome>adminSocios</from-outcome>
             <to-view-id>/views/s/adminSocios/adminSocios.xhtml</to-view-id>
             <redirect></redirect>
         </navigation-case>
         <navigation-case>
-            <from-outcome>home</from-outcome>
-            <to-view-id>/views/s/home.xhtml</to-view-id>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
             <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>factura</from-outcome>
+            <to-view-id>/views/s/adminSocios/facturaAfiliacion.xhtml</to-view-id>
+            <redirect>                
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/s/adminSocios/facturaAfiliacion.xhtml
+        </from-view-id>
+        <navigation-case>
+            <from-outcome>loggedout</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminSocios</from-outcome>
+            <to-view-id>/views/s/adminSocios/adminSocios.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>        
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>        
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/views/p/login.xhtml</to-view-id>
+            <redirect>                
+            </redirect>
         </navigation-case>
     </navigation-rule>
     
