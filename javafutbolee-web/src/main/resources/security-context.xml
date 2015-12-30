@@ -2,7 +2,7 @@
 <beans:beans
     xmlns:sec="http://www.springframework.org/schema/security"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:beans="http://www.springframework.org/schema/beans"    
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">    
     
@@ -41,9 +41,50 @@
         
 
         <!-- Define logout properties for Spring Security -->
-        <sec:logout invalidate-session="true" delete-cookies="true" logout-success-url="/"></sec:logout>
+        <sec:logout invalidate-session="true" delete-cookies="true" logout-success-url="/"></sec:logout>  
+        
+        <sec:headers>
+            <sec:cache-control disabled="true"/>
+            <sec:header ref="cacheStaticsHeaders" />
+            <sec:header ref="noCacheHeaders"/>
+        </sec:headers>      
     </sec:http>
    
+   <beans:bean id="cacheStaticsHeaders" class="org.springframework.security.web.header.writers.DelegatingRequestMatcherHeaderWriter">
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                <beans:constructor-arg value="/faces/javax.faces.resource/**"/>
+            </beans:bean>
+        </beans:constructor-arg>
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.security.web.header.writers.StaticHeadersWriter">
+                <beans:constructor-arg name="headers">
+                    <beans:list>
+                        <beans:bean class="org.springframework.security.web.header.Header">
+                            <beans:constructor-arg name="headerName" value="cache-control"></beans:constructor-arg>
+                            <beans:constructor-arg name="headerValues" value="max-age=31536000"/>
+                        </beans:bean>
+                        <beans:bean class="org.springframework.security.web.header.Header">
+                            <beans:constructor-arg name="headerName" value="Expires"></beans:constructor-arg>
+                            <beans:constructor-arg name="headerValues" value="31536000"/>
+                        </beans:bean>
+
+                    </beans:list>
+                </beans:constructor-arg>
+            </beans:bean>
+        </beans:constructor-arg>
+    </beans:bean> 
+    <beans:bean id="noCacheHeaders" class="org.springframework.security.web.header.writers.DelegatingRequestMatcherHeaderWriter">
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                <beans:constructor-arg value="/**/*.xhtml"/>
+            </beans:bean>
+        </beans:constructor-arg>
+        <beans:constructor-arg>
+                <beans:bean class="org.springframework.security.web.header.writers.CacheControlHeadersWriter"/>
+        </beans:constructor-arg>
+    </beans:bean> 
+
     <!-- Set customUserDetailsService class as the authentication Manager for Spring Security-->
     <sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider user-service-ref="customUserDetailsService">
@@ -66,5 +107,5 @@
         <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
     </beans:bean>
     
-    
+          
 </beans:beans>
