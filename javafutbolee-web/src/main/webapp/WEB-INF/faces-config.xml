@@ -299,4 +299,15 @@
         </navigation-case>
     </navigation-rule>
     
+    
+    <navigation-rule>
+        <from-view-id>
+            /views/s/socio/reservarBoleto.xhtml
+        </from-view-id>
+        <navigation-case>
+            <from-outcome>loggedout</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>        
+    </navigation-rule>
 </faces-config>

@@ -16,14 +16,25 @@
  */
 package io.dacopancm.jfee.managedController;
 
+import io.dacopancm.jfee.exceptions.JfeeCustomException;
+import io.dacopancm.jfee.sp.model.Boleto;
 import io.dacopancm.jfee.sp.model.Partido;
+import io.dacopancm.jfee.sp.model.PartidoPrecio;
+import io.dacopancm.jfee.sp.model.Socio;
+import io.dacopancm.jfee.sp.service.BoletoService;
 import io.dacopancm.jfee.sp.service.PartidoService;
+import io.dacopancm.jfee.sp.service.SocioService;
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 /**
  *
@@ -31,20 +42,87 @@ import org.apache.commons.logging.LogFactory;
  */
 @ManagedBean(name = "boletoBean")
 @ViewScoped
-public class BoletoBean {
+public class BoletoBean implements Serializable {
 
-    private Log log = LogFactory.getLog(this.getClass());
+    private final Log log = LogFactory.getLog(this.getClass());
 
     @ManagedProperty(value = "#{PartidoService}")
     PartidoService partidoService;
 
+    @ManagedProperty(value = "#{BoletoService}")
+    BoletoService boletoService;
+
+    @ManagedProperty(value = "#{SocioService}")
+    SocioService socioService;
+
+    Socio selectedSocio;
     Partido selectedPartido;
+    PartidoPrecio selectedPrecio;
 
     @PostConstruct
     public void postConstruct() {
 
     }
 
+    public void reservarAction() {
+        try {
+
+            Boleto b = new Boleto();
+            b.setSocio(selectedSocio);
+            b.setPartidoPrecio(selectedPrecio);
+            boletoService.addBoleto(b);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Reservación", "Reservación exitosa!"));
+
+        } catch (JfeeCustomException fex) {
+            log.error("jfee: " + fex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
+        } catch (Exception ex) {
+            log.error("jfee: " + ex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo Reservar."));
+        }
+
+    }
+
+    public void cancelarAction() {
+        try {
+
+            Boleto b = getBoletoReservado();
+            boletoService.deleteBoleto(b);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Reservación", "Reservación cancelada!"));
+
+        } catch (JfeeCustomException fex) {
+            log.error("jfee: " + fex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
+        } catch (Exception ex) {
+            log.error("jfee: " + ex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo Cancelar."));
+        }
+    }
+
+    public void printAction() {
+    }
+
+    public Boleto getBoletoReservado() {
+        try {
+            User userDetails
+                    = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return boletoService.getBoletoByPartidoIdAndSocCi(selectedPartido.getPrtId(), userDetails.getUsername());
+
+        } catch (Exception ex) {
+            log.error("jfee: " + ex);
+        }
+        return null;
+    }
+
+    public boolean isPartidoReservado() {
+        return getBoletoReservado() != null;
+    }
     //get set
 
     public Partido getSelectedPartido() {
@@ -58,12 +136,61 @@ public class BoletoBean {
         this.selectedPartido = selectedPartido;
     }
 
+    public Socio getSelectedSocio() {
+        if (selectedSocio == null) {
+            User userDetails
+                    = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            selectedSocio = socioService.getSocioByCi(userDetails.getUsername());
+        }
+        return selectedSocio;
+    }
+
+    public void setSelectedSocio(Socio selectedSocio) {
+        this.selectedSocio = selectedSocio;
+    }
+
+    public PartidoPrecio getSelectedPrecio() {
+        if (selectedPrecio == null) {
+            int locId = getSelectedSocio().getPlan().getLocalidad().getLocId();
+            for (PartidoPrecio pp : getSelectedPartido().getPartidoPrecios()) {
+                if (pp.getLocalidad().getLocId() == locId) {
+                    selectedPrecio = pp;
+                    break;
+                }
+            }
+
+        }
+        return selectedPrecio;
+    }
+
+    public void setSelectedPrecio(PartidoPrecio selectedPrecio) {
+        this.selectedPrecio = selectedPrecio;
+    }
+
+    //services
     public PartidoService getPartidoService() {
         return partidoService;
     }
 
     public void setPartidoService(PartidoService partidoService) {
         this.partidoService = partidoService;
+    }
+
+    public BoletoService getBoletoService() {
+        return boletoService;
+    }
+
+    public void setBoletoService(BoletoService boletoService) {
+        this.boletoService = boletoService;
+    }
+
+    public SocioService getSocioService() {
+        return socioService;
+    }
+
+    public void setSocioService(SocioService socioService) {
+        this.socioService = socioService;
     }
 
 }

@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://java.sun.com/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition template="/templates/standAloneTemplate.xhtml">
+
+
+        <ui:define name="title">
+            JavaFutbolEE | Reserva Boleto
+        </ui:define>
+
+        <ui:define name="backLink">
+            <a href="#{facesContext.externalContext.requestContextPath}/faces/views/s/home.xhtml" 
+               title="home"
+               class="navbar-brand fg-hover-yellow" style="line-height: 56px;font-size: 33.6px;"><span class="fa fa-arrow-left"></span>&nbsp;</a>
+        </ui:define>
+        <ui:define name="menuitem">
+
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="form3">
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+
+                <section id="temporadas" class="call-to-action full-height" style="background-color: #f5f5f5;">
+                    <div class="container" style="padding-top: 0;">
+                        <div class="section-header">
+                            <h2 class="text-light wow fadeIn" data-wow-delay="0.25s">Reservar <strong>Boleto</strong></h2>
+                            <div class="colored-line wow fadeInLeftBig"></div>
+                            <div class="sub-heading"></div>					
+                        </div>
+
+                        <c:if test="#{boletoBean.selectedPartido==null}">
+                            <h3 class="text-light">
+                                Ningún partido disponible para reserva
+                            </h3>
+                        </c:if>
+                        <c:if test="#{boletoBean.selectedPartido!=null}">
+                            <div class="table_home align-center">                                                                                                               
+                                <table class="widget_table calendario_table" style="margin: auto;">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="wow fadeInDown" data-wow-delay="0.25s">
+                                                <span class="fa fa-angellist"></span> FECHA 20
+                                                <br/><br/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="wow fadeInDown" data-wow-delay="0.5s">
+                                                <span class="fa fa-calendar-check-o"></span>&nbsp;
+                                                <h:outputText value="#{boletoBean.selectedPartido.prtFecha}">
+                                                    <f:convertDateTime dateStyle="full" pattern="EEEE dd, MMMM yyyy"/>
+                                                </h:outputText>
+                                                <br/><br/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="wow fadeInDown" data-wow-delay="0.5s">
+                                                <span class="fa fa-clock-o"></span>&nbsp;
+                                                <h:outputText value="#{boletoBean.selectedPartido.prtFecha}">
+                                                    <f:convertDateTime dateStyle="full" pattern="HH:mm"/>
+                                                </h:outputText>
+                                                <br/><br/>
+                                            </td>
+                                        </tr>
+                                        <tr class="wow fadeInDown" data-wow-delay="0.5s">
+
+                                            <ui:fragment rendered="#{boletoBean.selectedPartido.prtLocal==true}">                                                                                               
+                                                <td>BSC</td>
+                                                <td style="font-size: 30px;">VS</td>
+                                                <td>#{boletoBean.selectedPartido.equipo.eqpAbbr}</td>
+                                            </ui:fragment>
+                                            <ui:fragment rendered="#{boletoBean.selectedPartido.prtLocal==false}">
+                                                <td>#{boletoBean.selectedPartido.equipo.eqpAbbr}</td>
+                                                <td style="font-size: 30px;">VS</td>
+                                                <td>BSC</td>
+                                            </ui:fragment>
+                                        </tr>
+                                        <tr>
+                                            <td class="wow bounceIn" data-wow-delay="0.75s">
+                                                <img class="pulse" data-wow-delay="1.3s" data-wow-duration="2.2s" data-wow-iteration="infinite" src="http://www.barcelonasc.com.ec/img/widget/#{boletoBean.selectedPartido.prtLocal?'bsc':'lduq'.toString().toLowerCase()}.png"/>
+                                            </td>
+                                            <td>|</td>
+                                            <td class="wow bounceIn" data-wow-delay="0.75s">
+                                                <img class="pulse" data-wow-delay="1.3s" data-wow-duration="2.2s" data-wow-iteration="infinite" src="http://www.barcelonasc.com.ec/img/widget/#{boletoBean.selectedPartido.prtLocal?'LDUQ'.toString().toLowerCase():'bsc'}.png"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="wow fadeInUpBig" data-wow-delay="0.75s">
+                                                <img src="#{facesContext.externalContext.requestContextPath}/faces/javax.faces.resource/images/cancha2.png"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="wow fadeInDown" data-wow-delay="0.75s">
+                                                ESTADIO - #{boletoBean.selectedPartido.estadio.estNombre}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>                                                                            		
+                            </div>
+                            <div class="align-center">                                
+                                <br/>
+                                <br/>
+                                <p:commandButton value="Reservar" class="primary large-button"
+                                                 onclick="PF('dlgConfirmReserva').show();
+                                                         return false;"
+                                                 onstart="return false;"
+                                                 ajax="false"
+                                                 rendered="#{!boletoBean.partidoReservado}"/>                                                              
+
+                                <p:commandButton action="#{boletoBean.cancelarAction()}" value="Cancelar reserva" class="large-button danger margin10R"
+                                                 update="content,dialogs"
+                                                 rendered="#{boletoBean.partidoReservado}"/>
+
+                                <p:commandButton action="#{boletoBean.printAction()}" value="Imprimir" class="large-button success"
+                                                 rendered="#{boletoBean.partidoReservado}"/>
+                            </div>
+                        </c:if>
+
+
+                    </div>
+                </section>
+            </h:form>
+        </ui:define>
+        <ui:define name="dialogs">
+
+            <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+                <p:dialog header="Reservar Boleto" widgetVar="dlgConfirmReserva" modal="true" hideEffect="fade" showEffect="fade"
+                          closeOnEscape="true">
+                    <div class="grid">
+                        <div class="row cells2"> 
+                            <div class="cell">
+                                <h4 class="no-margin"><small>Rival</small></h4>
+                                <h:outputText value="#{boletoBean.selectedPartido.equipo.eqpNombre}"/>
+                                <br/>
+                                <br/>
+
+                                <h4 class="no-margin"><small>Fecha</small></h4>
+                                <h:outputText value="#{boletoBean.selectedPartido.prtFecha}">
+                                    <f:convertDateTime dateStyle="full" pattern="EEEE dd, MMMM yyyy"/>
+                                </h:outputText>
+                                <br/>
+                                <br/>
+
+                                <h4 class="no-margin"><small>Hora</small></h4>
+                                <h:outputText value="#{boletoBean.selectedPartido.prtFecha}">
+                                    <f:convertDateTime dateStyle="full" pattern="HH:mm"/>
+                                </h:outputText>
+                                <br/>
+                                <br/>
+
+                            </div>
+
+                            <div class="cell">
+                                <h4 class="no-margin"><small>Estadio</small></h4>
+                                <h:outputText value="#{boletoBean.selectedPartido.estadio.estNombre}"/>
+                                <br/>
+                                <br/>
+
+
+                                <h4 class="no-margin"><small>Localidad</small></h4>
+                                <h:outputText value="#{boletoBean.selectedSocio.plan.localidad.locNombre}"/>
+                                <br/>
+                                <br/>
+
+                                <h4 class="no-margin"><small>Precio</small></h4>
+                                <h:outputText value="$#{boletoBean.selectedPrecio.prtPreMonto}"/>
+                                <br/>
+                                <br/>                                
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="cell align-right">
+                                <p:commandButton value="cancelar" class="margin5R"
+                                                 onclick="PF('dlgConfirmReserva').hide();
+                                                         return false;"
+                                                 onstart="return false;"
+                                                 />
+                                <p:commandButton widgetVar="confirmReservaButton" class="primary" value="Confirmar" icon="fa fa-check"  
+                                                 validateClient="true" 
+                                                 action="#{boletoBean.reservarAction()}" 
+                                                 oncomplete="PF('confirmReservaButton').jq.prop('disabled', false);"                                                                                                  
+                                                 onclick="PF('confirmReservaButton').jq.prop('disabled', true);"
+                                                 onerror="PF('confirmReservaButton').jq.prop('disabled', false);" 
+                                                 update="content,dialogs"
+                                                 />
+                            </div>
+                        </div>
+                    </div>
+
+                </p:dialog>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
