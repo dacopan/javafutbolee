@@ -229,6 +229,26 @@ public class SociosBean implements Serializable {
         return null;
     }
 
+    public void toggleEstadoSocio() {
+        try {
+            boolean estado = !selectedSocio.getSocEstado();
+
+            selectedSocio.setSocEstado(estado);
+            socioService.updateSocio(selectedSocio);
+            planList = null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Editar Socio", "Socio Editado!"));
+
+        } catch (JfeeCustomException fex) {
+            log.error("jfee: " + fex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
+        } catch (Exception ex) {
+            log.error("jfee: " + ex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo Editar."));
+        }
+    }
+
     public String getReturnPage() {
         return returnPage;
     }

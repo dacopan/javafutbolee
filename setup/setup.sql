@@ -35,7 +35,7 @@ CREATE TABLE `boleto` (
   CONSTRAINT `FK_RELATIONSHIP_17` FOREIGN KEY (`PRT_PRE_ID`) REFERENCES `partido_precio` (`PRT_PRE_ID`),
   CONSTRAINT `FK_RELATIONSHIP_19` FOREIGN KEY (`FRM_PAG_ID`) REFERENCES `forma_pago` (`FRM_PAG_ID`),
   CONSTRAINT `FK_RELATIONSHIP_21` FOREIGN KEY (`SOC_ID`) REFERENCES `socio` (`SOC_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,7 +300,7 @@ CREATE TABLE `socio` (
   `SOC_TELEFONO` text,
   `SOC_CELULAR` text,
   `SOC_NUM` text COMMENT 'numero unico de socio',
-  `SOC_ESTADO` int(11) DEFAULT NULL COMMENT '1 activo\n            2 pasivo\n            3 desafiliado',
+  `SOC_ESTADO` tinyint(1) DEFAULT NULL COMMENT '1 activo\n            2 pasivo\n            3 desafiliado',
   PRIMARY KEY (`SOC_ID`),
   KEY `FK_RELATIONSHIP_14` (`CIU_ID`),
   KEY `FK_RELATIONSHIP_18` (`USR_ID`),
@@ -361,4 +361,4 @@ CREATE TABLE `usuario` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-29 19:30:00
+-- Dump completed on 2015-12-31 12:14:46

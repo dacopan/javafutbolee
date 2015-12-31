@@ -56,12 +56,12 @@ public class Socio implements java.io.Serializable {
     private String socTelefono;
     private String socCelular;
     private String socNum;
-    private Integer socEstado;
+    private Boolean socEstado;
 
     public Socio() {
     }
 
-    public Socio(Integer socId, Ciudad ciudad, FormaPago formaPago, Plan plan, Usuario usuario, String socNombre, String socApellido, Date socFechaNac, Integer socGenero, String socLugarNac, String socTipoSangre, Integer socNumHijos, Boolean socTrabaja, String socDireccion, String socDireccionRef, String socTelefono, String socCelular, String socNum, Integer socEstado) {
+    public Socio(Integer socId, Ciudad ciudad, FormaPago formaPago, Plan plan, Usuario usuario, String socNombre, String socApellido, Date socFechaNac, Integer socGenero, String socLugarNac, String socTipoSangre, Integer socNumHijos, Boolean socTrabaja, String socDireccion, String socDireccionRef, String socTelefono, String socCelular, String socNum, Boolean socEstado) {
         this.socId = socId;
         this.ciudad = ciudad;
         this.formaPago = formaPago;
@@ -254,11 +254,11 @@ public class Socio implements java.io.Serializable {
     }
 
     @Column(name = "SOC_ESTADO")
-    public Integer getSocEstado() {
+    public Boolean getSocEstado() {
         return this.socEstado;
     }
 
-    public void setSocEstado(Integer socEstado) {
+    public void setSocEstado(Boolean socEstado) {
         this.socEstado = socEstado;
     }
 

@@ -50,8 +50,6 @@
                         <!--TODO DataTable socios, ir a registrar socio, ir a editar socio -->
                         TODO aqui mostrar boton q genere reporte de todos los socios y lo descargue en PDF. 
                         <br/>
-                        TODO aqui mostrar tabla con socios, y boton de editar, cuando da allí se va a editarSocio.xhtml                        
-                        similar a AdminFUncionarios pero la edición se va a otra pagina (editarSocio.xhtml)
                         <br/>
 
                         <p:dataTable var="soc" value="#{sociosBean.socioList}" rows="10"
@@ -75,7 +73,8 @@
 
 
                             </f:facet>
-                            <p:column headerText="Id" sortBy="#{soc.socId}" filterBy="#{soc.socId}" filterStyleClass="no-display" filterMatchMode="contains">
+                            <p:column headerText="Id" sortBy="#{soc.socId}" filterBy="#{soc.socId}" filterStyleClass="no-display" filterMatchMode="contains"
+                                      width="50">
                                 <h:outputText value="#{soc.socId}" />
                             </p:column>
 
@@ -98,17 +97,26 @@
                             <p:column headerText="Plan" sortBy="#{soc.plan.plnNombre}" filterBy="#{soc.plan.plnNombre}" filterStyleClass="no-display" filterMatchMode="contains">
                                 <h:outputText value="#{soc.plan.plnNombre}" />
                             </p:column>
+                            <p:column headerText="Estado" sortBy="#{soc.socEstado?'activo': 'pasivo'}" filterBy="#{soc.socEstado?'activo': 'pasivo'}" filterStyleClass="no-display" filterMatchMode="contains">
+                                <h:outputText value="#{soc.socEstado?'activo': 'pasivo'}" />
+                            </p:column>
 
 
 
 
-                            <p:column headerText="Acciones" class="align-center">
+                            <p:column headerText="Acciones" class="align-center" width="200">
                                 <p:commandButton update="showSocio" oncomplete="PF('dlgShowSocio').show()" icon="fa-eye" title="Ver"
                                                  class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
                                     <f:setPropertyActionListener value="#{soc}" target="#{sociosBean.selectedSocio}" />
                                 </p:commandButton> 
                                 <p:commandButton icon="fa-pencil" title="Editar"
                                                  action="#{sociosBean.editSocioRequestPageAction()}"
+                                                 class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
+                                    <f:setPropertyActionListener value="#{soc}" target="#{sociosBean.selectedSocio}" />
+                                </p:commandButton> 
+                                <p:commandButton icon="fa-user#{soc.socEstado? '-times':''}" title="Editar"
+                                                 update="content"
+                                                 action="#{sociosBean.toggleEstadoSocio()}"
                                                  class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
                                     <f:setPropertyActionListener value="#{soc}" target="#{sociosBean.selectedSocio}" />
                                 </p:commandButton> 
