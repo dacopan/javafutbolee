@@ -5,6 +5,7 @@
  */
 package io.dacopancm.jfee.sp.service;
 
+import io.dacopancm.jfee.exceptions.JfeeCustomException;
 import io.dacopancm.jfee.sp.model.Usuario;
 
 /**
@@ -14,5 +15,10 @@ import io.dacopancm.jfee.sp.model.Usuario;
 public interface UsuarioService {
 
     public Usuario getUsuario(String usr_ci);
+
     public void updateUsuario(Usuario u);
+
+    public void failLoginUser(String ci);
+
+    public void requestPassword(String userName);
 }

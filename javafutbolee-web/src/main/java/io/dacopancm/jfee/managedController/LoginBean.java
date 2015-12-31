@@ -16,6 +16,7 @@
  */
 package io.dacopancm.jfee.managedController;
 
+import io.dacopancm.jfee.sp.service.UsuarioService;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -42,6 +43,9 @@ public class LoginBean {
     @ManagedProperty(value = "#{authenticationManager}")
     private AuthenticationManager authenticationManager = null;
 
+    @ManagedProperty(value = "#{UsuarioService}")
+    UsuarioService usuarioService;
+
     public String login() {
         try {
             Authentication request = new UsernamePasswordAuthenticationToken(this.getUserName(), this.getPassword());
@@ -51,11 +55,11 @@ public class LoginBean {
         } catch (BadCredentialsException bc) {
             System.out.println(bc.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Incorrecto", "Usuario o contraseña incorrecto"));
+            usuarioService.failLoginUser(this.getUserName());
             return null;
         } catch (Exception e) {
             //e.printStackTrace();           
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Incorrecto", "Cuenta inhabilitada o no confirmada."));
-
             return null;
         }
 
@@ -64,6 +68,18 @@ public class LoginBean {
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", "Hola, " + userDetails.getUsername()));
         return "correct";
+    }
+
+    public String requestPassword() {
+        try {
+            usuarioService.requestPassword(userName);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Recordar Contraseña", "Contraseña temporal enviada"));
+        } catch (Exception e) {
+            //e.printStackTrace();           
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Recordar Contraseña", "No se pudo enviar contraseña temporal."));
+            return null;
+        }
+        return null;
     }
 
     public String cancel() {
@@ -98,6 +114,14 @@ public class LoginBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UsuarioService getUsuarioService() {
+        return usuarioService;
+    }
+
+    public void setUsuarioService(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
 
 }

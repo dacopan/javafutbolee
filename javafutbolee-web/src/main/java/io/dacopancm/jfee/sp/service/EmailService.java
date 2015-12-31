@@ -55,13 +55,13 @@ public class EmailService implements Serializable {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper message = new MimeMessageHelper(mimeMessage,"UTF-8");
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
                 message.setTo(u.getUsrEmail());
                 message.setFrom(getFromAddress()); // could be parameterized...
-                message.setSubject("Registro #BSC SOC10S | JavaFutbolEE");
+                message.setSubject("Registro BSC soc10s | JavaFutbolEE");
                 Map model = new HashMap();
 
-                model.put("subject", "Registro #BSC SOC10S | JavaFutbolEE");
+                model.put("subject", "Registro BSC soc10s | JavaFutbolEE");
                 model.put("nombre", nombre + " " + apellido);
                 model.put("email", u.getUsrEmail());
                 model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
@@ -87,13 +87,13 @@ public class EmailService implements Serializable {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper message = new MimeMessageHelper(mimeMessage,"UTF-8");
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
                 message.setTo(u.getUsrEmail());
                 message.setFrom(getFromAddress()); // could be parameterized...
-                message.setSubject("Confirmación #BSC SOC10S | JavaFutbolEE");
+                message.setSubject("Confirmación BSC soc10s | JavaFutbolEE");
                 Map model = new HashMap();
 
-                model.put("subject", "Confirmación #BSC SOC10S | JavaFutbolEE");
+                model.put("subject", "Confirmación BSC soc10s | JavaFutbolEE");
                 model.put("nombre", nombre + " " + apellido);
                 model.put("email", u.getUsrEmail());
                 model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
@@ -110,6 +110,66 @@ public class EmailService implements Serializable {
             }
         };
         this.mailSender.send(preparator);
+    }
+
+    @Async
+    void sendAccountLockedEmail(final Usuario u, final String nombre) {
+        MimeMessagePreparator preparator = new MimeMessagePreparator() {
+            @Override
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
+                message.setTo(u.getUsrEmail());
+                message.setFrom(getFromAddress()); // could be parameterized...
+                message.setSubject("Cuenta Bloqueada | JavaFutbolEE");
+                Map model = new HashMap();
+
+                model.put("subject", "Cuenta Bloqueada | JavaFutbolEE");
+                model.put("nombre", nombre);
+                model.put("email", u.getUsrEmail());
+                model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
+
+                model.put("user", u);
+
+                String text = VelocityEngineUtils.mergeTemplateIntoString(
+                        velocityEngine,
+                        "email/JFEE_accountLockedEmail.html", "UTF-8", model);
+
+                mimeMessage.setHeader("Content-Type", "text/plain; charset=UTF-8");
+                message.setText(text, true);
+            }
+        };
+        this.mailSender.send(preparator);
+    }
+
+    @Async
+    void sendNewPasswordEmail(final Usuario u, final String nombre, final String password) {
+        MimeMessagePreparator preparator = new MimeMessagePreparator() {
+            @Override
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
+                message.setTo(u.getUsrEmail());
+                message.setFrom(getFromAddress()); // could be parameterized...
+                message.setSubject("Contraseña Temporal | JavaFutbolEE");
+                Map model = new HashMap();
+
+                model.put("subject", "Contraseña Temporal | JavaFutbolEE");
+                model.put("nombre", nombre);
+                model.put("email", u.getUsrEmail());
+                model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
+
+                model.put("user", u);
+                model.put("password", password);
+
+                String text = VelocityEngineUtils.mergeTemplateIntoString(
+                        velocityEngine,
+                        "email/JFEE_newPassword.html", "UTF-8", model);
+
+                mimeMessage.setHeader("Content-Type", "text/plain; charset=UTF-8");
+                message.setText(text, true);
+            }
+        };
+
+        this.mailSender.send(preparator);        
     }
 
     public EmailService() {
