@@ -21,7 +21,7 @@
     
     <dependencies>
         <dependency>
-            <groupId>io.dacopanm</groupId>
+            <groupId>io.dacopancm</groupId>
             <artifactId>jasper-fonts</artifactId>
             <version>1.0</version>
         </dependency>
