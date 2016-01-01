@@ -208,15 +208,32 @@ public class SociosBean implements Serializable {
                     + "&r=" + returnPage;
 
         } catch (JfeeCustomException fex) {
-            log.error("jfee: " + fex);
+            log.error("jfee: " + fex, fex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
-        } catch (Exception ex) {
-            log.error("jfee: " + ex);
+        } catch (UnsupportedEncodingException ex) {
+            log.error("jfee: " + ex, ex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo Afiliar."));
         }
         return null;
+    }
+
+    public void deleteSocioAction() {
+        try {
+            socioService.deleteSocio(selectedSocio);
+            socioList = null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Eliminar Socio", "Socio eliminado!"));
+
+        } catch (JfeeCustomException fex) {
+            log.error("jfee: " + fex, fex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
+        } catch (Exception ex) {
+            log.error("jfee: " + ex, ex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo Eliminar."));
+        }
     }
 
     public String editSocioRequestPageAction() {
@@ -224,7 +241,7 @@ public class SociosBean implements Serializable {
             return "/views/s/adminSocios/editarSocio.xhtml?faces-redirect=true&socCi=" + selectedSocio.getUsuario().getUsrCi() + "&h=" + UriUtils.encode(new BCryptPasswordEncoder().encode(selectedSocio.getUsuario().getUsrCi()), "UTF-8")
                     + "&r=adminSocios";
         } catch (UnsupportedEncodingException ex) {
-            log.error("jfee: " + ex);
+            log.error("jfee: " + ex, ex);
         }
         return null;
     }

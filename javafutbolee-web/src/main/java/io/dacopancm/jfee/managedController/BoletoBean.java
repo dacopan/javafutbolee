@@ -115,7 +115,7 @@ public class BoletoBean implements Serializable {
             return boletoService.getBoletoByPartidoIdAndSocCi(selectedPartido.getPrtId(), userDetails.getUsername());
 
         } catch (Exception ex) {
-            log.error("jfee: " + ex);
+            log.error("jfee: " + ex,ex);
         }
         return null;
     }

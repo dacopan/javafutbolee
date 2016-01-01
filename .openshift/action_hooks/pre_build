@@ -17,12 +17,22 @@ rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/javafutbolee-web/target
 rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/javafutbolee-web/deployments
 
 echo "PRE_BUILD DOWNLOAD resources START"
+
+#download resources
 curl -L -o $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources1.tar.gz https://www.dropbox.com/s/qumz51q04u9ncuw/resources1.tar.gz?dl=1
 curl -L -o $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources2.tar.gz https://www.dropbox.com/s/dfezes4tdn9bh8k/resources2.tar.gz?dl=1
+
+#untar resources
 tar -zxvf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources1.tar.gz -C $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/
 tar -zxvf $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources2.tar.gz -C $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/
+
+#folder to res
 mkdir $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/resources/email/
+
+#move resources
 mv $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources/email/* $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/resources/email/
+mv $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/webapp/resources/resources/report/* $OPENSHIFT_HOMEDIR/app-root/repo/javafutbolee-web/src/main/resources/report/
+
 echo "PRE_BUILD DOWNLOAD resources END"
 
 

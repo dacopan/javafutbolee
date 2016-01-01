@@ -84,7 +84,8 @@ public class SocioService {
     }
 
     @Transactional(readOnly = false)
-    public void deleteSocio(Socio p) {
+    public void deleteSocio(Socio p) throws JfeeCustomException{
+        socioDAO.deleteSocio(p);
     }
 
     @Transactional(readOnly = false)

@@ -21,6 +21,11 @@
     
     <dependencies>
         <dependency>
+            <groupId>io.dacopanm</groupId>
+            <artifactId>jasper-fonts</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -168,6 +173,21 @@
             <artifactId>primefaces-extensions</artifactId>
             <version>4.0.0</version>
         </dependency>
+        
+        <!-- Jasper -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <exclusions>    		                   		
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     
@@ -222,10 +242,31 @@
             </plugin>            
         </plugins>
         <resources>
+            <!--<resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/*.jpg</exclude>
+                    <exclude>**/*.html</exclude>
+                    <exclude>**/*.jasper</exclude>
+                    <exclude>**/*.jrxml</exclude>
+                </excludes>
+                <filtering>true</filtering>
+            </resource>-->
+            
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-            </resource>           
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/*.xml</exclude>
+                </excludes>
+            </resource>          
         </resources>
     </build>
     <profiles>  

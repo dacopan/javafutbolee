@@ -116,8 +116,9 @@
                                                  update="content,dialogs"
                                                  rendered="#{boletoBean.partidoReservado}"/>
 
-                                <p:commandButton action="#{boletoBean.printAction()}" value="Imprimir" class="large-button success"
-                                                 rendered="#{boletoBean.partidoReservado}"/>
+                                <p:commandButton action="#{reportBean.reportReservaBoleto(boletoBean.boletoReservado)}" value="Imprimir" class="large-button success"
+                                                 ajax="false"
+                                                 rendered="#{boletoBean.partidoReservado}"/>                               
                             </div>
                         </c:if>
 

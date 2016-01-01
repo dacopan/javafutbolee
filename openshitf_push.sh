@@ -23,7 +23,7 @@ fi
 if [ "$1" == "all" ]
 then
 	tar -zcvf resources1.tar.gz dt1c/css dt1c/js primefaces-dtic_theme
-	tar -zcvf resources2.tar.gz dt1c/fonts ../../resources/email
+	tar -zcvf resources2.tar.gz dt1c/fonts ../../resources/email ../../resources/report/*.jasper
 fi
 
 

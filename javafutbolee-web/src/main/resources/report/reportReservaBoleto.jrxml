@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportPadronSocios" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="383d367c-9776-4c43-a04c-4c819a2d2d92">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="373"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#D5D11A"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFD700">
+		<box>
+			<pen lineWidth="0.5" lineColor="#D5D11A"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFF5BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#D5D11A"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#D5D11A"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFFCEF"/>
+		</conditionalStyle>
+	</style>
+	<field name="socio.socNombre" class="java.lang.String"/>
+	<field name="socio.socApellido" class="java.lang.String"/>
+	<field name="socio.usuario.usrCi" class="java.lang.String"/>
+	<field name="socio.usuario.usrEmail" class="java.lang.String"/>
+	<field name="partidoPrecio.localidad.locNombre" class="java.lang.String"/>
+	<field name="partidoPrecio.prtPreMonto" class="java.lang.Double"/>
+	<field name="partidoPrecio.partido.equipo.eqpNombre" class="java.lang.String"/>
+	<field name="partidoPrecio.partido.prtFecha" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="12" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="198" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="555" height="155" uuid="77d935a0-5546-43a9-a0ce-aee5568e6499"/>
+				<imageExpression><![CDATA["report/header.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="155" width="555" height="43" forecolor="#FFFFFF" backcolor="#1D1D1D" uuid="6f89d1c7-6547-4cec-9ffa-afea9c4e61be"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Segoe UI" size="28" isStrikeThrough="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Reserva Boleto SOC10S BSC | JavaFutbolEE]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy HH:mm:ss">
+				<reportElement x="347" y="4" width="201" height="20" uuid="f1b37f8a-bd8b-4796-ba39-bf83a3b10859"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="437" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="89" y="74" width="147" height="20" backcolor="#FEFEFE" uuid="b542f734-0756-4800-8fed-1b3127eca572"/>
+				<textElement>
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio.socNombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="191" y="0" width="91" height="30" forecolor="#000000" backcolor="#FEFEFE" uuid="ac1fe7cd-e58a-46e9-ba8c-7cee5bfc4781"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="20"/>
+				</textElement>
+				<text><![CDATA[Resumen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="275" y="0" width="91" height="30" forecolor="#000000" backcolor="#FEFEFE" uuid="d664d9e4-09f4-4d2b-8549-1856d25bfd0d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="20"/>
+				</textElement>
+				<text><![CDATA[Reserva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="89" y="56" width="70" height="20" forecolor="#777777" backcolor="#FFFFFF" uuid="f1b7f188-11c3-4fb3-a4f6-de037032bcd3"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="485" y="0" width="70" height="20" forecolor="#FEFEFE" backcolor="#FFD700" uuid="ee1f5a50-9063-4072-a5ed-52547c8d5ef7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="12"/>
+				</textElement>
+				<text><![CDATA[#BSC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="89" y="110" width="70" height="20" forecolor="#777777" backcolor="#FFFFFF" uuid="fafe9154-7062-420a-88b7-e0b31cb5de0d"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="89" y="128" width="147" height="20" backcolor="#FEFEFE" uuid="c23fde93-eaae-4002-993b-d27348e72113"/>
+				<textElement>
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio.socApellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="318" y="126" width="147" height="20" backcolor="#FEFEFE" uuid="9aed9c68-bfe7-489e-b38c-ddd579392fe9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio.usuario.usrEmail}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="392" y="54" width="70" height="20" forecolor="#777777" backcolor="#FFFFFF" uuid="27ce0003-0efa-4b72-90b5-e0a6fac0cb49"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[CI]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="318" y="72" width="147" height="20" backcolor="#FEFEFE" uuid="47c18a50-5369-43d1-b5b3-9fc7db15a629"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{socio.usuario.usrCi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="392" y="106" width="70" height="20" forecolor="#777777" backcolor="#FFFFFF" uuid="9e9692f5-1300-4258-b141-231a2d56b391"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<line>
+				<reportElement x="89" y="164" width="376" height="2" uuid="30257ea5-c27b-484b-894e-cd8c49548ff1"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#868686"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="107" y="183" width="340" height="20" forecolor="#FEFEFE" backcolor="#DC3023" uuid="69c0219d-6bc2-4d84-9ad7-c14b0df11b7c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Light" size="12"/>
+				</textElement>
+				<text><![CDATA[Seleccionado]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="89" y="203" width="376" height="41" forecolor="#010101" backcolor="#FEFEFE" uuid="04399e7f-a92c-4800-bcc8-5c79eb483834"/>
+				<box topPadding="10" bottomPadding="10">
+					<pen lineWidth="1.0" lineColor="#FEC500"/>
+					<topPen lineWidth="1.0" lineColor="#FEC500"/>
+					<leftPen lineWidth="1.0" lineColor="#FEC500"/>
+					<bottomPen lineWidth="1.0" lineColor="#FEC500"/>
+					<rightPen lineWidth="1.0" lineColor="#FEC500"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partidoPrecio.partido.equipo.eqpNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="89" y="244" width="376" height="41" forecolor="#FFFFFF" backcolor="#FEC500" uuid="0aa3f049-9a46-4846-b8a0-3741419a0df7"/>
+				<box topPadding="10" bottomPadding="10">
+					<pen lineWidth="1.0" lineColor="#FEC500"/>
+					<topPen lineWidth="1.0" lineColor="#FEC500"/>
+					<leftPen lineWidth="1.0" lineColor="#FEC500"/>
+					<bottomPen lineWidth="1.0" lineColor="#FEC500"/>
+					<rightPen lineWidth="1.0" lineColor="#FEC500"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$F{partidoPrecio.prtPreMonto}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="89" y="304" width="376" height="2" uuid="b1c71b27-c735-42cf-96e4-79fb1222f821"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#868686"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement mode="Opaque" x="176" y="324" width="202" height="20" forecolor="#777777" backcolor="#FFFFFF" uuid="31721fdc-0db9-4c49-87dc-55ac24158cb4"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partidoPrecio.localidad.locNombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy HH:mm:ss">
+				<reportElement mode="Opaque" x="176" y="357" width="202" height="20" forecolor="#777777" backcolor="#FFFFFF" uuid="f9ed25c3-d4d0-43f0-a6ba-9fbe90ed9c0b"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partidoPrecio.partido.prtFecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="60" forecolor="#252525" backcolor="#252525" uuid="65078f44-933a-4a12-b25e-cd133a354b8c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="202" y="17" width="150" height="33" forecolor="#9C9B9B" uuid="8603ffd1-42b8-4eb9-b9fe-6262df6ed171"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[Estadio Monumental Lado Oeste
+Av. Barcelona, Guayaquil-Ecuador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="17" width="123" height="20" forecolor="#9C9B9B" uuid="9b9552b8-320c-43b0-8e04-9e3a93ed6c2c"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[(593) 04-2200550]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="17" width="123" height="20" forecolor="#9C9B9B" uuid="2074b789-57fe-4f04-a6a7-ff42af90d79c"/>
+				<textElement>
+					<font fontName="Segoe UI Light"/>
+				</textElement>
+				<text><![CDATA[soc10s@javafutbolee.tk]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

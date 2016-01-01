@@ -45,6 +45,8 @@ public class SocioDAO implements java.io.Serializable {
     }
 
     public void deleteSocio(Socio p) {
+        getSessionFactory().getCurrentSession().createQuery("delete from Boleto where socio.socId=:socId").setParameter("socId", p.getSocId())
+                .executeUpdate();
         getSessionFactory().getCurrentSession().delete(p);
     }
 

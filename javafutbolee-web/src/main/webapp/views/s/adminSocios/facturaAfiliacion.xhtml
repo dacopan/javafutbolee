@@ -44,7 +44,9 @@
                             <p:commandButton action="login" value="Ingresar" class="primary large-button"/>
                             <br/>
                             <br/>
-                            <p:commandButton action="login" value="Descargar Factura" class="large-button"/>
+                            <p:commandButton action="#{reportBean.reportAfiliacion(facturaAfiliacionBean.selectedSocio)}" 
+                                             ajax="false"
+                                             value="Descargar Factura" class="large-button"/>
                         </div>
                     </div>
                 </section>
