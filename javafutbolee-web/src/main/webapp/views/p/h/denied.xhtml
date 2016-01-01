@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:sec="http://www.springframework.org/security/tags">
+    <ui:composition template="/templates/emptyTemplate.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="JavaFutbolEE | Denied" />
+        </ui:define>
+
+        <ui:define name="content">
+            <section class="call-to-action full-height bg-orange" style="display: flex;align-items: center;justify-content: center;
+                     min-height: 100%;
+                     height: auto;width: 100%;"
+                     >
+
+
+                <div class="shadow padding20 bg-white align-center" style="width:100%; max-width: 550px;">
+                    <br/><br/>
+
+                    <i class="fa fa-lock fa-5x fg-orange"/>
+
+                    <br/><br/>
+
+                    <div class="Fs30 fg-orange">
+                        Acceso denegado<br/>
+                        Compruebe sus permisos!
+                    </div>
+
+                    <br/>
+
+                    <div class="Fs20 fg-gray">
+                        Lo sentimos, pero usted no tiene acceso a esta página.
+                    </div>
+
+                    <br/>
+                    <hr class="thin"/>
+                    <br/>
+                    <br/>
+
+                </div>
+
+            </section>
+        </ui:define>
+    </ui:composition>
+</html>
