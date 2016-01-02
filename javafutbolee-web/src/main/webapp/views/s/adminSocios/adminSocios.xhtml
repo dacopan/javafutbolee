@@ -148,7 +148,7 @@
 
                         <p:commandButton class="success call-button" value="Añadir" icon="fa fa-bank"
                                          ajax="true" actionListener="#{sociosBean.resetAddPlan}" 
-                                         update="dialogs"
+                                         update="fromAddPlan"
                                          oncomplete="PF('dlgAddPlan').show();"/>                        
 
                         <br/><br/>
@@ -192,7 +192,7 @@
 
 
                             <p:column headerText="Acciones" class="align-center">
-                                <p:commandButton update="dialogs" oncomplete="PF('dlgEditPlan').show()" icon="fa-pencil" title="Editar"
+                                <p:commandButton update="formEditPlan" oncomplete="PF('dlgEditPlan').show()" icon="fa-pencil" title="Editar"
                                                  class="cycle-button bd-gray fg-gray bd-hover-yellow fg-hover-white bg-hover-yellow margin10R">
                                     <f:setPropertyActionListener value="#{plan}" target="#{sociosBean.selectedPlan}" />
                                 </p:commandButton>                                
@@ -204,7 +204,7 @@
             </h:form>
         </ui:define>
         <ui:define name="dialogs">
-            <h:form>
+            <h:form id="formAddPlan">
                 <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
                 <p:dialog header="Añadir Plan" widgetVar="dlgAddPlan" modal="true" hideEffect="fade" showEffect="fade"
                           closeOnEscape="true">
@@ -262,7 +262,7 @@
                                                  oncomplete="$(PF('addPlanButton')).prop('disabled', false);"                                                                                                  
                                                  onstart="$(PF('addPlanButton')).prop('disabled', true);"
                                                  onerror="$(PF('addPlanButton')).prop('disabled', false);" 
-                                                 update="content,dialogs"
+                                                 update="content"
                                                  />
                             </div>
                         </div>
@@ -271,7 +271,7 @@
                 </p:dialog> 
             </h:form>
 
-            <h:form>
+            <h:form id="formEditPlan">
                 <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
                 <p:dialog header="Editar Plan" widgetVar="dlgEditPlan" modal="true" hideEffect="fade" showEffect="fade"
                           closeOnEscape="true">
@@ -329,7 +329,7 @@
                                                  oncomplete="$(PF('editPlanButton')).prop('disabled', false);"                                                                                                  
                                                  onstart="$(PF('editPlanButton')).prop('disabled', true);"
                                                  onerror="$(PF('editPlanButton')).prop('disabled', false);" 
-                                                 update="content,dialogs"
+                                                 update="content"
                                                  />
                             </div>
                         </div>
