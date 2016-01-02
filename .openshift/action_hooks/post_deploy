@@ -1,0 +1,15 @@
+#!/bin/bash
+echo "POST_DEPLOY action hooks execute start"
+# clean repo
+
+rm -rf $OPENSHIFT_HOMEDIR/app-root/repo/deployments
+
+
+# clean deploy
+rm -rf $OPENSHIFT_HOMEDIR/app-deployments/current/repo/deployments
+
+
+echo "POST_DEPLOY action hooks execute end"
+
+
+
