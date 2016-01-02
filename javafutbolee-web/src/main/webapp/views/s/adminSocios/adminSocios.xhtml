@@ -44,17 +44,13 @@
 
                         <p:commandButton class="success call-button margin5R" value="Añadir" icon="fa fa-user-plus"
                                          action="registrarSocio"/>   
-                        
+
                         <p:commandButton class="info call-button" value="Padrón" icon="fa fa-users"
                                          ajax="false"
                                          action="#{reportBean.reportPadronSocios()}"/>   
 
                         <br/><br/>
 
-                        <!--TODO DataTable socios, ir a registrar socio, ir a editar socio -->
-                        TODO aqui mostrar boton q genere reporte de todos los socios y lo descargue en PDF. 
-                        <br/>
-                        <br/>
 
                         <p:dataTable var="soc" value="#{sociosBean.socioList}" rows="10"
                                      paginator="true"  reflow="true" editable="false"
@@ -259,9 +255,9 @@
                             <div class="cell align-right">
                                 <p:commandButton widgetVar="addPlanButton" class="primary" value="Guardar" icon="fa fa-check"  
                                                  validateClient="true" action="#{sociosBean.addPlanAction()}"
-                                                 oncomplete="$(PF('addPlanButton')).prop('disabled', false);"                                                                                                  
-                                                 onstart="$(PF('addPlanButton')).prop('disabled', true);"
-                                                 onerror="$(PF('addPlanButton')).prop('disabled', false);" 
+                                                 oncomplete="PF('addPlanButton').jq.prop('disabled', false);"                                                                                                  
+                                                 onclick="PF('addPlanButton').jq.prop('disabled', true);"
+                                                 onerror="PF('addPlanButton').jq.prop('disabled', false);" 
                                                  update="content"
                                                  />
                             </div>
@@ -326,9 +322,9 @@
                             <div class="cell align-right">
                                 <p:commandButton widgetVar="editPlanButton" class="primary" value="Guardar" icon="fa fa-check"  
                                                  validateClient="true" action="#{sociosBean.editPlanAction()}"
-                                                 oncomplete="$(PF('editPlanButton')).prop('disabled', false);"                                                                                                  
-                                                 onstart="$(PF('editPlanButton')).prop('disabled', true);"
-                                                 onerror="$(PF('editPlanButton')).prop('disabled', false);" 
+                                                 oncomplete="PF('editPlanButton').jq.prop('disabled', false);"                                                                                                  
+                                                 onclick="PF('editPlanButton').jq.prop('disabled', true);"
+                                                 onerror="PF('editPlanButton').jq.prop('disabled', false);" 
                                                  update="content"
                                                  />
                             </div>

@@ -183,9 +183,10 @@ public class SociosBean implements Serializable {
 
     public void editPlanAction() {
         try {
-            planService.updatePlan(selectedPlan);
-            planList = null;
+            planService.updatePlan(selectedPlan);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Editar Plan", "Plan editado con éxito!"));
+            RequestContext.getCurrentInstance().execute("PF('dlgEditPlan').hide()");
+            planList = null;
 
         } catch (JfeeCustomException fex) {
             log.error("jfee: " + fex);
