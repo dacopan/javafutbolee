@@ -241,9 +241,9 @@
                             <div class="cell align-right">
                                 <p:commandButton widgetVar="addFuncionarioButton" class="primary" value="Guardar" icon="fa fa-check"  
                                                  validateClient="true" action="#{funcionariosBean.addFuncionarioAction()}"
-                                                 oncomplete="PF('addFuncionarioButton').prop('disabled', false);"                                                                                                  
-                                                 onstart="PF('addFuncionarioButton').prop('disabled', true);"
-                                                 onerror="PF('addFuncionarioButton').prop('disabled', false);" 
+                                                 oncomplete="PF('addFuncionarioButton').jq.prop('disabled', false);"                                                                                                  
+                                                 onclick="PF('addFuncionarioButton').jq.prop('disabled', true);"
+                                                 onerror="PF('addFuncionarioButton').jq.prop('disabled', false);" 
                                                  update="content,dialogs"
                                                  />
                             </div>
@@ -392,9 +392,9 @@
                             <div class="cell align-right">
                                 <p:commandButton widgetVar="editFuncionarioButton" class="primary" value="Guardar" icon="fa fa-check"  
                                                  validateClient="true" action="#{funcionariosBean.editFuncionarioAction()}"
-                                                 oncomplete="PF('editFuncionarioButton').prop('disabled', false);"                                                                                                  
-                                                 onstart="PF('editFuncionarioButton').prop('disabled', true);"
-                                                 onerror="PF('editFuncionarioButton').prop('disabled', false);" 
+                                                 oncomplete="PF('editFuncionarioButton').jq.prop('disabled', false);"                                                                                                  
+                                                 onclick="PF('editFuncionarioButton').jq.prop('disabled', true);"
+                                                 onerror="PF('editFuncionarioButton').jq.prop('disabled', false);" 
                                                  update="content,dialogs"
                                                  />
                             </div>

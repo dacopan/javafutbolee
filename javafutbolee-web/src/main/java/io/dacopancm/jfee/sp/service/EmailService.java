@@ -16,7 +16,6 @@
  */
 package io.dacopancm.jfee.sp.service;
 
-import io.dacopancm.jfee.sp.model.Personal;
 import io.dacopancm.jfee.sp.model.Usuario;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -51,7 +50,7 @@ public class EmailService implements Serializable {
     String urlx;
 
     @Async
-    void sendAccountEmail(final Usuario u, final String nombre, final String apellido, final String password, final String confirmUrl) {
+    public void sendAccountEmail(final Usuario u, final String nombre, final String apellido, final String password, final String confirmUrl, final String context) {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -64,7 +63,7 @@ public class EmailService implements Serializable {
                 model.put("subject", "Registro BSC soc10s | JavaFutbolEE");
                 model.put("nombre", nombre + " " + apellido);
                 model.put("email", u.getUsrEmail());
-                model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
+                model.put("url", (urlx + context));
 
                 model.put("user", u);
                 model.put("password", password);
@@ -79,11 +78,11 @@ public class EmailService implements Serializable {
         };
 
         this.mailSender.send(preparator);
-        sendConfirmationEmail(u, nombre, apellido, confirmUrl);
+        sendConfirmationEmail(u, nombre, apellido, confirmUrl, context);
     }
 
     @Async
-    void sendConfirmationEmail(final Usuario u, final String nombre, final String apellido, final String confirmUrl) {
+    public void sendConfirmationEmail(final Usuario u, final String nombre, final String apellido, final String confirmUrl, final String context) {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -96,7 +95,7 @@ public class EmailService implements Serializable {
                 model.put("subject", "Confirmación BSC soc10s | JavaFutbolEE");
                 model.put("nombre", nombre + " " + apellido);
                 model.put("email", u.getUsrEmail());
-                model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
+                model.put("url", (urlx + context));
 
                 model.put("user", u);
                 model.put("confirmUrl", confirmUrl);
@@ -113,7 +112,7 @@ public class EmailService implements Serializable {
     }
 
     @Async
-    void sendAccountLockedEmail(final Usuario u, final String nombre) {
+    public void sendAccountLockedEmail(final Usuario u, final String nombre, final String context) {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -126,7 +125,7 @@ public class EmailService implements Serializable {
                 model.put("subject", "Cuenta Bloqueada | JavaFutbolEE");
                 model.put("nombre", nombre);
                 model.put("email", u.getUsrEmail());
-                model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
+                model.put("url", (urlx + context));
 
                 model.put("user", u);
 
@@ -142,7 +141,7 @@ public class EmailService implements Serializable {
     }
 
     @Async
-    void sendNewPasswordEmail(final Usuario u, final String nombre, final String password) {
+    public void sendNewPasswordEmail(final Usuario u, final String nombre, final String password, final String context) {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -155,7 +154,7 @@ public class EmailService implements Serializable {
                 model.put("subject", "Contraseña Temporal | JavaFutbolEE");
                 model.put("nombre", nombre);
                 model.put("email", u.getUsrEmail());
-                model.put("url", (urlx + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()));
+                model.put("url", (urlx + context));
 
                 model.put("user", u);
                 model.put("password", password);
@@ -169,7 +168,7 @@ public class EmailService implements Serializable {
             }
         };
 
-        this.mailSender.send(preparator);        
+        this.mailSender.send(preparator);
     }
 
     public EmailService() {

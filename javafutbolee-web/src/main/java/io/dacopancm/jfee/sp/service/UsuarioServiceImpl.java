@@ -5,10 +5,9 @@
  */
 package io.dacopancm.jfee.sp.service;
 
-import io.dacopancm.jfee.exceptions.JfeeCustomException;
 import io.dacopancm.jfee.sp.dao.UsuarioDAO;
-import io.dacopancm.jfee.sp.model.Personal;
 import io.dacopancm.jfee.sp.model.Usuario;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,7 +43,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             //confirm email url
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String confirmUrl = "confirmEmail.xhtml?h=" + u.getUsrActivationHash() + "&c=" + passwordEncoder.encode(u.getUsrCi());
-            emailService.sendConfirmationEmail(u, "usuario", "", confirmUrl);
+            emailService.sendConfirmationEmail(u, "usuario", "", confirmUrl, FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
         }
 
         //TODO: verify if email already in use
@@ -61,7 +60,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             old.setUsrFailedLogin(loginFails + 1);
             if (old.getUsrFailedLogin() >= 3) {
                 old.setUsrActive(false);
-                emailService.sendAccountLockedEmail(old, "usuario");
+                emailService.sendAccountLockedEmail(old, "usuario", FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
             }
             usuarioDAO.updateUsuario(old);
         }
@@ -77,7 +76,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             String tmpPassword = org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric(12);
             old.setUsrPassword(new BCryptPasswordEncoder().encode(tmpPassword));
 
-            emailService.sendNewPasswordEmail(old, "usuario", tmpPassword);
+            emailService.sendNewPasswordEmail(old, "usuario", tmpPassword, FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
             usuarioDAO.updateUsuario(old);
         }
     }

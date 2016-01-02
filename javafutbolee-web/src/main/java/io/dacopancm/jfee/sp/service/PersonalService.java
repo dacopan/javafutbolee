@@ -23,6 +23,9 @@ import io.dacopancm.jfee.sp.model.Personal;
 import io.dacopancm.jfee.sp.model.Usuario;
 import java.util.Date;
 import java.util.List;
+import javax.faces.context.FacesContext;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,6 +39,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("PersonalService")
 @Transactional(readOnly = true)
 public class PersonalService implements java.io.Serializable {
+
+    private final Log log = LogFactory.getLog(getClass());
 
     @Autowired
     PersonalDAO personalDAO;
@@ -67,7 +72,9 @@ public class PersonalService implements java.io.Serializable {
         String confirmUrl = "confirmEmail.xhtml?h=" + u.getUsrActivationHash() + "&c=" + passwordEncoder.encode(u.getUsrCi());
 
         personalDAO.addPersonal(p);
-        emailService.sendAccountEmail(p.getUsuario(), p.getPsnNombre(), p.getPsnApellido(), tmpPassword, confirmUrl);
+        log.info("jfee: invoke email service start");
+        emailService.sendAccountEmail(p.getUsuario(), p.getPsnNombre(), p.getPsnApellido(), tmpPassword, confirmUrl, FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
+        log.info("jfee: invoke email service end");
     }
 
     @Transactional(readOnly = false)
@@ -96,7 +103,7 @@ public class PersonalService implements java.io.Serializable {
             //confirm email url
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String confirmUrl = "confirmEmail.xhtml?h=" + p.getUsuario().getUsrActivationHash() + "&c=" + passwordEncoder.encode(p.getUsuario().getUsrCi());
-            emailService.sendConfirmationEmail(p.getUsuario(), p.getPsnNombre(), p.getPsnApellido(), confirmUrl);
+            emailService.sendConfirmationEmail(p.getUsuario(), p.getPsnNombre(), p.getPsnApellido(), confirmUrl, FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
         }
 
         //TODO: verify if email already in use

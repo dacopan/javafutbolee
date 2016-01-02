@@ -36,7 +36,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -50,7 +49,7 @@ import org.springframework.web.util.UriUtils;
 @ViewScoped
 public class EditarSocioBean implements Serializable{
 
-    private final Log log = LogFactory.getLog(AdminPortalBean.class);
+    private final Log log = LogFactory.getLog(getClass());
 
     @ManagedProperty(value = "#{SocioService}")
     SocioService socioService;
@@ -108,8 +107,7 @@ public class EditarSocioBean implements Serializable{
         }
 
     }
-
-    @Async
+    
     public void editSocioAction() {
         try {
             socioService.updateSocio(selectedSocio);

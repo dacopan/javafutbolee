@@ -44,7 +44,7 @@ import org.primefaces.context.RequestContext;
 @ViewScoped
 public class AdminPortalBean implements Serializable {
 
-    private Log log = LogFactory.getLog(AdminPortalBean.class);
+    private final Log log = LogFactory.getLog(getClass());
 
     @ManagedProperty(value = "#{TemporadaService}")
     TemporadaService temporadaService;

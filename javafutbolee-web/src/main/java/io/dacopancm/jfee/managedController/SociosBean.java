@@ -37,8 +37,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -46,12 +44,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.primefaces.context.RequestContext;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.util.UriUtils;
 
@@ -63,7 +58,7 @@ import org.springframework.web.util.UriUtils;
 @ViewScoped
 public class SociosBean implements Serializable {
 
-    private final Log log = LogFactory.getLog(AdminPortalBean.class);
+    private final Log log = LogFactory.getLog(getClass());
 
     @ManagedProperty(value = "#{SocioService}")
     SocioService socioService;

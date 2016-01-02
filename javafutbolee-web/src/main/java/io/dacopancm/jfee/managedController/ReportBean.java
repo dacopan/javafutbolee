@@ -46,7 +46,7 @@ import org.apache.commons.logging.LogFactory;
 @RequestScoped
 public class ReportBean {
 
-    private final Log log = LogFactory.getLog(AdminPortalBean.class);
+    private final Log log = LogFactory.getLog(getClass());
 
     @ManagedProperty(value = "#{SocioService}")
     SocioService socioService;

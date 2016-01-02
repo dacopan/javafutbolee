@@ -32,8 +32,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
 import javax.faces.event.ActionEvent;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -43,6 +44,8 @@ import org.primefaces.context.RequestContext;
 @ManagedBean(name = "funcionariosBean")
 @ViewScoped
 public class FuncionariosBean implements Serializable {
+
+    private final Log log = LogFactory.getLog(getClass());
 
     //private Funcionario
     @ManagedProperty(value = "#{PersonalService}")
@@ -55,7 +58,7 @@ public class FuncionariosBean implements Serializable {
     Personal selectedPersonal;
     List<Personal> filteredPersonalList;
 
-    List<Rol> rolList;    
+    List<Rol> rolList;
 
     @PostConstruct
     public void postConstruct() {
@@ -85,6 +88,7 @@ public class FuncionariosBean implements Serializable {
     public void addFuncionarioAction() {
 
         try {
+            log.info("jfee: start addFuncionarioAction");
             Personal p = personalService.getPersonalByCi(selectedPersonal.getUsuario().getUsrCi());
             if (p != null) {
                 System.out.println(p.getUsuario().getUsrCi() + " " + selectedPersonal.getUsuario().getUsrCi());
@@ -106,6 +110,7 @@ public class FuncionariosBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo agregar personal."));
         }
+        log.info("jfee: end addFuncionarioAction");
     }
 
     public void editFuncionarioAction() {
@@ -145,7 +150,7 @@ public class FuncionariosBean implements Serializable {
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo eliminar personal."));
         }
         resetAddFuncionario(null);
-    }    
+    }
 
     public PersonalService getPersonalService() {
         return personalService;

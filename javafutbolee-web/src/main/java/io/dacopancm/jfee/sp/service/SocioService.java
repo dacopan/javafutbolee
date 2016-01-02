@@ -17,20 +17,16 @@
 package io.dacopancm.jfee.sp.service;
 
 import io.dacopancm.jfee.exceptions.JfeeCustomException;
-import io.dacopancm.jfee.managedController.AdminPortalBean;
-import io.dacopancm.jfee.managedController.SociosBean;
 import io.dacopancm.jfee.sp.dao.RolDAO;
 import io.dacopancm.jfee.sp.dao.SocioDAO;
 import io.dacopancm.jfee.sp.model.Socio;
 import io.dacopancm.jfee.sp.model.Usuario;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,7 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class SocioService {
 
-    private final Log log = LogFactory.getLog(AdminPortalBean.class);
+    private final Log log = LogFactory.getLog(getClass());
 
     @Autowired
     SocioDAO socioDAO;
@@ -80,16 +76,15 @@ public class SocioService {
         String confirmUrl = "confirmEmail.xhtml?h=" + u.getUsrActivationHash() + "&c=" + passwordEncoder.encode(u.getUsrCi());
 
         socioDAO.addSocio(s);
-        emailService.sendAccountEmail(s.getUsuario(), s.getSocNombre(), s.getSocApellido(), tmpPassword, confirmUrl);
+        emailService.sendAccountEmail(s.getUsuario(), s.getSocNombre(), s.getSocApellido(), tmpPassword, confirmUrl, FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
     }
 
     @Transactional(readOnly = false)
-    public void deleteSocio(Socio p) throws JfeeCustomException{
+    public void deleteSocio(Socio p) throws JfeeCustomException {
         socioDAO.deleteSocio(p);
     }
 
     @Transactional(readOnly = false)
-    @Async
     public void updateSocio(Socio p) throws JfeeCustomException {
         Socio old = socioDAO.getSocioById(p.getSocId());
 
@@ -110,7 +105,7 @@ public class SocioService {
             //confirm email url
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String confirmUrl = "confirmEmail.xhtml?h=" + p.getUsuario().getUsrActivationHash() + "&c=" + passwordEncoder.encode(p.getUsuario().getUsrCi());
-            emailService.sendConfirmationEmail(p.getUsuario(), p.getSocNombre(), p.getSocApellido(), confirmUrl);
+            emailService.sendConfirmationEmail(p.getUsuario(), p.getSocNombre(), p.getSocApellido(), confirmUrl, FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
         }
 
         //TODO: verify if email already in use
