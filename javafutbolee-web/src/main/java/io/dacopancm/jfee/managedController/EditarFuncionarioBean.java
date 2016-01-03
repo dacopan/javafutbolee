@@ -26,7 +26,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
@@ -37,7 +38,8 @@ import org.springframework.security.core.userdetails.User;
 @ManagedBean(name = "editarFuncionarioBean")
 @ViewScoped
 public class EditarFuncionarioBean implements Serializable {
-//private Funcionario
+
+    private final Log log = LogFactory.getLog(getClass());
 
     @ManagedProperty(value = "#{PersonalService}")
     PersonalService personalService;
@@ -64,13 +66,13 @@ public class EditarFuncionarioBean implements Serializable {
         try {
             personalService.updatePersonal(selectedPersonal);
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Editar Personal", "Personal Editado con éxito!"));            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Editar Personal", "Personal Editado con éxito!"));
 
         } catch (JfeeCustomException fex) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.error("jfee: " + ex, ex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo editar personal."));
         }

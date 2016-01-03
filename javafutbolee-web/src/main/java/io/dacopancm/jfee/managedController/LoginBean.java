@@ -22,6 +22,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,6 +38,8 @@ import org.springframework.security.core.userdetails.User;
 @ManagedBean(name = "loginMgmtBean")
 @RequestScoped
 public class LoginBean {
+
+    private final Log log = LogFactory.getLog(getClass());
 
     private String userName = null;
     private String password = null;
@@ -53,12 +57,11 @@ public class LoginBean {
             SecurityContextHolder.getContext().setAuthentication(result);
 
         } catch (BadCredentialsException bc) {
-            System.out.println(bc.getMessage());
+            log.info("jfee: " + bc.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Incorrecto", "Usuario o contraseña incorrecto"));
             usuarioService.failLoginUser(this.getUserName());
             return null;
         } catch (Exception e) {
-            //e.printStackTrace();           
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Incorrecto", "Cuenta inhabilitada o no confirmada."));
             return null;
         }
@@ -74,8 +77,8 @@ public class LoginBean {
         try {
             usuarioService.requestPassword(userName);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Recordar Contraseña", "Contraseña temporal enviada"));
-        } catch (Exception e) {
-            //e.printStackTrace();           
+        } catch (Exception ex) {
+            log.error("jfee: " + ex, ex);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Recordar Contraseña", "No se pudo enviar contraseña temporal."));
             return null;
         }

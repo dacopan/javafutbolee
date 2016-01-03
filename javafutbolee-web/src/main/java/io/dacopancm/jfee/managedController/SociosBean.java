@@ -60,6 +60,9 @@ public class SociosBean implements Serializable {
 
     private final Log log = LogFactory.getLog(getClass());
 
+    @ManagedProperty(value = "#{PropertyHolder}")
+    PropertyHolder props;
+
     @ManagedProperty(value = "#{SocioService}")
     SocioService socioService;
 
@@ -127,20 +130,22 @@ public class SociosBean implements Serializable {
         selectedSocio.setFormaPago(new FormaPago());
 
         //sample data
-        selectedSocio.setSocNombre("darwin");
-        selectedSocio.setSocApellido("correa");
-        selectedSocio.setSocFechaNac(new Date());
-        selectedSocio.setSocTelefono("4986489");
-        selectedSocio.setSocCelular("4986489");
+        if (props.getStage().equalsIgnoreCase("dev")) {            
+            selectedSocio.setSocNombre("darwin");
+            selectedSocio.setSocApellido("correa");
+            selectedSocio.setSocFechaNac(new Date());
+            selectedSocio.setSocTelefono("4986489");
+            selectedSocio.setSocCelular("4986489");
 
-        selectedSocio.getUsuario().setUsrEmail("dacopan.bsc@gmail.com");
-        selectedSocio.getUsuario().setUsrCi("1719871327");
-        selectedSocio.setSocDireccion("lorem ipsum");
+            selectedSocio.getUsuario().setUsrEmail("dacopan.bsc@gmail.com");
+            selectedSocio.getUsuario().setUsrCi("1719871327");
+            selectedSocio.setSocDireccion("lorem ipsum");
 
-        selectedSocio.setSocTipoSangre("ORH+");
+            selectedSocio.setSocTipoSangre("ORH+");
 
-        selectedSocio.setSocNumHijos(5);
-        selectedSocio.setSocGenero(0);
+            selectedSocio.setSocNumHijos(5);
+            selectedSocio.setSocGenero(0);
+        }
     }
 
     public void onPaisChange() {
@@ -178,7 +183,7 @@ public class SociosBean implements Serializable {
 
     public void editPlanAction() {
         try {
-            planService.updatePlan(selectedPlan);            
+            planService.updatePlan(selectedPlan);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Editar Plan", "Plan editado con éxito!"));
             RequestContext.getCurrentInstance().execute("PF('dlgEditPlan').hide()");
             planList = null;
@@ -270,7 +275,7 @@ public class SociosBean implements Serializable {
         this.returnPage = returnPage;
     }
 
-    //gets sets    
+    //gets sets
     public List<Socio> getSocioList() {
         if (socioList == null) {
             socioList = new ArrayList<>();
@@ -392,6 +397,14 @@ public class SociosBean implements Serializable {
     }
 
     //services
+    public PropertyHolder getProps() {
+        return props;
+    }
+
+    public void setProps(PropertyHolder props) {
+        this.props = props;
+    }
+
     public SocioService getSocioService() {
         return socioService;
     }

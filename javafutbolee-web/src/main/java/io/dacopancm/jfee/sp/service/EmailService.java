@@ -20,7 +20,6 @@ import io.dacopancm.jfee.sp.model.Usuario;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import javax.faces.context.FacesContext;
 import javax.mail.internet.MimeMessage;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;

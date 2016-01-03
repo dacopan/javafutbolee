@@ -47,12 +47,17 @@ public class FuncionariosBean implements Serializable {
 
     private final Log log = LogFactory.getLog(getClass());
 
+    String stage;
+
     //private Funcionario
     @ManagedProperty(value = "#{PersonalService}")
     PersonalService personalService;
 
     @ManagedProperty(value = "#{RolService}")
     RolService rolService;
+
+    @ManagedProperty(value = "#{PropertyHolder}")
+    PropertyHolder props;
 
     List<Personal> personalList;
     Personal selectedPersonal;
@@ -62,6 +67,7 @@ public class FuncionariosBean implements Serializable {
 
     @PostConstruct
     public void postConstruct() {
+        log.info("construct FuncionariosBean");
         resetAddFuncionario(null);
     }
 
@@ -74,14 +80,19 @@ public class FuncionariosBean implements Serializable {
         u.setRole(r);
         selectedPersonal.setUsuario(u);
 
-        selectedPersonal.setPsnNombre("darwin");
-        selectedPersonal.setPsnApellido("correa");
-        selectedPersonal.setPsnFechaNac(new Date());
-        selectedPersonal.setPsnTelefono("4986489");
-        selectedPersonal.setPsnCelular("4986489");
+        //sample data
+        if (props
+                .getStage()
+                .equalsIgnoreCase("dev")) {
+            selectedPersonal.setPsnNombre("darwin");
+            selectedPersonal.setPsnApellido("correa");
+            selectedPersonal.setPsnFechaNac(new Date());
+            selectedPersonal.setPsnTelefono("4986489");
+            selectedPersonal.setPsnCelular("4986489");
 
-        selectedPersonal.getUsuario().setUsrEmail("dacopan.bsc@gmail.com");
-        selectedPersonal.getUsuario().setUsrCi("1719871327");
+            selectedPersonal.getUsuario().setUsrEmail("dacopan.bsc@gmail.com");
+            selectedPersonal.getUsuario().setUsrCi("1719871327");
+        }
 
     }
 
@@ -91,7 +102,7 @@ public class FuncionariosBean implements Serializable {
             log.info("jfee: start addFuncionarioAction");
             Personal p = personalService.getPersonalByCi(selectedPersonal.getUsuario().getUsrCi());
             if (p != null) {
-                System.out.println(p.getUsuario().getUsrCi() + " " + selectedPersonal.getUsuario().getUsrCi());
+                log.info("jfee: " + p.getUsuario().getUsrCi() + " " + selectedPersonal.getUsuario().getUsrCi());
                 FacesContext.getCurrentInstance().addMessage(
                         null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Agregar Personal!", "No se pudo agregar personal, ya existe un funcionario con este CI o email!"));
             } else {
@@ -106,7 +117,7 @@ public class FuncionariosBean implements Serializable {
                 resetAddFuncionario(null);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.error("jfee: " + ex, ex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo agregar personal."));
         }
@@ -128,7 +139,7 @@ public class FuncionariosBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.error("jfee: " + ex, ex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo editar personal."));
         }
@@ -146,34 +157,20 @@ public class FuncionariosBean implements Serializable {
             resetAddFuncionario(null);
 
         } catch (Exception ex) {
+            log.error("jfee: " + ex, ex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo eliminar personal."));
         }
         resetAddFuncionario(null);
     }
 
-    public PersonalService getPersonalService() {
-        return personalService;
+    //get set
+    public String getStage() {
+        return stage;
     }
 
-    public void setPersonalService(PersonalService personalService) {
-        this.personalService = personalService;
-    }
-
-    /*public HelperBean getHelperBean() {
-     return helperBean;
-     }
-
-     public void setHelperBean(HelperBean helperBean) {
-     this.helperBean = helperBean;
-     }
-     */
-    public RolService getRolService() {
-        return rolService;
-    }
-
-    public void setRolService(RolService rolService) {
-        this.rolService = rolService;
+    public void setStage(String stage) {
+        this.stage = stage;
     }
 
     public List<Personal> getPersonalList() {
@@ -219,6 +216,31 @@ public class FuncionariosBean implements Serializable {
 
     public void setRolList(List<Rol> rolList) {
         this.rolList = rolList;
+    }
+
+    //services
+    public PersonalService getPersonalService() {
+        return personalService;
+    }
+
+    public void setPersonalService(PersonalService personalService) {
+        this.personalService = personalService;
+    }
+
+    public RolService getRolService() {
+        return rolService;
+    }
+
+    public void setRolService(RolService rolService) {
+        this.rolService = rolService;
+    }
+
+    public PropertyHolder getProps() {
+        return props;
+    }
+
+    public void setProps(PropertyHolder props) {
+        this.props = props;
     }
 
 }
