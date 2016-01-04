@@ -130,7 +130,7 @@ public class SociosBean implements Serializable {
         selectedSocio.setFormaPago(new FormaPago());
 
         //sample data
-        if (props.getStage().equalsIgnoreCase("dev")) {            
+        if (props.getStage().equalsIgnoreCase("dev")) {
             selectedSocio.setSocNombre("darwin");
             selectedSocio.setSocApellido("correa");
             selectedSocio.setSocFechaNac(new Date());
@@ -175,7 +175,7 @@ public class SociosBean implements Serializable {
                 resetAddPlan(null);
             }
         } catch (Exception ex) {
-            log.error("jfee: " + ex);
+            log.error("jfee: " + ex, ex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo agregar Plan."));
         }
@@ -189,11 +189,11 @@ public class SociosBean implements Serializable {
             planList = null;
 
         } catch (JfeeCustomException fex) {
-            log.error("jfee: " + fex);
+            log.error("jfee: " + fex, fex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
         } catch (Exception ex) {
-            log.error("jfee: " + ex);
+            log.error("jfee: " + ex, ex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo editar Plan."));
         }
@@ -252,16 +252,15 @@ public class SociosBean implements Serializable {
             boolean estado = !selectedSocio.getSocEstado();
 
             selectedSocio.setSocEstado(estado);
-            socioService.updateSocio(selectedSocio);
-            planList = null;
+            socioService.updateSocio(selectedSocio);            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Editar Socio", "Socio Editado!"));
 
         } catch (JfeeCustomException fex) {
-            log.error("jfee: " + fex);
+            log.error("jfee: " + fex, fex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", fex.getMessage()));
         } catch (Exception ex) {
-            log.error("jfee: " + ex);
+            log.error("jfee: " + ex, ex);
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "No se pudo Editar."));
         }
