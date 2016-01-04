@@ -39,19 +39,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("SocioService")
 @Transactional(readOnly = true)
 public class SocioService {
-
+    
     private final Log log = LogFactory.getLog(getClass());
-
+    
     @Autowired
     SocioDAO socioDAO;
     @Autowired
     RolDAO rolDAO;
     @Autowired
     EmailService emailService;
-
+    
     @Transactional(readOnly = false)
     public void addSocio(Socio s) throws JfeeCustomException {
-
+        
         Socio old = socioDAO.getSocioByCi(s.getUsuario().getUsrCi());
         if (old != null) {
             socioDAO.evictSocio(old);
@@ -60,34 +60,36 @@ public class SocioService {
 
         //temp password
         String tmpPassword = org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric(12);
-
+        
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(tmpPassword);
 
         //user
         Usuario u = s.getUsuario();
-
+        
         u.setUsrActivationHash(java.util.UUID.randomUUID().toString().replace("-", ""));
         u.setUsrActive(false);
         u.setUsrCreationTimestamp(new Date());
         u.setUsrPassword(hashedPassword);
+        
+        s.setSocEstado(Boolean.FALSE);
 
         //confirm email url
         String confirmUrl = "confirmEmail.xhtml?h=" + u.getUsrActivationHash() + "&c=" + passwordEncoder.encode(u.getUsrCi());
-
+        
         socioDAO.addSocio(s);
         emailService.sendAccountEmail(s.getUsuario(), s.getSocNombre(), s.getSocApellido(), tmpPassword, confirmUrl, FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
     }
-
+    
     @Transactional(readOnly = false)
     public void deleteSocio(Socio p) throws JfeeCustomException {
         socioDAO.deleteSocio(p);
     }
-
+    
     @Transactional(readOnly = false)
     public void updateSocio(Socio p) throws JfeeCustomException {
         Socio old = socioDAO.getSocioById(p.getSocId());
-
+        
         if (!old.getUsuario().getUsrCi().equalsIgnoreCase(p.getUsuario().getUsrCi())) {
             //intenta actualizar cedula
             Socio old2 = socioDAO.getSocioByCi(p.getUsuario().getUsrCi());
@@ -98,7 +100,7 @@ public class SocioService {
             }
             socioDAO.evictSocio(old2);
         }
-
+        
         if (!old.getUsuario().getUsrEmail().equalsIgnoreCase(p.getUsuario().getUsrEmail())) {
             p.getUsuario().setUsrActivationHash(java.util.UUID.randomUUID().toString().replace("-", ""));
 
@@ -113,15 +115,15 @@ public class SocioService {
         socioDAO.evictSocio(old);
         socioDAO.updateSocio(p);
     }
-
+    
     public Socio getSocioById(int id) {
         return socioDAO.getSocioById(id);
     }
-
+    
     public Socio getSocioByCi(String ci) {
         return socioDAO.getSocioByCi(ci);
     }
-
+    
     public List<Socio> getSocios() {
         return socioDAO.getSocios();
     }
@@ -130,25 +132,25 @@ public class SocioService {
     public SocioDAO getSocioDAO() {
         return socioDAO;
     }
-
+    
     public void setSocioDAO(SocioDAO socioDAO) {
         this.socioDAO = socioDAO;
     }
-
+    
     public RolDAO getRolDAO() {
         return rolDAO;
     }
-
+    
     public void setRolDAO(RolDAO rolDAO) {
         this.rolDAO = rolDAO;
     }
-
+    
     public EmailService getEmailService() {
         return emailService;
     }
-
+    
     public void setEmailService(EmailService emailService) {
         this.emailService = emailService;
     }
-
+    
 }
