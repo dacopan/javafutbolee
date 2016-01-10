@@ -41,6 +41,8 @@
         <property name="maxPoolSize" value="${jfee.datasource.maxPoolSize}" />
         <property name="maxStatements" value="${jfee.datasource.maxStatements}" />
         <property name="minPoolSize" value="${jfee.datasource.minPoolSize}" />
+        <property name="maxIdleTime" value="${jfee.datasource.maxIdleTime}" />
+        
     </bean>
 
     <!-- Session Factory Declaration -->
@@ -56,13 +58,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>    
-                <prop key="hibernate.enable_lazy_load_no_trans">true</prop> 
-                 
-                <prop key="hibernate.c3p0.min_size">${jfee.c3p0.hibernate.c3p0.min_size}</prop>
-                <prop key="hibernate.c3p0.max_size">${jfee.c3p0.hibernate.c3p0.max_size}</prop>
-                <prop key="hibernate.c3p0.timeout">${jfee.c3p0.hibernate.c3p0.timeout}</prop>
-                <prop key="hibernate.c3p0.max_statements">${jfee.c3p0.hibernate.c3p0.max_statements}</prop>
-                <prop key="hibernate.c3p0.idle_test_period">${jfee.c3p0.hibernate.c3p0.idle_test_period}</prop>          
+                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>                                           
             </props>
         </property>
     </bean>
