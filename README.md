@@ -5,7 +5,7 @@ Java Enterprise Application to manage a football club's partners and ticket rese
 
 
 ## Development
-- See Development notes in the [development page](https://github.com/dacopan/javafutbolee/wiki/Development) of the project's [wiki](https://github.com/dacopan/javafutbolee/wiki)
+See Development notes in the [development page](https://github.com/dacopan/javafutbolee/wiki/Development) of the project's [wiki](https://github.com/dacopan/javafutbolee/wiki)
 
 ## License
 JavaFutbolEE has [GNU GPL v3](https://github.com/dacopan/javafutbolee/blob/master/LICENSE) licence
