@@ -180,7 +180,12 @@
     <navigation-rule>
         <from-view-id>
             /views/s/adminFuncionarios/editarFuncionario.xhtml
-        </from-view-id>        
+        </from-view-id>   
+        <navigation-case>
+            <from-outcome>loggedout</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>     
         <navigation-case>
             <from-outcome>home</from-outcome>
             <to-view-id>/views/s/home.xhtml</to-view-id>
